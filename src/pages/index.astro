@@ -31,6 +31,17 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
           <p class="hero-desc">{SITE_DESCRIPTION}</p>
         </section>
 
+        <!-- Category pills -->
+        <section class="categories-section">
+          <div class="categories">
+            {CATEGORIES.map((cat) => (
+              <a href={`/blog/category/${cat.id}`} class="category-pill">
+                {cat.label}
+              </a>
+            ))}
+          </div>
+        </section>
+
         <!-- Recent Posts -->
         <section class="posts-section">
           <h2 class="section-label">Recent Posts</h2>
@@ -90,8 +101,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 
   /* Hero */
   .hero {
-    padding: 3.5rem 0 3rem;
-    border-bottom: 1px solid var(--color-border);
+    padding: 3.5rem 0 2rem;
   }
 
   .hero-badge {
@@ -122,6 +132,36 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     line-height: 1.7;
     max-width: 520px;
     margin: 0;
+  }
+
+  /* Category pills */
+  .categories-section {
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .category-pill {
+    display: inline-block;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    background-color: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
+    padding: 0.3125rem 0.875rem;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: color 0.15s, border-color 0.15s, background-color 0.15s;
+  }
+
+  .category-pill:hover {
+    color: #7c3aed;
+    border-color: #7c3aed;
+    background-color: color-mix(in srgb, #7c3aed 8%, transparent);
   }
 
   /* Posts */
