@@ -1,70 +1,78 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseHead from '../../components/BaseHead.astro';
-import Footer from '../../components/Footer.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
-import Header from '../../components/Header.astro';
-import { CATEGORIES, SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import BaseHead from '../../../components/BaseHead.astro';
+import Footer from '../../../components/Footer.astro';
+import FormattedDate from '../../../components/FormattedDate.astro';
+import Header from '../../../components/Header.astro';
+import { CATEGORIES, SITE_TITLE } from '../../../consts';
 
-const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+  return CATEGORIES.map((cat) => ({
+    params: { id: cat.id },
+    props: {
+      category: cat,
+      posts: allPosts
+        .filter((p) => p.data.category === cat.id)
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+    },
+  }));
+}
 
-// Group by category for count display
-const countByCategory = CATEGORIES.map((cat) => ({
-  ...cat,
-  count: allPosts.filter((p) => p.data.category === cat.id).length,
-}));
+const { category, posts } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={`Blog — ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+    <BaseHead
+      title={`${category.label} — ${SITE_TITLE}`}
+      description={`All posts in ${category.label}`}
+    />
   </head>
   <body>
     <Header />
     <main class="main">
 
       <div class="page-header">
-        <h1 class="page-title">All Posts</h1>
-        <p class="page-count">{allPosts.length} article{allPosts.length !== 1 ? 's' : ''}</p>
+        <a href="/blog" class="back-link">← All Posts</a>
+        <h1 class="page-title">{category.label}</h1>
+        <p class="page-count">{posts.length} article{posts.length !== 1 ? 's' : ''}</p>
       </div>
 
       <!-- Category filter -->
       <div class="filter-row">
-        <a href="/blog" class="filter-pill active">All</a>
-        {countByCategory.filter((c) => c.count > 0).map((cat) => (
-          <a href={`/blog/category/${cat.id}`} class="filter-pill">
+        <a href="/blog" class="filter-pill">All</a>
+        {CATEGORIES.map((cat) => (
+          <a
+            href={`/blog/category/${cat.id}`}
+            class={`filter-pill${cat.id === category.id ? ' active' : ''}`}
+          >
             {cat.label}
-            <span class="filter-count">{cat.count}</span>
           </a>
         ))}
       </div>
 
-      <!-- Post list -->
-      {allPosts.length === 0 ? (
-        <p class="empty">No posts yet. First one coming soon.</p>
+      {posts.length === 0 ? (
+        <p class="empty">No posts in this category yet.</p>
       ) : (
         <ul class="post-list">
-          {allPosts.map((post) => {
-            const cat = CATEGORIES.find((c) => c.id === post.data.category);
-            return (
-              <li class="post-item">
-                <a href={`/blog/${post.id}/`} class="post-link">
-                  <div class="post-meta">
-                    {cat && <span class="post-category">{cat.label}</span>}
-                    <span class="post-date">
-                      <FormattedDate date={post.data.pubDate} />
-                    </span>
-                  </div>
-                  <h2 class="post-title">{post.data.title}</h2>
-                  {post.data.description && (
-                    <p class="post-desc">{post.data.description}</p>
-                  )}
-                </a>
-              </li>
-            );
-          })}
+          {posts.map((post) => (
+            <li class="post-item">
+              <a href={`/blog/${post.id}/`} class="post-link">
+                <div class="post-meta">
+                  <span class="post-category">{category.label}</span>
+                  <span class="post-date">
+                    <FormattedDate date={post.data.pubDate} />
+                  </span>
+                </div>
+                <h2 class="post-title">{post.data.title}</h2>
+                {post.data.description && (
+                  <p class="post-desc">{post.data.description}</p>
+                )}
+              </a>
+            </li>
+          ))}
         </ul>
       )}
 
@@ -81,10 +89,20 @@ const countByCategory = CATEGORIES.map((cat) => ({
   }
 
   .page-header {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
     padding: 3rem 0 2rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    margin-bottom: 1rem;
+    transition: color 0.15s;
+  }
+
+  .back-link:hover {
+    color: var(--color-text);
   }
 
   .page-title {
@@ -92,7 +110,7 @@ const countByCategory = CATEGORIES.map((cat) => ({
     font-weight: 700;
     letter-spacing: -0.02em;
     color: var(--color-text);
-    margin: 0;
+    margin: 0 0 0.25rem;
   }
 
   .page-count {
@@ -101,7 +119,6 @@ const countByCategory = CATEGORIES.map((cat) => ({
     margin: 0;
   }
 
-  /* Filter */
   .filter-row {
     display: flex;
     flex-wrap: wrap;
@@ -131,16 +148,6 @@ const countByCategory = CATEGORIES.map((cat) => ({
     background-color: color-mix(in srgb, #7c3aed 8%, transparent);
   }
 
-  .filter-count {
-    font-size: 0.6875rem;
-    color: var(--color-text-muted);
-  }
-
-  .filter-pill.active .filter-count {
-    color: #7c3aed;
-  }
-
-  /* Post list */
   .empty {
     padding-top: 3rem;
     color: var(--color-text-muted);
@@ -151,8 +158,6 @@ const countByCategory = CATEGORIES.map((cat) => ({
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
   }
 
   .post-item {
