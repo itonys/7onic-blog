@@ -66,7 +66,6 @@ body {
 
 /* Prose (blog post content) */
 .prose {
-  max-width: 680px;
   font-size: 1.0625rem;
   color: var(--color-text);
 }
