@@ -52,6 +52,8 @@ if (fm.draft) {
 
 const canonicalUrl = `${CANONICAL_BASE}/${slug}/`;
 const tags = (fm.tags ?? []).slice(0, 4) as string[];
+// dev.to only allows alphanumeric tags (no hyphens)
+const devtoTags = tags.map((t) => t.replace(/-/g, ''));
 
 console.log(`\n📝 Publishing: ${fm.title}`);
 console.log(`   canonical: ${canonicalUrl}\n`);
@@ -67,7 +69,7 @@ async function publishDevto(): Promise<string | null> {
       body_markdown: content,
       published: true,
       canonical_url: canonicalUrl,
-      tags,
+      tags: devtoTags,
       description: fm.description,
     },
   };

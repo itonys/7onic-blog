@@ -1,12 +1,21 @@
 ---
-title: "Design to Code #1: Why I Built 7onic"
-description: "I spent 10 years watching pixels drift between Figma and production. Here's why I stopped filing tickets and started building a design system from scratch."
-pubDate: 2026-04-16
-category: "design-system"
-tags: ["design-system", "design-tokens", "figma", "react"]
-series: "design-to-code"
+title: 'Design to Code #1: Why I Built 7onic'
+description: >-
+  I spent 10 years watching pixels drift between Figma and production. Here's
+  why I stopped filing tickets and started building a design system from
+  scratch.
+pubDate: 2026-04-16T00:00:00.000Z
+category: design-system
+tags:
+  - design-system
+  - design-tokens
+  - figma
+  - react
+series: design-to-code
 seriesOrder: 1
 draft: false
+hashnodeId: 69e0be11934f05e2a915df82
+devtoId: '3509912'
 ---
 
 I remember the exact moment I gave up on handoffs.
