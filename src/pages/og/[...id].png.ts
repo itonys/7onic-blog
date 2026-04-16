@@ -69,8 +69,7 @@ export const GET: APIRoute = async ({ props }) => {
   const seriesLabel = series ? SERIES.find((s) => s.id === series)?.label : undefined;
 
   const displayTitle = title.length > 55 ? title.slice(0, 52) + '...' : title;
-  const displayDesc = description.length > 90 ? description.slice(0, 87) + '...' : description;
-  const titleFontSize = displayTitle.length > 35 ? '46px' : '54px';
+  const titleFontSize = displayTitle.length > 40 ? '62px' : displayTitle.length > 25 ? '74px' : '88px';
 
   const svg = await satori(
     {
@@ -221,8 +220,8 @@ export const GET: APIRoute = async ({ props }) => {
                     style: {
                       display: 'flex',
                       flexDirection: 'column',
-                      gap: '18px',
-                      maxWidth: '780px',
+                      gap: '24px',
+                      maxWidth: '950px',
                     },
                     children: [
                       ...(seriesLabel && seriesOrder ? [{
@@ -264,23 +263,10 @@ export const GET: APIRoute = async ({ props }) => {
                             fontSize: titleFontSize,
                             fontWeight: '700',
                             color: '#ffffff',
-                            lineHeight: '1.18',
-                            letterSpacing: '-0.02em',
+                            lineHeight: '1.15',
+                            letterSpacing: '-0.025em',
                           },
                           children: displayTitle,
-                        },
-                      },
-                      {
-                        type: 'div',
-                        props: {
-                          style: {
-                            fontSize: '20px',
-                            fontWeight: '400',
-                            color: 'rgba(255,255,255,0.42)',
-                            lineHeight: '1.55',
-                            letterSpacing: '0.005em',
-                          },
-                          children: displayDesc,
                         },
                       },
                     ],
