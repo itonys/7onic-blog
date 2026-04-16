@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Sidebar from '../components/Sidebar.astro';
 import { SITE_TITLE, DOCS_URL } from '../consts';
 ---
 
@@ -15,6 +16,7 @@ import { SITE_TITLE, DOCS_URL } from '../consts';
     <div class="page-wrapper">
       <main class="about-content">
         <article class="prose">
+
 
           <h1>Hey, I'm 7onic.</h1>
 
@@ -78,6 +80,7 @@ import { SITE_TITLE, DOCS_URL } from '../consts';
 
         </article>
       </main>
+      <Sidebar />
     </div>
     <Footer />
   </body>
@@ -89,10 +92,14 @@ import { SITE_TITLE, DOCS_URL } from '../consts';
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1.5rem;
+    display: flex;
+    gap: 4rem;
+    align-items: flex-start;
   }
 
   .about-content {
-    max-width: 680px;
+    flex: 1;
+    min-width: 0;
     padding: 3rem 0 4rem;
   }
 </style>
