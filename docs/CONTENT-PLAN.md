@@ -148,6 +148,8 @@
 | R-7 | Peer Dependency CI Fix: rm lock + legacy-peer-deps | 첫 배포 전 CI 검증 닭-달걀 문제 |
 | R-8 | Breaking Change Migration Guides in CHANGELOG | 필수 before/after 코드 블록 정책 |
 | R-9 | 0.x Semver: MINOR = Breaking, PATCH = Features | Radix/Tailwind와 동일한 비표준 semver |
+| R-10 | Dynamic OG Images with Satori + Sharp in Astro | 빌드타임 OG 이미지 자동 생성 — 10팔레트 해시 + 은하수 배경 |
+| R-11 | Google Favicon Jagged Edges: The Pre-Rounded Trap | 둥근 아이콘을 구글이 또 클리핑 → 울퉁불퉁 — 정사각형으로 해결 |
 
 ---
 
@@ -194,11 +196,11 @@
 | Tailwind Guides | 10 |
 | AI + Design | 10 |
 | CLI & Tooling | 10 |
-| Build & Release | 9 |
+| Build & Release | 11 |
 | Solo Builder | 12 |
 | Accessibility | 7 |
 | 트렌드 스탠드얼론 | 11 |
-| **합계** | **110편** |
+| **합계** | **112편** |
 
 ---
 
