@@ -1,10 +1,10 @@
 import type { APIRoute } from 'astro';
-import { getCollection } from 'astro:content';
 import satori from 'satori';
 import sharp from 'sharp';
 import fs from 'node:fs';
 import path from 'node:path';
-import { hashToPalette, MILKY_WAY, STARS } from '../../lib/og';
+import { CATEGORIES, SERIES } from '../../../consts';
+import { hashToPalette, MILKY_WAY, STARS } from '../../../lib/og';
 
 // Load fonts
 const fontRegular = fs.readFileSync(
@@ -23,22 +23,26 @@ const logoSvgMono = logoSvgBuf.toString()
 const logoPngBuf = await sharp(Buffer.from(logoSvgMono)).resize(null, 40).png().toBuffer();
 const logoDataUrl = `data:image/png;base64,${logoPngBuf.toString('base64')}`;
 
-export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => !data.draft);
-  return posts.map((post) => ({
-    params: { id: post.id },
-    props: { post },
-  }));
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'home' },  props: { title: '7onic Blog',    label: 'Design to Code' } },
+    { params: { slug: 'about' }, props: { title: 'About',         label: '7onic Blog' } },
+    ...CATEGORIES.map((c) => ({
+      params: { slug: `category-${c.id}` },
+      props: { title: c.label, label: 'Category' },
+    })),
+    ...SERIES.map((s) => ({
+      params: { slug: `series-${s.id}` },
+      props: { title: s.label, label: 'Series' },
+    })),
+  ];
 }
 
-export const GET: APIRoute = async ({ props }) => {
-  const { post } = props as Awaited<ReturnType<typeof getStaticPaths>>[number]['props'];
-  const { title } = post.data;
+export const GET: APIRoute = async ({ props, params }) => {
+  const { title, label } = props as { title: string; label: string };
+  const colors = hashToPalette(params.slug as string);
 
-  const colors = hashToPalette(post.id);
-
-  const displayTitle = title.length > 55 ? title.slice(0, 52) + '...' : title;
-  const titleFontSize = displayTitle.length > 45 ? '64px' : displayTitle.length > 30 ? '80px' : '96px';
+  const titleFontSize = title.length > 20 ? '72px' : '88px';
 
   const svg = await satori(
     {
@@ -175,11 +179,11 @@ export const GET: APIRoute = async ({ props }) => {
                       letterSpacing: '-0.03em',
                       maxWidth: '1020px',
                     },
-                    children: displayTitle,
+                    children: title,
                   },
                 },
 
-                // BOTTOM: Accent dash + domain
+                // BOTTOM: label + domain
                 {
                   type: 'div',
                   props: {
@@ -188,10 +192,31 @@ export const GET: APIRoute = async ({ props }) => {
                       {
                         type: 'div',
                         props: {
-                          style: {
-                            width: '32px', height: '3px', borderRadius: '2px',
-                            background: colors.accent, opacity: 0.8,
-                          },
+                          style: { display: 'flex', alignItems: 'center', gap: '10px' },
+                          children: [
+                            {
+                              type: 'div',
+                              props: {
+                                style: {
+                                  width: '20px', height: '2px', borderRadius: '1px',
+                                  background: colors.accent, opacity: 0.8,
+                                },
+                              },
+                            },
+                            {
+                              type: 'span',
+                              props: {
+                                style: {
+                                  fontSize: '13px', fontWeight: '700',
+                                  color: colors.accent,
+                                  letterSpacing: '0.12em',
+                                  textTransform: 'uppercase',
+                                  opacity: 0.85,
+                                },
+                                children: label,
+                              },
+                            },
+                          ],
                         },
                       },
                       {

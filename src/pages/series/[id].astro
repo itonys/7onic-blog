@@ -29,6 +29,7 @@ const { series, posts } = Astro.props;
     <BaseHead
       title={`${series.label} — ${SITE_TITLE}`}
       description={series.description}
+      ogImage={new URL(`/og/site/series-${series.id}.png`, Astro.site).toString()}
     />
   </head>
   <body>

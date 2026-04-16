@@ -29,6 +29,7 @@ const { category, posts } = Astro.props;
     <BaseHead
       title={`${category.label} — ${SITE_TITLE}`}
       description={`All posts in ${category.label}`}
+      ogImage={new URL(`/og/site/category-${category.id}.png`, Astro.site).toString()}
     />
   </head>
   <body>

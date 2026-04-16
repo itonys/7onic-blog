@@ -9,7 +9,7 @@ import { SITE_TITLE, DOCS_URL } from '../consts';
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={`About — ${SITE_TITLE}`} description="Designer and frontend developer building 7onic, an open-source design system." />
+    <BaseHead title={`About — ${SITE_TITLE}`} description="Designer and frontend developer building 7onic, an open-source design system." ogImage={new URL('/og/site/about.png', Astro.site).toString()} />
   </head>
   <body>
     <Header />

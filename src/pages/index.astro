@@ -14,7 +14,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} ogImage={new URL('/og/site/home.png', Astro.site).toString()} />
   </head>
   <body>
     <Header />
