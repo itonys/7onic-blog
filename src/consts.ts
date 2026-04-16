@@ -7,7 +7,7 @@ export const DOCS_URL = 'https://7onic.design';
 
 // Author
 export const AUTHOR_NAME = '7onic';
-export const AUTHOR_TWITTER = '@7onic_design';
+export const AUTHOR_TWITTER = '@7onicHQ';
 
 // Categories
 export const CATEGORIES = [
