@@ -74,9 +74,11 @@ const jsonLd = {
             <a href="/" class="back-link">← All Posts</a>
 
             <div class="post-badges">
-              <a href={`/category/${category}`} class="category-badge">
-                {categoryLabel}
-              </a>
+              {category && (
+                <a href={`/category/${category}`} class="category-badge">
+                  {categoryLabel}
+                </a>
+              )}
               {seriesLabel && seriesOrder && (
                 <span class="series-badge">
                   {seriesLabel} #{seriesOrder}
