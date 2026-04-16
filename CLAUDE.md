@@ -29,7 +29,10 @@
 
 - **`width: 100%`** — `.page-wrapper`에 필수. 없으면 flex context에서 컨텐츠 크기로 축소됨
 - **`<Sidebar />` 누락 금지** — 새 페이지 추가 시 반드시 포함
-- **콘텐츠 영역 `padding-top: 3rem`** — 모든 페이지 통일 (BlogPost, About, index 동일)
+- **콘텐츠 영역 상단 패딩** — 반드시 `page-top` 클래스 사용. 개별 `padding-top` 직접 작성 금지
+  - `global.css`에 정의: desktop 3rem / mobile 2rem 자동 적용
+  - 적용 위치: 각 페이지의 최상단 콘텐츠 요소 (`.hero`, `.page-header`, `.main-content` 등)
+  - 예: `<section class="hero page-top">`, `<div class="page-header page-top">`
 
 ---
 
