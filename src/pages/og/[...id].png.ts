@@ -34,13 +34,14 @@ const fontBold = fs.readFileSync(
   path.resolve(process.cwd(), 'src/assets/fonts/atkinson-bold.woff')
 );
 
-// Load logo — strip brand colors → white for dark OG background
+// Load logo — dark mode mono palette (matches blog header dark mode)
+// mono-h (horizontal bar) #F46181 → #6B7280, mono-d (diagonal) #37D0DE → #D1D5DB, mono-i (overlap) #6D70E3 → #F3F4F6
 const logoSvgBuf = fs.readFileSync(path.resolve(process.cwd(), 'public/favicon.svg'));
-const logoSvgWhite = logoSvgBuf.toString()
-  .replace(/fill="#F46181"/g, 'fill="white"')
-  .replace(/fill="#37D0DE"/g, 'fill="white"')
-  .replace(/fill="#6D70E3"/g, 'fill="white"');
-const logoPngBuf = await sharp(Buffer.from(logoSvgWhite)).resize(null, 40).png().toBuffer();
+const logoSvgMono = logoSvgBuf.toString()
+  .replace(/fill="#F46181"/g, 'fill="#6B7280"')
+  .replace(/fill="#37D0DE"/g, 'fill="#D1D5DB"')
+  .replace(/fill="#6D70E3"/g, 'fill="#F3F4F6"');
+const logoPngBuf = await sharp(Buffer.from(logoSvgMono)).resize(null, 40).png().toBuffer();
 const logoDataUrl = `data:image/png;base64,${logoPngBuf.toString('base64')}`;
 
 export async function getStaticPaths() {
