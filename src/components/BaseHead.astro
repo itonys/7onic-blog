@@ -1,6 +1,4 @@
 ---
-// Import the global.css file here so that it is included on
-// all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
 import FallbackImage from '../assets/blog-placeholder-1.jpg';
 import { SITE_TITLE, AUTHOR_TWITTER } from '../consts';
@@ -12,12 +10,7 @@ interface Props {
   canonicalUrl?: string;
 }
 
-const {
-  title,
-  description,
-  ogImage,
-  canonicalUrl,
-} = Astro.props;
+const { title, description, ogImage, canonicalUrl } = Astro.props;
 
 const resolvedCanonical = canonicalUrl ?? new URL(Astro.url.pathname, Astro.site).toString();
 const resolvedOgImage = ogImage ?? new URL(FallbackImage.src, Astro.site).toString();
@@ -34,6 +27,14 @@ const pageTitle = title === SITE_TITLE ? title : `${title} — ${SITE_TITLE}`;
     } catch (e) {}
   })();
 </script>
+
+<!-- Inter font -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+/>
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />

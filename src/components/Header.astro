@@ -1,20 +1,45 @@
 ---
-import { SITE_TITLE, DOCS_URL } from '../consts';
+import { getCollection } from 'astro:content';
+import { SITE_TITLE, DOCS_URL, CATEGORIES } from '../consts';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const categoryCounts = CATEGORIES.map((cat) => ({
+  ...cat,
+  count: allPosts.filter((p) => p.data.category === cat.id).length,
+}));
 ---
 
 <header class="site-header">
   <div class="header-inner">
-    <a href="/" class="logo">
-      <span class="logo-dot" aria-hidden="true"></span>
-      {SITE_TITLE}
+
+    <!-- Logo -->
+    <a href="/" class="logo" aria-label={SITE_TITLE}>
+      <!-- 7onic color mark -->
+      <svg viewBox="0 0 18 27" width="12" height="18" aria-hidden="true">
+        <defs>
+          <clipPath id="hc"><rect width="18" height="27"/></clipPath>
+          <mask id="hm" maskUnits="userSpaceOnUse" x="3" y="0" width="15" height="27" style="mask-type:alpha">
+            <path d="M17.0458 5.30189C17.6547 3.62877 16.7921 1.77877 15.1189 1.1698C13.4458 0.560834 11.5958 1.4235 10.9868 3.09663L4.18728 21.7783C3.57831 23.4514 4.44098 25.3014 6.11411 25.9104C7.78723 26.5193 9.63723 25.6567 10.2462 23.9835L17.0458 5.30189Z" fill="white"/>
+          </mask>
+        </defs>
+        <g clip-path="url(#hc)">
+          <path d="M3.22388 0.873132C1.44338 0.873132 0 2.31651 0 4.09701C0 5.87751 1.44338 7.32089 3.22388 7.32089L13.7015 7.32089C15.482 7.32089 16.9254 5.87751 16.9254 4.09701C16.9254 2.31651 15.482 0.873132 13.7015 0.873132L3.22388 0.873132Z" fill="#F46181"/>
+          <path d="M16.7417 5.1912C17.3507 3.51808 16.5561 1.69286 14.9669 1.11446C13.3778 0.536056 11.5959 1.4235 10.9869 3.09663L4.18734 21.7783C3.57838 23.4514 4.37297 25.2766 5.96211 25.855C7.55125 26.4334 9.33318 25.546 9.94214 23.8729L16.7417 5.1912Z" fill="#37D0DE"/>
+          <g mask="url(#hm)">
+            <path d="M3.22388 0.873132C1.44338 0.873132 0 2.31651 0 4.09701C0 5.87751 1.44338 7.32089 3.22388 7.32089L13.7015 7.32089C15.482 7.32089 16.9254 5.87751 16.9254 4.09701C16.9254 2.31651 15.482 0.873132 13.7015 0.873132L3.22388 0.873132Z" fill="#6D70E3"/>
+          </g>
+        </g>
+      </svg>
+      <span class="logo-text">{SITE_TITLE}</span>
     </a>
 
+    <!-- Desktop nav -->
     <nav class="nav" aria-label="Main navigation">
       <a href="/blog">Blog</a>
       <a href="/about">About</a>
-      <a href={DOCS_URL} target="_blank" rel="noopener noreferrer" class="docs-link">
-        Docs
-        <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+      <a href={DOCS_URL} target="_blank" rel="noopener noreferrer">
+        7onic Design System
+        <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
           <path d="M3.5 2H2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V8.5M7 1h4m0 0v4m0-4L5.5 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
@@ -22,34 +47,75 @@ import { SITE_TITLE, DOCS_URL } from '../consts';
 
     <div class="header-actions">
       <!-- Theme toggle -->
-      <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme" title="Toggle light/dark mode">
-        <!-- Sun icon (shown in dark mode) -->
+      <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">
         <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="4"/>
           <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
         </svg>
-        <!-- Moon icon (shown in light mode) -->
         <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
         </svg>
       </button>
 
-      <!-- Social -->
-      <a href="https://github.com/itonys/7onic" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub">
+      <!-- GitHub -->
+      <a href="https://github.com/itonys/7onic" target="_blank" rel="noopener noreferrer" class="icon-btn desktop-only" aria-label="GitHub">
         <svg width="19" height="19" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
           <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
         </svg>
       </a>
-      <a href="https://x.com/7onicHQ" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="X (Twitter)">
-        <svg width="17" height="17" viewBox="0 0 1200 1227" fill="currentColor" aria-hidden="true">
+
+      <!-- X -->
+      <a href="https://x.com/7onicHQ" target="_blank" rel="noopener noreferrer" class="icon-btn desktop-only" aria-label="X (Twitter)">
+        <svg width="16" height="16" viewBox="0 0 1200 1227" fill="currentColor" aria-hidden="true">
           <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/>
         </svg>
       </a>
+
+      <!-- Mobile hamburger -->
+      <button id="mobile-menu-btn" class="icon-btn mobile-only" aria-label="Open menu" aria-expanded="false">
+        <svg class="hamburger-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+        <svg class="close-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
     </div>
   </div>
 </header>
 
+<!-- Mobile menu overlay -->
+<div id="mobile-menu" aria-hidden="true">
+  <div class="mobile-backdrop"></div>
+  <nav class="mobile-drawer" aria-label="Mobile navigation">
+    <div class="mobile-nav-links">
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+      <a href={DOCS_URL} target="_blank" rel="noopener noreferrer">
+        7onic Design System ↗
+      </a>
+    </div>
+    <div class="mobile-divider"></div>
+    <div class="mobile-section-label">Categories</div>
+    <ul class="mobile-category-list">
+      <li><a href="/blog">All Posts <span class="mobile-count">{allPosts.length}</span></a></li>
+      {categoryCounts.map((cat) => (
+        <li>
+          <a href={`/blog/category/${cat.id}`}>
+            {cat.label}
+            {cat.count > 0 && <span class="mobile-count">{cat.count}</span>}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</div>
+
 <script>
+  // Theme toggle
   const toggle = document.getElementById('theme-toggle');
   function getTheme() {
     return document.documentElement.getAttribute('data-theme') || 'light';
@@ -61,9 +127,38 @@ import { SITE_TITLE, DOCS_URL } from '../consts';
   toggle?.addEventListener('click', () => {
     setTheme(getTheme() === 'dark' ? 'light' : 'dark');
   });
+
+  // Mobile menu
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const backdrop = mobileMenu?.querySelector('.mobile-backdrop');
+
+  function openMenu() {
+    mobileMenu?.classList.add('open');
+    menuBtn?.setAttribute('aria-expanded', 'true');
+    mobileMenu?.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    mobileMenu?.classList.remove('open');
+    menuBtn?.setAttribute('aria-expanded', 'false');
+    mobileMenu?.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  menuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  backdrop?.addEventListener('click', closeMenu);
+
+  // Close on nav link click
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
 </script>
 
 <style>
+  /* ── Header ── */
   .site-header {
     position: sticky;
     top: 0;
@@ -83,6 +178,7 @@ import { SITE_TITLE, DOCS_URL } from '../consts';
     gap: 1rem;
   }
 
+  /* Logo */
   .logo {
     display: flex;
     align-items: center;
@@ -95,15 +191,7 @@ import { SITE_TITLE, DOCS_URL } from '../consts';
     flex-shrink: 0;
   }
 
-  .logo-dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: #7c3aed;
-    flex-shrink: 0;
-  }
-
+  /* Nav */
   .nav {
     display: flex;
     align-items: center;
@@ -114,12 +202,13 @@ import { SITE_TITLE, DOCS_URL } from '../consts';
   .nav a {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 3px;
     padding: 0.375rem 0.625rem;
     font-size: 0.875rem;
     color: var(--color-text-muted);
     text-decoration: none;
     border-radius: 6px;
+    white-space: nowrap;
     transition: color 0.15s, background-color 0.15s;
   }
 
@@ -128,6 +217,7 @@ import { SITE_TITLE, DOCS_URL } from '../consts';
     background-color: var(--color-bg-subtle);
   }
 
+  /* Actions */
   .header-actions {
     display: flex;
     align-items: center;
@@ -155,17 +245,137 @@ import { SITE_TITLE, DOCS_URL } from '../consts';
     background-color: var(--color-bg-subtle);
   }
 
-  /* Show sun in dark mode, moon in light mode */
+  /* Theme icon — moon shown in light, sun shown in dark */
   .icon-sun { display: none; }
   .icon-moon { display: block; }
 
-  [data-theme="dark"] .icon-sun { display: block; }
-  [data-theme="dark"] .icon-moon { display: none; }
+  /* hamburger/close icon */
+  .close-icon { display: none; }
+  .hamburger-icon { display: block; }
 
-  @media (max-width: 480px) {
-    .icon-btn[aria-label="GitHub"],
-    .icon-btn[aria-label="X (Twitter)"] {
-      display: none;
-    }
+  /* Responsive visibility */
+  .desktop-only { display: flex; }
+  .mobile-only { display: none; }
+
+  @media (max-width: 768px) {
+    .desktop-only { display: none; }
+    .mobile-only { display: flex; }
+    .nav { display: none; }
   }
+
+  /* ── Mobile menu ── */
+  #mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+  }
+
+  #mobile-menu.open {
+    display: block;
+  }
+
+  #mobile-menu.open .hamburger-icon { display: none; }
+  #mobile-menu.open ~ * .hamburger-icon { display: none; }
+
+  .mobile-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+  }
+
+  .mobile-drawer {
+    position: absolute;
+    top: 56px;
+    right: 0;
+    width: 280px;
+    height: calc(100vh - 56px);
+    background-color: var(--color-bg);
+    border-left: 1px solid var(--color-border);
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .mobile-nav-links a {
+    display: block;
+    padding: 0.5rem 0.625rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.15s;
+  }
+
+  .mobile-nav-links a:hover {
+    background-color: var(--color-bg-subtle);
+  }
+
+  .mobile-divider {
+    border-top: 1px solid var(--color-border);
+    margin-bottom: 1.25rem;
+  }
+
+  .mobile-section-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 0.625rem;
+    padding: 0 0.625rem;
+  }
+
+  .mobile-category-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .mobile-category-list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.4375rem 0.625rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: color 0.15s, background-color 0.15s;
+  }
+
+  .mobile-category-list a:hover {
+    color: var(--color-text);
+    background-color: var(--color-bg-subtle);
+  }
+
+  .mobile-count {
+    font-size: 0.6875rem;
+    background-color: var(--color-bg-subtle);
+    padding: 0.0625rem 0.375rem;
+    border-radius: 999px;
+  }
+</style>
+
+<!-- Global theme icon switcher — needs :global to escape Astro scoping -->
+<style is:global>
+  [data-theme="dark"] #theme-toggle .icon-sun { display: block; }
+  [data-theme="dark"] #theme-toggle .icon-moon { display: none; }
+
+  #mobile-menu.open #mobile-menu-btn .hamburger-icon { display: none; }
+  #mobile-menu.open #mobile-menu-btn .close-icon { display: block; }
 </style>

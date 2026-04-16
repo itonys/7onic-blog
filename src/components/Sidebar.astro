@@ -46,7 +46,7 @@ const currentPath = Astro.url.pathname;
           const count = allPosts.filter((p) => p.data.series === s.id).length;
           return (
             <li>
-              <a href={`/blog`} class="sidebar-link">
+              <a href="/blog" class="sidebar-link">
                 <span>{s.label}</span>
                 {count > 0 && <span class="sidebar-count">{count}</span>}
               </a>
@@ -62,8 +62,15 @@ const currentPath = Astro.url.pathname;
   .sidebar {
     width: 200px;
     flex-shrink: 0;
+    /* Left sidebar via CSS order */
+    order: -1;
+    /* Sticky: header(56px) + breathing room */
     position: sticky;
-    top: 72px;
+    top: calc(56px + 1.5rem);
+    /* Prevent sidebar from growing beyond viewport */
+    align-self: flex-start;
+    max-height: calc(100vh - 56px - 3rem);
+    overflow-y: auto;
   }
 
   .sidebar-section {
@@ -124,5 +131,12 @@ const currentPath = Astro.url.pathname;
   .sidebar-link.active .sidebar-count {
     background-color: color-mix(in srgb, #7c3aed 15%, transparent);
     color: #7c3aed;
+  }
+
+  /* Hide on mobile — use hamburger menu instead */
+  @media (max-width: 768px) {
+    .sidebar {
+      display: none;
+    }
   }
 </style>
