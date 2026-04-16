@@ -114,6 +114,104 @@ body {
   overflow-x: auto;
   padding: 1.25em 1.5em;
   margin: 1.5em 0;
+  position: relative;
+}
+
+/* Copy button */
+.prose pre .copy-btn {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-family: var(--font-sans);
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+  user-select: none;
+}
+.prose pre .copy-btn:hover {
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.15);
+}
+.prose pre .copy-btn.copied {
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.3);
+}
+
+/* File title (```tsx title="file.tsx") */
+.prose figure[data-rehype-pretty-code-figure] {
+  margin: 1.5em 0;
+}
+.prose figcaption[data-rehype-pretty-code-title] {
+  font-size: 0.8125rem;
+  font-family: var(--font-mono);
+  color: rgba(255, 255, 255, 0.5);
+  background: #1e1e2e;
+  border-radius: 8px 8px 0 0;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.prose figcaption[data-rehype-pretty-code-title] + pre {
+  border-radius: 0 0 8px 8px;
+  margin-top: 0;
+}
+
+/* Shiki meta title via transformer (data-title attribute) */
+.prose pre[data-title]::before {
+  content: attr(data-title);
+  display: block;
+  font-size: 0.8125rem;
+  font-family: var(--font-mono);
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.625rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Diff: added / removed lines */
+.prose pre .line.diff.add {
+  background-color: rgba(74, 222, 128, 0.12);
+}
+.prose pre .line.diff.add::before {
+  content: '+';
+  color: #4ade80;
+  margin-right: 0.75rem;
+}
+.prose pre .line.diff.remove {
+  background-color: rgba(248, 113, 113, 0.12);
+}
+.prose pre .line.diff.remove::before {
+  content: '-';
+  color: #f87171;
+  margin-right: 0.75rem;
+}
+
+/* Highlighted lines ({2,4-6}) */
+.prose pre .line.highlighted {
+  background-color: rgba(124, 58, 237, 0.15);
+  border-left: 2px solid #7c3aed;
+  margin-left: -1.5em;
+  padding-left: calc(1.5em - 2px);
+}
+
+/* Focus: non-focused lines dimmed */
+.prose pre.has-focused .line:not(.focused) {
+  opacity: 0.3;
+  transition: opacity 0.2s;
+}
+.prose pre.has-focused:hover .line:not(.focused) {
+  opacity: 0.7;
+}
+
+/* Word highlight */
+.prose pre .highlighted-word {
+  background-color: rgba(124, 58, 237, 0.25);
+  border-radius: 3px;
+  padding: 1px 3px;
 }
 
 .prose pre code {
