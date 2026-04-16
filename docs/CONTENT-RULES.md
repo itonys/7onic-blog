@@ -181,6 +181,28 @@ const className = 'btn'
 
 ---
 
+## 교차 게시 유입 규칙
+
+dev.to / Hashnode에 교차 게시되는 포스트는 독자가 7onic을 모를 수 있다. 반드시 아래 두 가지를 포함한다.
+
+### 1. 본문 내 contextual 링크 (필수)
+- 포스트 내에서 7onic을 제품으로 처음 소개하는 문장에 `[7onic](https://7onic.design)` 링크 삽입
+- 자연스러운 흐름에서 1~2회면 충분. 억지로 반복 금지
+
+### 2. 포스트 하단 author footer (필수)
+모든 포스트 맨 끝에 아래 형식의 footer를 추가한다:
+
+```md
+---
+
+**About 7onic** — An open-source React design system where design and code never drift. Free, MIT licensed. Docs and interactive playground at [7onic.design](https://7onic.design). More posts in this series at [blog.7onic.design](https://blog.7onic.design). Follow updates on X at [@7onicHQ](https://x.com/7onicHQ).
+```
+
+- `---` (HR) 뒤에 bold 텍스트 + 링크 3개: 7onic.design / blog.7onic.design / @7onicHQ
+- 마케팅 카피가 아닌 사실 정보 나열 톤 유지
+
+---
+
 ## 포스트 구조 (권장)
 
 ```md
@@ -199,6 +221,10 @@ frontmatter
 ## Conclusion / Wrapping Up
 
 마무리 + 다음 포스트 예고 (시리즈의 경우)
+
+---
+
+**About 7onic** — ...footer...
 ```
 
 ---

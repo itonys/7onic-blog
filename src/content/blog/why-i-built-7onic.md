@@ -68,7 +68,7 @@ One `sync-tokens` command reads that file and generates everything:
 
 Eleven files total. All from one source. I can change a color in the token file, run the command, and know it's updated everywhere. No searching the codebase for hardcoded hex values. No "did we update the Tailwind config too?"
 
-On top of that token layer, I built a component library. 42 components, all using Radix UI under the hood for accessibility, styled with CVA variants. There's a CLI too:
+On top of that token layer, I built [7onic](https://7onic.design) — 42 components, all using Radix UI under the hood for accessibility, styled with CVA variants. There's a CLI too:
 
 ```bash
 npx 7onic add button input select
@@ -94,7 +94,7 @@ I should mention that I built all of this alone. No team. No design review. No c
 
 Building solo has one unexpected benefit: it makes the "no hardcoding" rule actually stick. On a team, someone always has a deadline and a good reason to skip the token file. "I'll clean it up later." Solo, I'm the person who has to clean it up later, and I know I won't, so I just do it right the first time. The constraint isn't aspirational — it's survival.
 
-The downside is that a design system can grow forever. There's always one more component to add, one more variant to support, one more edge case to handle. I had to get comfortable shipping something incomplete. 7onic right now has 42 components, supports both Tailwind v3 and v4, has a CLI, and docs in three languages. It's also missing things. That's fine. Ship, iterate, repeat.
+The downside is that a design system can grow forever. There's always one more component to add, one more variant to support, one more edge case to handle. I had to get comfortable shipping something incomplete. [7onic](https://7onic.design) right now has 42 components, supports both Tailwind v3 and v4, has a CLI, and docs in three languages. It's also missing things. That's fine. Ship, iterate, repeat.
 
 ## What comes next
 
@@ -112,3 +112,7 @@ If any of that sounds interesting, stick around.
 ---
 
 *Next up: how one JSON file becomes CSS variables, Tailwind presets, and TypeScript types — and why my first three attempts at building this pipeline failed.*
+
+---
+
+**About 7onic** — An open-source React design system where design and code never drift. Free, MIT licensed. Docs and interactive playground at [7onic.design](https://7onic.design). More posts in this series at [blog.7onic.design](https://blog.7onic.design). Follow updates on X at [@7onicHQ](https://x.com/7onicHQ).
