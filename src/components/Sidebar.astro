@@ -46,7 +46,10 @@ const currentPath = Astro.url.pathname;
           const count = allPosts.filter((p) => p.data.series === s.id).length;
           return (
             <li>
-              <a href="/" class="sidebar-link">
+              <a
+                href={`/series/${s.id}`}
+                class={`sidebar-link${currentPath.includes(`/series/${s.id}`) ? ' active' : ''}`}
+              >
                 <span>{s.label}</span>
                 {count > 0 && <span class="sidebar-count">{count}</span>}
               </a>
