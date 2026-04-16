@@ -38,12 +38,12 @@ npm run publish-post -- "[slug]"
 아래는 자동화 불가 — 유저가 직접 실행:
 
 - [ ] **X (@7onicHQ)** — 포스트 링크 + 한 줄 요약 트윗
-- [ ] **Hacker News** — news.ycombinator.com/submit
+- [ ] **Hacker News** — news.ycombinator.com/submit (**포스트 20개 이상일 때**)
   - 제목 형식: `Show HN: [포스트 제목 또는 7onic 소개]`
   - URL: `blog.7onic.design/[slug]` 또는 `7onic.design`
   - 첫 댓글에 배경 설명 추가 (솔로 빌더 + 오픈소스 + 토큰 파이프라인 스토리)
 - [ ] **Reddit** — r/webdev, r/reactjs, r/Frontend 중 내용에 맞는 곳
-- [ ] **IndieHackers** — indiehackers.com (솔로 빌더 커뮤니티, 스토리 중심 포스트에 적합)
+- [ ] **IndieHackers** — indiehackers.com (**포스트 20개 이상일 때**, 솔로 빌더 커뮤니티)
 
 ## 주의
 
