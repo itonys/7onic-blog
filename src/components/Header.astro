@@ -99,7 +99,7 @@ const categoryCounts = CATEGORIES.map((cat) => ({
     <div class="mobile-divider"></div>
     <div class="mobile-section-label">Categories</div>
     <ul class="mobile-category-list">
-      <li><a href="/blog">All Posts <span class="mobile-count">{allPosts.length}</span></a></li>
+      <li><a href="/">All Posts <span class="mobile-count">{allPosts.length}</span></a></li>
       {categoryCounts.map((cat) => (
         <li>
           <a href={`/blog/category/${cat.id}`}>
