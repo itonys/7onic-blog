@@ -1,0 +1,67 @@
+---
+// PAGE-TEMPLATE.astro
+// Copy this file to src/pages/[your-page].astro and customize.
+//
+// Rules:
+// - Add page-top class to the top-level content element (main or first div inside main)
+// - Never write padding-top directly — use page-top (defined in global.css)
+// - Always include <Sidebar /> inside page-wrapper
+// - Always include <Footer /> at the bottom
+// - Add mobile @media (max-width: 768px) block even if currently empty
+
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Sidebar from '../components/Sidebar.astro';
+import { SITE_TITLE } from '../consts';
+
+// TODO: update title and description
+const title = 'Page Title';
+const description = 'Page description (120–160 chars for SEO).';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={`${title} — ${SITE_TITLE}`} description={description} />
+  </head>
+  <body>
+    <Header />
+    <div class="page-wrapper">
+      <main class="main-content page-top">
+
+        <!-- TODO: page content here -->
+
+      </main>
+      <Sidebar />
+    </div>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .page-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    gap: 4rem;
+    align-items: flex-start;
+  }
+
+  .main-content {
+    flex: 1;
+    min-width: 0;
+    padding-bottom: 4rem;
+  }
+
+  @media (max-width: 768px) {
+    .page-wrapper {
+      flex-direction: column;
+      gap: 0;
+      padding: 0 1rem;
+    }
+    /* Add mobile-specific overrides below */
+  }
+</style>

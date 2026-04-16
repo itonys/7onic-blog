@@ -1,11 +1,15 @@
 ---
 import { getCollection } from 'astro:content';
-import { SITE_TITLE, DOCS_URL, CATEGORIES } from '../consts';
+import { SITE_TITLE, DOCS_URL, CATEGORIES, SERIES } from '../consts';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const categoryCounts = CATEGORIES.map((cat) => ({
   ...cat,
   count: allPosts.filter((p) => p.data.category === cat.id).length,
+}));
+const seriesCounts = SERIES.map((s) => ({
+  ...s,
+  count: allPosts.filter((p) => p.data.series === s.id).length,
 }));
 ---
 
@@ -109,6 +113,23 @@ const categoryCounts = CATEGORIES.map((cat) => ({
         </li>
       ))}
     </ul>
+
+    {seriesCounts.length > 0 && (
+      <>
+        <div class="mobile-divider"></div>
+        <div class="mobile-section-label">Series</div>
+        <ul class="mobile-category-list">
+          {seriesCounts.map((s) => (
+            <li>
+              <a href={`/series/${s.id}`}>
+                {s.label}
+                {s.count > 0 && <span class="mobile-count">{s.count}</span>}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
   </nav>
 </div>
 
