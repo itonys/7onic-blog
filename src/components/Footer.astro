@@ -1,14 +1,14 @@
 ---
-import { DOCS_URL, SITE_URL } from '../consts';
+import { DOCS_URL } from '../consts';
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   <div class="footer-inner">
 
-    <!-- Logo + tagline -->
-    <div class="footer-brand">
-      <svg viewBox="0 0 18 27" width="12" height="18" aria-hidden="true">
+    <!-- Logo -->
+    <a href="/" class="footer-logo" aria-label="7onic Blog">
+      <svg viewBox="0 0 18 27" width="16" height="24" aria-hidden="true">
         <defs>
           <clipPath id="fc"><rect width="18" height="27"/></clipPath>
           <mask id="fm" maskUnits="userSpaceOnUse" x="3" y="0" width="15" height="27" style="mask-type:alpha">
@@ -23,20 +23,22 @@ const year = new Date().getFullYear();
           </g>
         </g>
       </svg>
-      <span class="footer-tagline">Design to Code</span>
-    </div>
+    </a>
 
-    <!-- Links -->
-    <div class="footer-links">
+    <!-- Nav links -->
+    <nav class="footer-nav" aria-label="Footer navigation">
       <a href={DOCS_URL} target="_blank" rel="noopener noreferrer">Design System</a>
+      <span class="footer-dot" aria-hidden="true">·</span>
       <a href="https://github.com/itonys/7onic" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="https://x.com/7onicHQ" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
-        <svg width="13" height="13" viewBox="0 0 1200 1227" fill="currentColor" aria-hidden="true">
+      <span class="footer-dot" aria-hidden="true">·</span>
+      <a href="https://x.com/7onicHQ" target="_blank" rel="noopener noreferrer">
+        <svg width="13" height="13" viewBox="0 0 1200 1227" fill="currentColor" aria-label="X">
           <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/>
         </svg>
       </a>
+      <span class="footer-dot" aria-hidden="true">·</span>
       <a href="/rss.xml">RSS</a>
-    </div>
+    </nav>
 
     <!-- Copyright -->
     <p class="footer-copy">© {year} 7onic</p>
@@ -53,72 +55,63 @@ const year = new Date().getFullYear();
   .footer-inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1.75rem 1.5rem;
+    padding: 3rem 1.5rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  /* Logo */
+  .footer-logo {
+    display: block;
+    opacity: 0.6;
+    transition: opacity 0.15s;
+  }
+
+  .footer-logo:hover {
+    opacity: 1;
+  }
+
+  .footer-logo svg {
+    display: block;
+  }
+
+  /* Nav */
+  .footer-nav {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 0.5rem;
   }
 
-  /* Brand */
-  .footer-brand {
-    display: flex;
+  .footer-nav a {
+    display: inline-flex;
     align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-  }
-
-  .footer-tagline {
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--color-text-muted);
-    letter-spacing: -0.01em;
-  }
-
-  /* Links — center */
-  .footer-links {
-    display: flex;
-    align-items: center;
-    gap: 0.125rem;
-    flex: 1;
-    justify-content: center;
-  }
-
-  .footer-links a {
     font-size: 0.8125rem;
     color: var(--color-text-muted);
     text-decoration: none;
-    padding: 0.25rem 0.625rem;
-    border-radius: 4px;
-    transition: color 0.15s, background-color 0.15s;
+    transition: color 0.15s;
   }
 
-  .footer-links a:hover {
+  .footer-nav a:hover {
     color: var(--color-text);
-    background-color: var(--color-bg-subtle);
   }
 
-  /* Copyright — right */
+  .footer-dot {
+    color: var(--color-border);
+    font-size: 0.75rem;
+    user-select: none;
+  }
+
+  /* Copyright */
   .footer-copy {
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     color: var(--color-text-muted);
+    opacity: 0.6;
     margin: 0;
-    flex-shrink: 0;
-  }
-
-  @media (max-width: 600px) {
-    .footer-inner {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 1rem;
-    }
-    .footer-links {
-      justify-content: center;
-    }
   }
 </style>
 
-<!-- Mono logo dark mode -->
 <style is:global>
   .footer-mono-h { fill: #9CA3AF; }
   .footer-mono-d { fill: #4B5563; }
