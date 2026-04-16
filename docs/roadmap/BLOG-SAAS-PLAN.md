@@ -147,6 +147,12 @@ lang: en            # en | ja
 - [ ] 플랫폼별 통계 (조회수 합산)
 - [ ] 실패 알림 (이메일/Slack)
 
+### Phase 4 — 소셜 기능
+- [ ] 댓글 — Giscus (GitHub Discussions 기반, 무료, 개발자 친화)
+- [ ] 공유 버튼 — X / LinkedIn (프론트엔드만, 백엔드 불필요)
+- [ ] 좋아요 카운터 — Supabase 간단 카운터 (Nice to have)
+- [ ] 북마크 — 로그인 유저 전용 (Nice to have)
+
 ---
 
 ## 마케팅 전략
