@@ -34,9 +34,13 @@ const fontBold = fs.readFileSync(
   path.resolve(process.cwd(), 'src/assets/fonts/atkinson-bold.woff')
 );
 
-// Load logo
+// Load logo — strip brand colors → white for dark OG background
 const logoSvgBuf = fs.readFileSync(path.resolve(process.cwd(), 'public/favicon.svg'));
-const logoPngBuf = await sharp(logoSvgBuf).resize(null, 40).png().toBuffer();
+const logoSvgWhite = logoSvgBuf.toString()
+  .replace(/fill="#F46181"/g, 'fill="white"')
+  .replace(/fill="#37D0DE"/g, 'fill="white"')
+  .replace(/fill="#6D70E3"/g, 'fill="white"');
+const logoPngBuf = await sharp(Buffer.from(logoSvgWhite)).resize(null, 40).png().toBuffer();
 const logoDataUrl = `data:image/png;base64,${logoPngBuf.toString('base64')}`;
 
 export async function getStaticPaths() {
