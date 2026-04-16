@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "publish-post": "npx dotenv-cli -e .env -- npx tsx scripts/publish-post.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.3",
@@ -18,8 +19,13 @@
     "@shikijs/transformers": "^4.0.2",
     "@tailwindcss/vite": "^4.2.2",
     "astro": "^6.1.7",
+    "gray-matter": "^4.0.3",
     "satori": "^0.26.0",
     "sharp": "^0.34.3",
     "tailwindcss": "^4.2.2"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^11.0.0",
+    "tsx": "^4.21.0"
   }
 }
