@@ -36,7 +36,6 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
           <a href="/blog" class="series-card">
             <div class="series-meta">
               <span class="series-label">Featured Series</span>
-              <span class="series-num">01</span>
             </div>
             <h2 class="series-title">Design to Code</h2>
             <p class="series-desc">A designer's journey building a design system — from Figma tokens to production components, Tailwind, AI tooling, and CLI.</p>
@@ -183,13 +182,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     color: #7c3aed;
   }
 
-  .series-num {
-    font-size: 0.75rem;
-    color: var(--color-text-muted);
-    font-variant-numeric: tabular-nums;
-  }
-
-  .series-title {
+.series-title {
     font-size: 1.25rem;
     font-weight: 700;
     color: var(--color-text);
