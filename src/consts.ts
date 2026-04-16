@@ -29,6 +29,12 @@ export const SERIES = [
     label: 'Design to Code',
     description: "A designer's journey building a design system",
   },
+  // TEST — remove after scroll test
+  { id: 'token-deep-dive', label: 'Token Deep Dive', description: '' },
+  { id: 'component-anatomy', label: 'Component Anatomy', description: '' },
+  { id: 'cli-tooling', label: 'CLI & Tooling', description: '' },
+  { id: 'build-release', label: 'Build & Release', description: '' },
+  { id: 'ai-workflow', label: 'AI Workflow', description: '' },
 ] as const;
 
 export type SeriesId = (typeof SERIES)[number]['id'];
