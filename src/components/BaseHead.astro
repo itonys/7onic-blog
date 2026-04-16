@@ -8,9 +8,11 @@ interface Props {
   description: string;
   ogImage?: string;
   canonicalUrl?: string;
+  ogType?: 'website' | 'article';
+  keywords?: string[];
 }
 
-const { title, description, ogImage, canonicalUrl } = Astro.props;
+const { title, description, ogImage, canonicalUrl, ogType = 'website', keywords = [] } = Astro.props;
 
 const resolvedCanonical = canonicalUrl ?? new URL(Astro.url.pathname, Astro.site).toString();
 const resolvedOgImage = ogImage ?? new URL(FallbackImage.src, Astro.site).toString();
@@ -60,14 +62,16 @@ const pageTitle = title === SITE_TITLE ? title : `${title} — ${SITE_TITLE}`;
 <meta name="title" content={pageTitle} />
 <meta name="description" content={description} />
 <meta name="author" content="7onic" />
+{keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
 
 <!-- Open Graph -->
-<meta property="og:type" content="article" />
+<meta property="og:type" content={ogType} />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={pageTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={resolvedOgImage} />
 <meta property="og:site_name" content="7onic Blog" />
+<meta property="og:locale" content="en_US" />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
@@ -76,3 +80,4 @@ const pageTitle = title === SITE_TITLE ? title : `${title} — ${SITE_TITLE}`;
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={resolvedOgImage} />
 <meta property="twitter:site" content={AUTHOR_TWITTER} />
+<meta property="twitter:creator" content={AUTHOR_TWITTER} />
