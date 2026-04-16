@@ -27,6 +27,11 @@ const fontBold = fs.readFileSync(
   path.resolve(process.cwd(), 'src/assets/fonts/atkinson-bold.woff')
 );
 
+// Load logo (SVG → PNG data URL for satori)
+const logoSvgBuf = fs.readFileSync(path.resolve(process.cwd(), 'public/favicon.svg'));
+const logoPngBuf = await sharp(logoSvgBuf).resize(null, 40).png().toBuffer();
+const logoDataUrl = `data:image/png;base64,${logoPngBuf.toString('base64')}`;
+
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
   return posts.map((post) => ({
@@ -124,29 +129,19 @@ export const GET: APIRoute = async ({ props }) => {
                           style: { display: 'flex', alignItems: 'center', gap: '10px' },
                           children: [
                             {
-                              type: 'div',
+                              type: 'img',
                               props: {
-                                style: {
-                                  width: '32px',
-                                  height: '32px',
-                                  borderRadius: '8px',
-                                  background: colors.accent,
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  justifyContent: 'center',
-                                  fontSize: '16px',
-                                  fontWeight: '700',
-                                  color: '#fff',
-                                  letterSpacing: '-0.02em',
-                                },
-                                children: '7',
+                                src: logoDataUrl,
+                                width: 27,
+                                height: 40,
+                                style: { width: '27px', height: '40px' },
                               },
                             },
                             {
                               type: 'span',
                               props: {
                                 style: {
-                                  fontSize: '18px',
+                                  fontSize: '20px',
                                   fontWeight: '700',
                                   color: 'rgba(255,255,255,0.9)',
                                   letterSpacing: '-0.01em',
@@ -161,7 +156,7 @@ export const GET: APIRoute = async ({ props }) => {
                                   fontSize: '14px',
                                   fontWeight: '400',
                                   color: 'rgba(255,255,255,0.35)',
-                                  marginLeft: '6px',
+                                  marginLeft: '4px',
                                   letterSpacing: '0.02em',
                                 },
                                 children: '/ Blog',
