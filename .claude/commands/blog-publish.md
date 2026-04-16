@@ -43,6 +43,7 @@ npm run publish-post -- "[slug]"
   - URL: `blog.7onic.design/[slug]` 또는 `7onic.design`
   - 첫 댓글에 배경 설명 추가 (솔로 빌더 + 오픈소스 + 토큰 파이프라인 스토리)
 - [ ] **Reddit** — r/webdev, r/reactjs, r/Frontend 중 내용에 맞는 곳
+- [ ] **IndieHackers** — indiehackers.com (솔로 빌더 커뮤니티, 스토리 중심 포스트에 적합)
 
 ## 주의
 
