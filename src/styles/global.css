@@ -14,7 +14,7 @@
     Consolas, 'DejaVu Sans Mono', monospace;
 }
 
-/* Light mode */
+/* Light mode (default) */
 :root {
   --color-bg: #ffffff;
   --color-bg-subtle: #f9fafb;
@@ -24,16 +24,14 @@
   --color-code-bg: #f3f4f6;
 }
 
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #0f0f11;
-    --color-bg-subtle: #1a1a1f;
-    --color-text: #f3f4f6;
-    --color-text-muted: #9ca3af;
-    --color-border: #27272a;
-    --color-code-bg: #1e1e24;
-  }
+/* Dark mode — toggled via data-theme attribute */
+[data-theme="dark"] {
+  --color-bg: #0f0f11;
+  --color-bg-subtle: #1a1a1f;
+  --color-text: #f3f4f6;
+  --color-text-muted: #9ca3af;
+  --color-border: #27272a;
+  --color-code-bg: #1e1e24;
 }
 
 /* Base */
@@ -59,8 +57,7 @@ body {
 
 /* Prose (blog post content) */
 .prose {
-  max-width: 720px;
-  margin: 0 auto;
+  max-width: 680px;
   font-size: 1.0625rem;
   color: var(--color-text);
 }

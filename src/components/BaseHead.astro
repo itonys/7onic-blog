@@ -24,6 +24,17 @@ const resolvedOgImage = ogImage ?? new URL(FallbackImage.src, Astro.site).toStri
 const pageTitle = title === SITE_TITLE ? title : `${title} — ${SITE_TITLE}`;
 ---
 
+<!-- Theme init: must run before paint to avoid flash -->
+<script is:inline>
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      var system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', stored || system);
+    } catch (e) {}
+  })();
+</script>
+
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />

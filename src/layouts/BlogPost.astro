@@ -4,6 +4,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import Sidebar from '../components/Sidebar.astro';
 import { SITE_URL, AUTHOR_NAME, CATEGORIES, SERIES } from '../consts';
 
 type Props = CollectionEntry<'blog'>['data'] & { id: string };
@@ -28,7 +29,6 @@ const seriesLabel = series
   ? SERIES.find((s) => s.id === series)?.label
   : undefined;
 
-// JSON-LD: BlogPosting
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
@@ -61,62 +61,189 @@ const jsonLd = {
       ogImage={ogImageUrl}
       canonicalUrl={canonicalUrl}
     />
-    <!-- JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
 
-  <body class="bg-[var(--color-bg)] text-[var(--color-text)]">
+  <body>
     <Header />
-    <main class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
-      <article>
-        <!-- Post header -->
-        <header class="mb-10">
-          <!-- Category + series -->
-          <div class="flex flex-wrap items-center gap-2 mb-4">
-            <span class="text-xs font-semibold uppercase tracking-wider text-[var(--color-brand)] bg-[var(--color-brand-light)] dark:bg-[var(--color-brand-light-dark)] px-3 py-1 rounded-full">
-              {categoryLabel}
-            </span>
-            {seriesLabel && seriesOrder && (
-              <span class="text-xs text-[var(--color-text-muted)] bg-[var(--color-bg-subtle)] px-3 py-1 rounded-full">
-                {seriesLabel} #{seriesOrder}
-              </span>
-            )}
-          </div>
+    <div class="page-wrapper">
+      <main class="main-content">
+        <article>
+          <!-- Post header -->
+          <header class="post-header">
+            <a href="/blog" class="back-link">← All Posts</a>
 
-          <h1 class="text-3xl sm:text-4xl font-bold leading-tight mb-4 text-[var(--color-text)]">
-            {title}
-          </h1>
-
-          <p class="text-lg text-[var(--color-text-muted)] mb-6">{description}</p>
-
-          <!-- Date -->
-          <div class="flex items-center gap-3 text-sm text-[var(--color-text-muted)]">
-            <FormattedDate date={pubDate} />
-            {updatedDate && updatedDate.toISOString() !== pubDate.toISOString() && (
-              <span>· Updated <FormattedDate date={updatedDate} /></span>
-            )}
-          </div>
-
-          <!-- Tags -->
-          {tags.length > 0 && (
-            <div class="flex flex-wrap gap-2 mt-4">
-              {tags.map((tag: string) => (
-                <span class="text-xs text-[var(--color-text-muted)] bg-[var(--color-bg-subtle)] border border-[var(--color-border)] px-2.5 py-1 rounded-full">
-                  #{tag}
+            <div class="post-badges">
+              <a href={`/blog/category/${category}`} class="category-badge">
+                {categoryLabel}
+              </a>
+              {seriesLabel && seriesOrder && (
+                <span class="series-badge">
+                  {seriesLabel} #{seriesOrder}
                 </span>
-              ))}
+              )}
             </div>
-          )}
 
-          <hr class="mt-8 border-[var(--color-border)]" />
-        </header>
+            <h1 class="post-title">{title}</h1>
+            <p class="post-desc">{description}</p>
 
-        <!-- Post content -->
-        <div class="prose">
-          <slot />
-        </div>
-      </article>
-    </main>
+            <div class="post-meta">
+              <FormattedDate date={pubDate} />
+              {updatedDate && updatedDate.toISOString() !== pubDate.toISOString() && (
+                <span class="post-updated">· Updated <FormattedDate date={updatedDate} /></span>
+              )}
+            </div>
+
+            {tags.length > 0 && (
+              <div class="post-tags">
+                {tags.map((tag: string) => (
+                  <span class="tag">#{tag}</span>
+                ))}
+              </div>
+            )}
+          </header>
+
+          <hr class="divider" />
+
+          <!-- Post content -->
+          <div class="prose">
+            <slot />
+          </div>
+        </article>
+      </main>
+      <Sidebar />
+    </div>
     <Footer />
   </body>
 </html>
+
+<style>
+  .page-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    gap: 4rem;
+    align-items: flex-start;
+  }
+
+  .main-content {
+    flex: 1;
+    min-width: 0;
+    padding: 3rem 0 4rem;
+  }
+
+  /* Post header */
+  .post-header {
+    margin-bottom: 2rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition: color 0.15s;
+  }
+
+  .back-link:hover {
+    color: var(--color-text);
+  }
+
+  .post-badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .category-badge {
+    display: inline-block;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #7c3aed;
+    background-color: color-mix(in srgb, #7c3aed 10%, transparent);
+    padding: 0.25rem 0.625rem;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .category-badge:hover {
+    opacity: 0.8;
+  }
+
+  .series-badge {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    background-color: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
+    padding: 0.25rem 0.625rem;
+    border-radius: 999px;
+  }
+
+  .post-title {
+    font-size: clamp(1.625rem, 4vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin: 0 0 0.875rem;
+  }
+
+  .post-desc {
+    font-size: 1.0625rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0 0 1.25rem;
+  }
+
+  .post-meta {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .post-updated {
+    color: var(--color-text-muted);
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin-top: 1rem;
+  }
+
+  .tag {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    background-color: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
+    padding: 0.1875rem 0.625rem;
+    border-radius: 999px;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 2rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .page-wrapper {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .main-content {
+      padding: 2rem 0 3rem;
+    }
+  }
+</style>

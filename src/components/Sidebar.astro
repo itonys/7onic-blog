@@ -1,0 +1,128 @@
+---
+import { getCollection } from 'astro:content';
+import { CATEGORIES, SERIES } from '../consts';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+
+const categoryCounts = CATEGORIES.map((cat) => ({
+  ...cat,
+  count: allPosts.filter((p) => p.data.category === cat.id).length,
+}));
+
+const currentPath = Astro.url.pathname;
+---
+
+<aside class="sidebar">
+  <!-- Categories -->
+  <div class="sidebar-section">
+    <h3 class="sidebar-label">Categories</h3>
+    <ul class="sidebar-list">
+      <li>
+        <a href="/blog" class={`sidebar-link${currentPath === '/blog' || currentPath === '/blog/' ? ' active' : ''}`}>
+          <span>All Posts</span>
+          <span class="sidebar-count">{allPosts.length}</span>
+        </a>
+      </li>
+      {categoryCounts.map((cat) => (
+        <li>
+          <a
+            href={`/blog/category/${cat.id}`}
+            class={`sidebar-link${currentPath.includes(`/category/${cat.id}`) ? ' active' : ''}`}
+          >
+            <span>{cat.label}</span>
+            {cat.count > 0 && <span class="sidebar-count">{cat.count}</span>}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- Series -->
+  {SERIES.length > 0 && (
+    <div class="sidebar-section">
+      <h3 class="sidebar-label">Series</h3>
+      <ul class="sidebar-list">
+        {SERIES.map((s) => {
+          const count = allPosts.filter((p) => p.data.series === s.id).length;
+          return (
+            <li>
+              <a href={`/blog`} class="sidebar-link">
+                <span>{s.label}</span>
+                {count > 0 && <span class="sidebar-count">{count}</span>}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  )}
+</aside>
+
+<style>
+  .sidebar {
+    width: 200px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 72px;
+  }
+
+  .sidebar-section {
+    margin-bottom: 2rem;
+  }
+
+  .sidebar-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin: 0 0 0.625rem;
+  }
+
+  .sidebar-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.3125rem 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: color 0.15s, background-color 0.15s;
+  }
+
+  .sidebar-link:hover {
+    color: var(--color-text);
+    background-color: var(--color-bg-subtle);
+  }
+
+  .sidebar-link.active {
+    color: #7c3aed;
+    background-color: color-mix(in srgb, #7c3aed 8%, transparent);
+    font-weight: 500;
+  }
+
+  .sidebar-count {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    background-color: var(--color-bg-subtle);
+    padding: 0.0625rem 0.375rem;
+    border-radius: 999px;
+    min-width: 20px;
+    text-align: center;
+  }
+
+  .sidebar-link.active .sidebar-count {
+    background-color: color-mix(in srgb, #7c3aed 15%, transparent);
+    color: #7c3aed;
+  }
+</style>

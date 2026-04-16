@@ -4,11 +4,12 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import Sidebar from '../components/Sidebar.astro';
 import { CATEGORIES, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 5);
+  .slice(0, 8);
 ---
 
 <!doctype html>
@@ -18,76 +19,79 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   </head>
   <body>
     <Header />
-    <main class="main">
+    <div class="page-wrapper">
+      <main class="main-content">
 
-      <!-- Hero -->
-      <section class="hero">
-        <div class="hero-badge">Design to Code</div>
-        <h1 class="hero-title">
-          A designer building<br />a design system.
-        </h1>
-        <p class="hero-desc">{SITE_DESCRIPTION}</p>
-      </section>
+        <!-- Hero -->
+        <section class="hero">
+          <div class="hero-badge">Design to Code</div>
+          <h1 class="hero-title">
+            A designer building<br />a design system.
+          </h1>
+          <p class="hero-desc">{SITE_DESCRIPTION}</p>
+        </section>
 
-      <!-- Categories -->
-      <section class="categories-section">
-        <div class="categories">
-          {CATEGORIES.map((cat) => (
-            <a href={`/blog/category/${cat.id}`} class="category-pill">
-              {cat.label}
-            </a>
-          ))}
-        </div>
-      </section>
+        <!-- Recent Posts -->
+        <section class="posts-section">
+          <h2 class="section-label">Recent Posts</h2>
 
-      <!-- Recent Posts -->
-      <section class="posts-section">
-        <h2 class="section-title">Recent Posts</h2>
+          {posts.length === 0 ? (
+            <p class="empty">No posts yet. First one coming soon.</p>
+          ) : (
+            <ul class="post-list">
+              {posts.map((post) => {
+                const cat = CATEGORIES.find((c) => c.id === post.data.category);
+                return (
+                  <li class="post-item">
+                    <a href={`/blog/${post.id}/`} class="post-link">
+                      <div class="post-meta">
+                        {cat && <span class="post-category">{cat.label}</span>}
+                        <span class="post-date">
+                          <FormattedDate date={post.data.pubDate} />
+                        </span>
+                      </div>
+                      <h3 class="post-title">{post.data.title}</h3>
+                      {post.data.description && (
+                        <p class="post-desc">{post.data.description}</p>
+                      )}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
 
-        {posts.length === 0 ? (
-          <p class="empty">No posts yet. First one coming soon.</p>
-        ) : (
-          <ul class="post-list">
-            {posts.map((post) => {
-              const cat = CATEGORIES.find((c) => c.id === post.data.category);
-              return (
-                <li class="post-item">
-                  <a href={`/blog/${post.id}/`} class="post-link">
-                    <div class="post-meta">
-                      {cat && <span class="post-category">{cat.label}</span>}
-                      <span class="post-date">
-                        <FormattedDate date={post.data.pubDate} />
-                      </span>
-                    </div>
-                    <h3 class="post-title">{post.data.title}</h3>
-                    {post.data.description && (
-                      <p class="post-desc">{post.data.description}</p>
-                    )}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        )}
+          {posts.length > 0 && (
+            <a href="/blog" class="all-posts-link">All posts →</a>
+          )}
+        </section>
 
-        <a href="/blog" class="all-posts-link">All posts →</a>
-      </section>
-
-    </main>
+      </main>
+      <Sidebar />
+    </div>
     <Footer />
   </body>
 </html>
 
 <style>
-  .main {
-    max-width: 760px;
+  .page-wrapper {
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 1.5rem;
+    display: flex;
+    gap: 4rem;
+    align-items: flex-start;
+  }
+
+  .main-content {
+    flex: 1;
+    min-width: 0;
   }
 
   /* Hero */
   .hero {
-    padding: 4rem 0 3rem;
+    padding: 3.5rem 0 3rem;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .hero-badge {
@@ -104,7 +108,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   }
 
   .hero-title {
-    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-size: clamp(1.875rem, 4vw, 2.5rem);
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.02em;
@@ -113,55 +117,25 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   }
 
   .hero-desc {
-    font-size: 1.0625rem;
+    font-size: 1rem;
     color: var(--color-text-muted);
     line-height: 1.7;
-    max-width: 560px;
+    max-width: 520px;
     margin: 0;
-  }
-
-  /* Categories */
-  .categories-section {
-    padding-bottom: 3rem;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .categories {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .category-pill {
-    display: inline-block;
-    font-size: 0.8125rem;
-    color: var(--color-text-muted);
-    background-color: var(--color-bg-subtle);
-    border: 1px solid var(--color-border);
-    padding: 0.3125rem 0.875rem;
-    border-radius: 999px;
-    text-decoration: none;
-    transition: color 0.15s, border-color 0.15s, background-color 0.15s;
-  }
-
-  .category-pill:hover {
-    color: #7c3aed;
-    border-color: #7c3aed;
-    background-color: color-mix(in srgb, #7c3aed 8%, transparent);
   }
 
   /* Posts */
   .posts-section {
-    padding-top: 3rem;
+    padding-top: 2.5rem;
   }
 
-  .section-title {
-    font-size: 0.75rem;
+  .section-label {
+    font-size: 0.6875rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-text-muted);
-    margin: 0 0 2rem;
+    margin: 0 0 1.5rem;
   }
 
   .empty {
@@ -173,8 +147,6 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
   }
 
   .post-item {
@@ -187,9 +159,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 
   .post-link {
     display: block;
-    padding: 1.5rem 0;
+    padding: 1.25rem 0;
     text-decoration: none;
-    transition: opacity 0.15s;
   }
 
   .post-link:hover .post-title {
@@ -200,13 +171,13 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.375rem;
   }
 
   .post-category {
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     font-weight: 600;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: #7c3aed;
   }
@@ -217,17 +188,17 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   }
 
   .post-title {
-    font-size: 1.125rem;
+    font-size: 1.0625rem;
     font-weight: 600;
     color: var(--color-text);
-    margin: 0 0 0.375rem;
+    margin: 0 0 0.3rem;
     line-height: 1.4;
     letter-spacing: -0.01em;
     transition: color 0.15s;
   }
 
   .post-desc {
-    font-size: 0.9375rem;
+    font-size: 0.9rem;
     color: var(--color-text-muted);
     margin: 0;
     line-height: 1.6;
@@ -239,7 +210,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 
   .all-posts-link {
     display: inline-block;
-    margin-top: 2rem;
+    margin-top: 1.75rem;
     font-size: 0.9375rem;
     font-weight: 500;
     color: #7c3aed;
@@ -249,5 +220,13 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 
   .all-posts-link:hover {
     opacity: 0.75;
+  }
+
+  /* Sidebar responsive */
+  @media (max-width: 768px) {
+    .page-wrapper {
+      flex-direction: column;
+      gap: 0;
+    }
   }
 </style>
