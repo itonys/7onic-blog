@@ -19,6 +19,28 @@ const PALETTES = [
   { from: '#020806', to: '#03120a', accent: '#34d399', glow: 'rgba(52,211,153,0.50)' },   // emerald
 ];
 
+// Milky Way band — 4 overlapping white ellipses along a bottom-left → top-right diagonal
+const MILKY_WAY = [
+  { left: -80,  top: 330, w: 560, h: 200, o: 0.050 },
+  { left: 200,  top: 225, w: 520, h: 170, o: 0.068 },
+  { left: 460,  top: 148, w: 460, h: 155, o: 0.058 },
+  { left: 700,  top: 72,  w: 400, h: 138, o: 0.042 },
+];
+
+// Deterministic stars — 12, larger & more prominent than a dense field
+const STARS = Array.from({ length: 12 }, (_, i) => {
+  const a = Math.abs(Math.sin(i * 2.1 + 1.5));
+  const b = Math.abs(Math.sin(i * 3.7 + 2.3));
+  const c = Math.abs(Math.sin(i * 5.3 + 0.7));
+  const d = Math.abs(Math.sin(i * 7.9 + 3.1));
+  return {
+    left: Math.floor(a * 1180),
+    top:  Math.floor(b * 610),
+    size: 1.2 + c * 2.2,       // 1.2–3.4 px
+    opacity: 0.30 + d * 0.60,  // 0.30–0.90
+  };
+});
+
 // Hash post ID → palette index (deterministic per post, feels random across posts)
 function hashToPalette(id: string): typeof PALETTES[number] {
   let h = 0;
@@ -79,6 +101,39 @@ export const GET: APIRoute = async ({ props }) => {
           overflow: 'hidden',
         },
         children: [
+          // Milky Way band — white ellipses, works on any dark palette
+          ...MILKY_WAY.map((b) => ({
+            type: 'div',
+            props: {
+              style: {
+                position: 'absolute',
+                left: `${b.left}px`,
+                top:  `${b.top}px`,
+                width:  `${b.w}px`,
+                height: `${b.h}px`,
+                background: `radial-gradient(ellipse at center, rgba(255,255,255,${b.o}) 0%, transparent 70%)`,
+                borderRadius: '50%',
+              },
+            },
+          })),
+
+          // Stars — 12 deterministic, slightly prominent
+          ...STARS.map((s) => ({
+            type: 'div',
+            props: {
+              style: {
+                position: 'absolute',
+                left: `${s.left}px`,
+                top:  `${s.top}px`,
+                width:  `${s.size}px`,
+                height: `${s.size}px`,
+                borderRadius: '50%',
+                background: '#ffffff',
+                opacity: s.opacity,
+              },
+            },
+          })),
+
           // Top accent line
           {
             type: 'div',
