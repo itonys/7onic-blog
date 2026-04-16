@@ -22,7 +22,7 @@ const {
 } = Astro.props;
 
 const ogImageUrl = new URL(`/og/${id}.png`, Astro.site).toString();
-const canonicalUrl = new URL(`/blog/${id}/`, Astro.site).toString();
+const canonicalUrl = new URL(`/${id}/`, Astro.site).toString();
 
 const categoryLabel = CATEGORIES.find((c) => c.id === category)?.label ?? category;
 const seriesLabel = series

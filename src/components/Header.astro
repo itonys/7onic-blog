@@ -102,7 +102,7 @@ const categoryCounts = CATEGORIES.map((cat) => ({
       <li><a href="/">All Posts <span class="mobile-count">{allPosts.length}</span></a></li>
       {categoryCounts.map((cat) => (
         <li>
-          <a href={`/blog/category/${cat.id}`}>
+          <a href={`/category/${cat.id}`}>
             {cat.label}
             {cat.count > 0 && <span class="mobile-count">{cat.count}</span>}
           </a>
