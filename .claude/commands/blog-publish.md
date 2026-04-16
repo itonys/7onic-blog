@@ -33,6 +33,17 @@ npm run publish-post -- "[slug]"
 - `blog.7onic.design/[slug]` URL 안내
 - dev.to / Hashnode 게시 URL (교차 게시 시)
 
+### Step 4 — 수동 공유 체크리스트 (유저에게 안내)
+
+아래는 자동화 불가 — 유저가 직접 실행:
+
+- [ ] **X (@7onicHQ)** — 포스트 링크 + 한 줄 요약 트윗
+- [ ] **Hacker News** — news.ycombinator.com/submit
+  - 제목 형식: `Show HN: [포스트 제목 또는 7onic 소개]`
+  - URL: `blog.7onic.design/[slug]` 또는 `7onic.design`
+  - 첫 댓글에 배경 설명 추가 (솔로 빌더 + 오픈소스 + 토큰 파이프라인 스토리)
+- [ ] **Reddit** — r/webdev, r/reactjs, r/Frontend 중 내용에 맞는 곳
+
 ## 주의
 
 - 유저 명시적 허락 없이 커밋·푸시 금지
