@@ -11,6 +11,8 @@ const seriesCounts = SERIES.map((s) => ({
   ...s,
   count: allPosts.filter((p) => p.data.series === s.id).length,
 }));
+
+const currentPath = Astro.url.pathname;
 ---
 
 <header class="site-header">
@@ -52,7 +54,7 @@ const seriesCounts = SERIES.map((s) => ({
 
     <!-- Desktop nav -->
     <nav class="nav" aria-label="Main navigation">
-      <a href="/about">About</a>
+      <a href="/about" class={currentPath.startsWith('/about') ? 'active' : ''}>About</a>
       <a href={DOCS_URL} target="_blank" rel="noopener noreferrer">
         Docs
         <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -195,6 +197,7 @@ const seriesCounts = SERIES.map((s) => ({
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+    position: relative;
   }
 
   /* Logo */
@@ -219,12 +222,14 @@ const seriesCounts = SERIES.map((s) => ({
     line-height: inherit;
   }
 
-  /* Nav */
+  /* Nav — centered absolutely so logo stays left, actions stay right */
   .nav {
     display: flex;
     align-items: center;
     gap: 0.125rem;
-    flex: 1;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .nav a {
@@ -243,6 +248,11 @@ const seriesCounts = SERIES.map((s) => ({
   .nav a:hover {
     color: var(--color-text);
     background-color: var(--color-bg-subtle);
+  }
+
+  .nav a.active {
+    color: var(--color-text);
+    font-weight: 500;
   }
 
   /* Actions */
