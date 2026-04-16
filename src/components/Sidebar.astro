@@ -18,7 +18,7 @@ const currentPath = Astro.url.pathname;
     <h3 class="sidebar-label">Categories</h3>
     <ul class="sidebar-list">
       <li>
-        <a href="/blog" class={`sidebar-link${currentPath === '/blog' || currentPath === '/blog/' ? ' active' : ''}`}>
+        <a href="/" class={`sidebar-link${currentPath === '/' ? ' active' : ''}`}>
           <span>All Posts</span>
           <span class="sidebar-count">{allPosts.length}</span>
         </a>
@@ -26,7 +26,7 @@ const currentPath = Astro.url.pathname;
       {categoryCounts.map((cat) => (
         <li>
           <a
-            href={`/blog/category/${cat.id}`}
+            href={`/category/${cat.id}`}
             class={`sidebar-link${currentPath.includes(`/category/${cat.id}`) ? ' active' : ''}`}
           >
             <span>{cat.label}</span>

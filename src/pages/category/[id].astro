@@ -1,11 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseHead from '../../../components/BaseHead.astro';
-import Footer from '../../../components/Footer.astro';
-import FormattedDate from '../../../components/FormattedDate.astro';
-import Header from '../../../components/Header.astro';
-import Sidebar from '../../../components/Sidebar.astro';
-import { CATEGORIES, SITE_TITLE } from '../../../consts';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import { CATEGORIES, SITE_TITLE } from '../../consts';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog', ({ data }) => !data.draft);
@@ -37,7 +37,7 @@ const { category, posts } = Astro.props;
       <main class="main-content">
 
         <div class="page-header">
-          <a href="/blog" class="back-link">← All Posts</a>
+          <a href="/" class="back-link">← All Posts</a>
           <div class="title-row">
             <h1 class="page-title">{category.label}</h1>
             <span class="page-count">{posts.length} article{posts.length !== 1 ? 's' : ''}</span>
@@ -50,7 +50,7 @@ const { category, posts } = Astro.props;
           <ul class="post-list">
             {posts.map((post) => (
               <li class="post-item">
-                <a href={`/blog/${post.id}/`} class="post-link">
+                <a href={`/${post.id}/`} class="post-link">
                   <div class="post-meta">
                     <span class="post-category">{category.label}</span>
                     <span class="post-date">
