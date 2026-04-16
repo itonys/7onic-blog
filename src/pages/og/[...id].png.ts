@@ -141,22 +141,9 @@ export const GET: APIRoute = async ({ props }) => {
                               type: 'span',
                               props: {
                                 style: {
-                                  fontSize: '20px',
-                                  fontWeight: '700',
-                                  color: 'rgba(255,255,255,0.9)',
-                                  letterSpacing: '-0.01em',
-                                },
-                                children: 'onic',
-                              },
-                            },
-                            {
-                              type: 'span',
-                              props: {
-                                style: {
                                   fontSize: '14px',
                                   fontWeight: '400',
                                   color: 'rgba(255,255,255,0.35)',
-                                  marginLeft: '4px',
                                   letterSpacing: '0.02em',
                                 },
                                 children: '/ Blog',
