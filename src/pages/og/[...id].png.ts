@@ -6,18 +6,38 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { CATEGORIES, SERIES } from '../../consts';
 
-// Category colors
-const CATEGORY_COLORS: Record<string, { from: string; to: string; accent: string; glow: string }> = {
-  'design-system': { from: '#0a0812', to: '#130f28', accent: '#a78bfa', glow: 'rgba(139,92,246,0.18)' },
-  'tokens':        { from: '#0c0a08', to: '#1c1510', accent: '#fb923c', glow: 'rgba(251,146,60,0.15)' },
-  'components':    { from: '#080c14', to: '#0f1826', accent: '#38bdf8', glow: 'rgba(56,189,248,0.15)' },
-  'tailwind':      { from: '#060e18', to: '#0a1a2e', accent: '#06b6d4', glow: 'rgba(6,182,212,0.15)' },
-  'ai':            { from: '#060c06', to: '#0a160a', accent: '#4ade80', glow: 'rgba(74,222,128,0.15)' },
-  'cli':           { from: '#0a0814', to: '#180d2e', accent: '#c084fc', glow: 'rgba(192,132,252,0.15)' },
-  'devops':        { from: '#0c0606', to: '#1c0a0a', accent: '#f87171', glow: 'rgba(248,113,113,0.15)' },
+// Category colors with dual-nebula (primary + secondary corner)
+const CATEGORY_COLORS: Record<string, {
+  from: string; to: string; accent: string;
+  glow: string; glow2: string;
+}> = {
+  'design-system': { from: '#02010e', to: '#070420', accent: '#a78bfa', glow: 'rgba(139,92,246,0.30)', glow2: 'rgba(56,189,248,0.11)' },
+  'tokens':        { from: '#060208', to: '#140608', accent: '#fb923c', glow: 'rgba(251,146,60,0.28)', glow2: 'rgba(244,97,129,0.11)' },
+  'components':    { from: '#010510', to: '#020c1e', accent: '#38bdf8', glow: 'rgba(56,189,248,0.28)', glow2: 'rgba(167,139,250,0.11)' },
+  'tailwind':      { from: '#010810', to: '#010e1e', accent: '#22d3ee', glow: 'rgba(34,211,238,0.28)', glow2: 'rgba(99,102,241,0.11)' },
+  'ai':            { from: '#010805', to: '#020e07', accent: '#4ade80', glow: 'rgba(74,222,128,0.24)', glow2: 'rgba(34,211,238,0.11)' },
+  'cli':           { from: '#040210', to: '#0c041e', accent: '#c084fc', glow: 'rgba(192,132,252,0.30)', glow2: 'rgba(244,97,129,0.11)' },
+  'devops':        { from: '#070101', to: '#140202', accent: '#f87171', glow: 'rgba(248,113,113,0.28)', glow2: 'rgba(251,146,60,0.11)' },
 };
 
-const DEFAULT_COLORS = { from: '#0a0812', to: '#130f28', accent: '#7c3aed', glow: 'rgba(124,58,237,0.18)' };
+const DEFAULT_COLORS = {
+  from: '#02010e', to: '#070420', accent: '#7c3aed',
+  glow: 'rgba(124,58,237,0.30)', glow2: 'rgba(56,189,248,0.11)',
+};
+
+// Deterministic star field (no randomness at runtime)
+const STARS = Array.from({ length: 60 }, (_, i) => {
+  const a = Math.abs(Math.sin(i * 2.1 + 1.5));
+  const b = Math.abs(Math.sin(i * 3.7 + 2.3));
+  const c = Math.abs(Math.sin(i * 5.3 + 0.7));
+  const d = Math.abs(Math.sin(i * 7.9 + 3.1));
+  return {
+    left: Math.floor(a * 1190),
+    top:  Math.floor(b * 620),
+    size: 0.7 + c * 1.6,      // 0.7–2.3 px
+    opacity: 0.15 + d * 0.65, // 0.15–0.80
+  };
+});
 
 // Load fonts
 const fontRegular = fs.readFileSync(
@@ -61,12 +81,39 @@ export const GET: APIRoute = async ({ props }) => {
           height: '630px',
           display: 'flex',
           flexDirection: 'column',
-          background: `radial-gradient(ellipse 900px 700px at 85% -10%, ${colors.glow} 0%, transparent 65%), linear-gradient(150deg, ${colors.from} 0%, ${colors.to} 100%)`,
+          // 4-layer cosmic background:
+          // 1) secondary nebula — bottom-left
+          // 2) primary nebula   — top-right (category accent)
+          // 3) milky way band   — wide flat ellipse across center
+          // 4) deep space base
+          background: [
+            `radial-gradient(ellipse 480px 380px at 8% 88%, ${colors.glow2} 0%, transparent 70%)`,
+            `radial-gradient(ellipse 1100px 900px at 90% -18%, ${colors.glow} 0%, transparent 55%)`,
+            `radial-gradient(ellipse 950px 260px at 52% 68%, rgba(255,255,255,0.014) 0%, transparent 100%)`,
+            `linear-gradient(162deg, ${colors.from} 0%, ${colors.to} 100%)`,
+          ].join(', '),
           position: 'relative',
           overflow: 'hidden',
         },
         children: [
-          // Top accent line
+          // Star field
+          ...STARS.map((s) => ({
+            type: 'div',
+            props: {
+              style: {
+                position: 'absolute',
+                left: `${s.left}px`,
+                top:  `${s.top}px`,
+                width:  `${s.size}px`,
+                height: `${s.size}px`,
+                borderRadius: '50%',
+                background: '#ffffff',
+                opacity: s.opacity,
+              },
+            },
+          })),
+
+          // Top accent line — center-peaked like a cosmic horizon
           {
             type: 'div',
             props: {
@@ -75,13 +122,14 @@ export const GET: APIRoute = async ({ props }) => {
                 top: '0',
                 left: '0',
                 right: '0',
-                height: '3px',
-                background: `linear-gradient(90deg, ${colors.accent}, transparent)`,
+                height: '2px',
+                background: `linear-gradient(90deg, transparent 0%, ${colors.accent} 35%, ${colors.accent} 65%, transparent 100%)`,
+                opacity: 0.85,
               },
             },
           },
 
-          // Large ghost "7" watermark (right side)
+          // Ghost "7" watermark
           {
             type: 'div',
             props: {
@@ -91,7 +139,7 @@ export const GET: APIRoute = async ({ props }) => {
                 top: '-40px',
                 fontSize: '560px',
                 fontWeight: '700',
-                color: 'rgba(255,255,255,0.028)',
+                color: 'rgba(255,255,255,0.022)',
                 lineHeight: '1',
                 letterSpacing: '-0.05em',
                 userSelect: 'none',
@@ -122,7 +170,6 @@ export const GET: APIRoute = async ({ props }) => {
                       justifyContent: 'space-between',
                     },
                     children: [
-                      // Logo mark
                       {
                         type: 'div',
                         props: {
@@ -143,7 +190,7 @@ export const GET: APIRoute = async ({ props }) => {
                                 style: {
                                   fontSize: '14px',
                                   fontWeight: '400',
-                                  color: 'rgba(255,255,255,0.35)',
+                                  color: 'rgba(255,255,255,0.32)',
                                   letterSpacing: '0.02em',
                                 },
                                 children: '/ Blog',
@@ -152,13 +199,12 @@ export const GET: APIRoute = async ({ props }) => {
                           ],
                         },
                       },
-                      // URL
                       {
                         type: 'div',
                         props: {
                           style: {
                             fontSize: '14px',
-                            color: 'rgba(255,255,255,0.3)',
+                            color: 'rgba(255,255,255,0.28)',
                             letterSpacing: '0.02em',
                           },
                           children: 'blog.7onic.design',
@@ -179,15 +225,10 @@ export const GET: APIRoute = async ({ props }) => {
                       maxWidth: '780px',
                     },
                     children: [
-                      // Series badge
                       ...(seriesLabel && seriesOrder ? [{
                         type: 'div',
                         props: {
-                          style: {
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                          },
+                          style: { display: 'flex', alignItems: 'center', gap: '8px' },
                           children: [
                             {
                               type: 'div',
@@ -216,7 +257,6 @@ export const GET: APIRoute = async ({ props }) => {
                           ],
                         },
                       }] : []),
-                      // Title
                       {
                         type: 'div',
                         props: {
@@ -230,14 +270,13 @@ export const GET: APIRoute = async ({ props }) => {
                           children: displayTitle,
                         },
                       },
-                      // Description
                       {
                         type: 'div',
                         props: {
                           style: {
                             fontSize: '20px',
                             fontWeight: '400',
-                            color: 'rgba(255,255,255,0.45)',
+                            color: 'rgba(255,255,255,0.42)',
                             lineHeight: '1.55',
                             letterSpacing: '0.005em',
                           },
@@ -252,13 +291,8 @@ export const GET: APIRoute = async ({ props }) => {
                 {
                   type: 'div',
                   props: {
-                    style: {
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                    },
+                    style: { display: 'flex', alignItems: 'center', gap: '8px' },
                     children: [
-                      // Category pill
                       {
                         type: 'div',
                         props: {
@@ -266,8 +300,8 @@ export const GET: APIRoute = async ({ props }) => {
                             fontSize: '12px',
                             fontWeight: '700',
                             color: colors.accent,
-                            background: `rgba(255,255,255,0.07)`,
-                            border: `1px solid ${colors.accent}40`,
+                            background: `rgba(255,255,255,0.06)`,
+                            border: `1px solid ${colors.accent}38`,
                             padding: '5px 14px',
                             borderRadius: '999px',
                             letterSpacing: '0.08em',
@@ -276,15 +310,14 @@ export const GET: APIRoute = async ({ props }) => {
                           children: categoryLabel,
                         },
                       },
-                      // Tags
                       ...tags.slice(0, 3).map((tag: string) => ({
                         type: 'div',
                         props: {
                           style: {
                             fontSize: '12px',
                             fontWeight: '400',
-                            color: 'rgba(255,255,255,0.35)',
-                            background: 'rgba(255,255,255,0.05)',
+                            color: 'rgba(255,255,255,0.32)',
+                            background: 'rgba(255,255,255,0.04)',
                             padding: '5px 14px',
                             borderRadius: '999px',
                           },
@@ -305,7 +338,7 @@ export const GET: APIRoute = async ({ props }) => {
       height: 630,
       fonts: [
         { name: 'Atkinson', data: fontRegular, weight: 400, style: 'normal' },
-        { name: 'Atkinson', data: fontBold, weight: 700, style: 'normal' },
+        { name: 'Atkinson', data: fontBold,   weight: 700, style: 'normal' },
       ],
     }
   );
