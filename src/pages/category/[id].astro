@@ -37,7 +37,7 @@ const { category, posts } = Astro.props;
     <div class="page-wrapper">
       <main class="main-content">
 
-        <div class="page-header">
+        <div class="page-header page-top">
           <a href="/" class="back-link">← All Posts</a>
           <div class="title-row">
             <h1 class="page-title">{category.label}</h1>
@@ -92,7 +92,7 @@ const { category, posts } = Astro.props;
   }
 
   .page-header {
-    padding: 3rem 0 2rem;
+    padding-bottom: 2rem;
     border-bottom: 1px solid var(--color-border);
   }
 
@@ -201,7 +201,5 @@ const { category, posts } = Astro.props;
       gap: 0;
       padding: 0 1rem;
     }
-    /* Mobile top padding rule: all pages use 2rem on mobile */
-    .page-header { padding-top: 2rem; }
   }
 </style>

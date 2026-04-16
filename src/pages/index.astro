@@ -22,7 +22,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
       <main class="main-content">
 
         <!-- Hero -->
-        <section class="hero">
+        <section class="hero page-top">
           <div class="hero-badge">Design to Code</div>
           <h1 class="hero-title">
             A designer building<br />a design system.
@@ -110,7 +110,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 
   /* Hero */
   .hero {
-    padding: 3.5rem 0 2rem;
+    padding-bottom: 2rem;
   }
 
   .hero-badge {
@@ -335,6 +335,5 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
       gap: 0;
       padding: 0 1rem;
     }
-    .hero { padding-top: 2rem; }
   }
 </style>

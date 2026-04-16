@@ -281,6 +281,13 @@ body {
   border-radius: 4px;
 }
 
+/* Page top padding — consistent across all pages */
+.page-top { padding-top: 3rem; }
+
+@media (max-width: 768px) {
+  .page-top { padding-top: 2rem; }
+}
+
 /* Utility */
 .sr-only {
   position: absolute;

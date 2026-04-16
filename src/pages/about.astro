@@ -14,7 +14,7 @@ import { SITE_TITLE, DOCS_URL } from '../consts';
   <body>
     <Header />
     <div class="page-wrapper">
-      <main class="about-content">
+      <main class="about-content page-top">
         <article class="prose">
 
           <h1 class="hero-title">Hey, I'm 7onic.</h1>
@@ -94,7 +94,7 @@ import { SITE_TITLE, DOCS_URL } from '../consts';
   .about-content {
     flex: 1;
     min-width: 0;
-    padding: 3rem 0 4rem;
+    padding-bottom: 4rem;
   }
 
   .hero-title {
@@ -116,8 +116,6 @@ import { SITE_TITLE, DOCS_URL } from '../consts';
 
   @media (max-width: 768px) {
     .page-wrapper { padding: 0 1rem; }
-    /* Mobile top padding rule: all pages use 2rem on mobile */
-    .about-content { padding-top: 2rem; }
   }
 
 </style>
