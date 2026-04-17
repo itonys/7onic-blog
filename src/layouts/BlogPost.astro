@@ -155,13 +155,13 @@ const jsonLd = {
           <nav class="post-nav" aria-label="Post navigation">
             {prevPost ? (
               <a href={`/${prevPost.id}/`} class="post-nav-link prev">
-                <span class="post-nav-direction">← {navContext === 'series' && prevPost.data.series === series ? 'Previous in series' : 'Previous'}</span>
+                <span class="post-nav-direction">← Prev</span>
                 <span class="post-nav-title">{prevPost.data.title}</span>
               </a>
             ) : <div />}
             {nextPost ? (
               <a href={`/${nextPost.id}/`} class="post-nav-link next">
-                <span class="post-nav-direction">{navContext === 'series' && nextPost.data.series === series ? 'Next in series' : 'Next'} →</span>
+                <span class="post-nav-direction">Next →</span>
                 <span class="post-nav-title">{nextPost.data.title}</span>
               </a>
             ) : <div />}
