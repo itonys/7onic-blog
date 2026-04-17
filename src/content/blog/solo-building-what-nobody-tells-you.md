@@ -13,6 +13,8 @@ tags:
 series: solo-builder
 seriesOrder: 1
 draft: false
+devtoId: '3513517'
+hashnodeId: 69e1ba74d57f326fd6abd52e
 ---
 
 Before I started building [7onic](https://7onic.design), I googled one very specific phrase:
