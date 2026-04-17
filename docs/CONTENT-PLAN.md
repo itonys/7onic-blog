@@ -145,11 +145,16 @@
 | R-4 | Verifying recharts Not in Main Bundle | dist에서 의존성 오염 확인 |
 | R-5 | Public Repo Sync Incident: 321 Files Deleted | rsync .git 보호 3겹 장치 — 사고 포스트모템 |
 | R-6 | TypeScript Emit Verification: dist/ Existence in CI | 조용히 실패하는 타입 빌드 |
-| R-7 | Peer Dependency CI Fix: rm lock + legacy-peer-deps | 첫 배포 전 CI 검증 닭-달걀 문제 |
+| R-7 | From `rm lock` to `npm ci`: Flipping My Own Decision | 첫 배포 전 닭-달걀 문제로 도입한 `rm -f lock && npm install --legacy-peer-deps`를 1개월 후 공급망 공격 대응으로 스스로 뒤집은 과정 — ADR 뒤집기 사례 |
 | R-8 | Breaking Change Migration Guides in CHANGELOG | 필수 before/after 코드 블록 정책 |
 | R-9 | 0.x Semver: MINOR = Breaking, PATCH = Features | Radix/Tailwind와 동일한 비표준 semver |
 | R-10 | Dynamic OG Images with Satori + Sharp in Astro | 빌드타임 OG 이미지 자동 생성 — 10팔레트 해시 + 은하수 배경 |
 | R-11 | Google Favicon Jagged Edges: The Pre-Rounded Trap | 둥근 아이콘을 구글이 또 클리핑 → 울퉁불퉁 — 정사각형으로 해결 |
+| 신규 | Axios Attack Day: 4-Hour Supply Chain Hardening as an Indie | 2026-04-17 axios 해킹 뉴스 받은 당일 전면 감사: npm ci + provenance + audit CI 강제 + ADR까지 — 인디 1인 유지보수 관점의 실제 대응 스토리 |
+| 신규 | npm Provenance Signing for Indie Libraries | OIDC + Sigstore로 "이 패키지는 이 GitHub 커밋에서 빌드됨" 증명. axios류 계정 탈취 공격 방어 원리 + workflow 설정 튜토리얼 |
+| 신규 | `npm ci` vs `npm install + --legacy-peer-deps`: The Hidden Supply Chain Risk | lock 파일 삭제가 왜 공급망 공격 방어력을 무너뜨리는지 — 실제 CVE 시나리오 + CI 전환 가이드 |
+| 신규 | Why My 1-Person Open Source Treats Security Like a Funded SaaS | 디자인 시스템이 유저 앱 핵심에 침투하는 특성 + SaaS 확장 염두 + AI 협업 일관성 — 보안 우선순위 철학 |
+| 신규 | Bundle Leak Detection: Verifying devDeps Don't Ship to Users | `dist/` grep으로 next/next-intl 참조 0건 검증 — 유저 영향 객관 증명하는 검증 스크립트 패턴 |
 
 ---
 
