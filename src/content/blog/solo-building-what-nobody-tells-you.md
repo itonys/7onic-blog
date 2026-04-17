@@ -3,7 +3,7 @@ title: 'Solo Builder #1: What Nobody Tells You'
 description: >-
   Building a design system alone sounds like a shortcut. No meetings, no
   politics, full ownership. Here's what that actually looks like.
-pubDate: 2026-04-17T12:00:00.000Z
+pubDate: 2026-04-17T09:00:00.000Z
 category: design-system
 tags:
   - solo-builder
