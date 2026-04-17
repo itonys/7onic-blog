@@ -149,10 +149,6 @@ body {
   transition: color 0.15s, background 0.15s, border-color 0.15s;
   user-select: none;
 }
-.prose pre:hover .copy-btn {
-  color: rgba(0, 0, 0, 0.45);
-  border-color: rgba(0, 0, 0, 0.15);
-}
 .prose pre .copy-btn:hover {
   color: rgba(0, 0, 0, 0.65);
   background: rgba(0, 0, 0, 0.06);
