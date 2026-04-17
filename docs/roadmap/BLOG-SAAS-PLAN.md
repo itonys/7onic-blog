@@ -702,6 +702,23 @@ seriesOrder: 1      # 시리즈 순서
 
 ---
 
+## 7onic 블로그에서 검증된 SaaS 기능 이슈
+
+> 7onic 블로그를 직접 운영하면서 발견한 기능 요구사항과 엣지케이스. SaaS 구현 시 반드시 반영.
+
+| # | 기능 | 7onic 블로그에서 배운 것 | SaaS 반영 사항 |
+|---|------|----------------------|---------------|
+| 1 | **Prev/Next 포스트 네비게이션** | 시리즈 내 네비게이션 우선, 시리즈 1개뿐이면 날짜순 폴백. 시리즈 끝에서 다른 시리즈로 넘어가면 맥락 끊김 → 혼합 폴백 금지 | `[slug].astro` 렌더링 시 시리즈/날짜 기반 prev/next 자동 계산. 유저 설정 불필요 (자동) |
+| 2 | **모바일 코드 블록 overflow** | `pre`에 `max-width: 100%` + `overflow-x: auto`만으로는 부족. column flex의 `align-items: flex-start`가 부모 체인을 확장시킴. `.prose`에 `overflow-x: hidden` + 모바일에서 `align-items: stretch` 필수 | 테마 CSS에 기본 포함. 유저가 커스텀 CSS를 넣어도 깨지지 않게 `.prose` overflow 보호 |
+| 3 | **`<!doctype html>` 누락** | 레이아웃 파일에 doctype 빠뜨리면 quirks mode → 모바일 viewport 무시 → 무한 가로 스크롤 | SSR 렌더링 시 doctype 자동 삽입. 테마 작성자가 실수해도 시스템이 보장 |
+| 4 | **교차 배포 sanitization** | dev.to 태그에 하이픈 불가, CSS `@` at-rule이 멘션 링크로 변환됨, 코드 펜스 `title="..."` 제거 필요 | 플랫폼별 sanitizer를 파이프라인에 내장. 유저가 몰라도 자동 처리 |
+| 5 | **pubDate 관리** | 배포 시 실제 시각으로 1회 설정, 수정 시 절대 변경 금지. 같은 날 여러 포스트는 시간으로 순서 보장 | 대시보드에서 "게시" 버튼 누른 시각을 자동 기록. 수정 시 pubDate 필드 읽기 전용 |
+| 6 | **OG 이미지 자동 생성** | satori + sharp로 on-demand 생성. 포스트별 제목/태그/브랜드 컬러 반영 | R2 캐시 + 포스트 수정 시 캐시 무효화 (이미 설계됨) |
+| 7 | **코드 블록 테마** | Shiki 듀얼 테마 (github-light/github-dark) + CSS 변수로 다크모드 전환 | 테마에 Shiki 설정 포함. 유저별 코드 테마 선택은 Phase 2 이후 |
+| 8 | **모바일 네비게이션 순서** | Prev/Next 모바일에서 Next를 위에 배치 (읽기 흐름상 다음 글 우선) | 테마 CSS에 `order: -1` 기본 포함 |
+
+---
+
 ## 미결 — 다음 브레인스토밍 대상
 
 > 구현 전에 설계를 구체화해야 할 영역. 하나씩 파고들어서 리스크 사전 제거.
