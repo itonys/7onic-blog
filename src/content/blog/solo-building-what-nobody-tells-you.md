@@ -48,7 +48,6 @@ That structure can be slow, but it spreads the mental load.
 When you're solo, every open question lands on your desk.
 
 Should the border radius be 6px or 8px?
-Which purple becomes the brand primary?
 Do we support RTL now or later?
 What happens when someone passes both `variant` and `className`?
 Should defaults be strict or forgiving?
