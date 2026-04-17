@@ -77,7 +77,7 @@ function sanitizeForDevto(raw: string): string {
   // Split on fenced code blocks, escape @ only in non-code segments
   const parts = result.split(/(```[\s\S]*?```)/g);
   return parts
-    .map((part, i) => (i % 2 === 1 ? part : part.replace(/@(\w)/g, '&#64;$1')))
+    .map((part, i) => (i % 2 === 1 ? part : part.replace(/@(\w)/g, '@\u200B$1')))
     .join('');
 }
 
