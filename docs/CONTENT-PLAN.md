@@ -169,6 +169,9 @@
 | SB-10 | Revenue, Users, Expectations: First Year | 솔직한 수치 공개 |
 | SB-11 | Why I Write About What I Build | 블로그가 마케팅인 이유 |
 | SB-12 | What I Wish I'd Known Before Starting | 회고 |
+| SB-신규 | My Experience Is the Product | **"내 경험 = 제품" 철학.** 7onic → 블로그 → Blog SaaS 플라이휠 흐름 공개. 각 단계가 이전 단계의 자산을 활용하는 구조. Stripe/Notion/Linear도 같은 패턴으로 시작. 인디 해커가 실패하는 이유는 "남의 문제"부터 풀려고 해서. |
+| SB-신규 | Why I Built Blog SaaS: It Started as My Own Pain | **블로그 교차게시가 귀찮아서 만든 자동화 스크립트가 SaaS가 된 과정.** 처음에는 7onic 홍보용 블로그였고, 수동 복붙에 지쳐서 스크립트 만들고, "나만 이런가?" 싶어서 SaaS로 확장. 진짜 유저 리서치는 본인이 쓰면서 하는 것. |
+| SB-신규 | The Indie Hacker's 4-Question Filter for New Ideas | **새 서비스 아이디어 검증 체크리스트:** ① 내가 한 달에 최소 1번 불편한가 ② 지금 수동/비효율적인가 ③ 나 같은 사람이 더 있는가 ④ 기존 자산으로 만들 수 있는가. 4개 다 YES여야 착수. |
 
 ---
 
