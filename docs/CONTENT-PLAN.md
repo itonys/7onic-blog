@@ -208,7 +208,7 @@
 
 ```
 #1  ✅ Why I Built 7onic
-#2     Token Pipeline: One JSON → 11 Outputs        (Design to Code #2)
+#2  ✅ Token Pipeline: One JSON → 11 Outputs        (Design to Code #2)
 #3  ✅ Solo Building: What Nobody Tells You          (Solo Builder #1, 감성)
 #4     Copy-Paste vs npm Install                     (Design to Code #3)
 #5     Tailwind v4 Migration: What Actually Changed  (SEO 강함)
