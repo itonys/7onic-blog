@@ -157,7 +157,7 @@
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
-| SB-1 | Solo Building a Design System: What Nobody Tells You | 팀 없이 만드는 현실 |
+| SB-1 | Solo Building a Design System: What Nobody Tells You | ✅ 2026-04-19 |
 | SB-2 | Shipping Without a Code Review | 셀프 리뷰 프로세스 |
 | SB-3 | How I Decide What to Build Next | 로드맵 우선순위 방법론 |
 | SB-4 | Documentation as a Solo Builder | 혼자서 쓰는 docs의 한계와 현실 |
@@ -209,7 +209,7 @@
 ```
 #1  ✅ Why I Built 7onic
 #2     Token Pipeline: One JSON → 11 Outputs        (Design to Code #2)
-#3     Solo Building: What Nobody Tells You          (Solo Builder #1, 감성)
+#3  ✅ Solo Building: What Nobody Tells You          (Solo Builder #1, 감성)
 #4     Copy-Paste vs npm Install                     (Design to Code #3)
 #5     Tailwind v4 Migration: What Actually Changed  (SEO 강함)
 #6     Using AI to Build a Design System             (Design to Code #4)
