@@ -109,6 +109,8 @@ export const Button = () => <button>Click</button>
 ```
 ````
 
+> **교차 게시 주의**: `title="..."` 속성은 Astro/Shiki 전용 문법. 7onic 블로그에서는 파일명 탭으로 렌더링되지만, `publish-post.ts`가 dev.to/Hashnode 전송 시 자동으로 제거한다. 원본 `.md` 파일은 건드리지 않음.
+
 ### Diff (추가/삭제)
 ````md
 ```tsx
@@ -207,6 +209,19 @@ const className = 'btn'
 - 1~2문장. 다음 포스트의 제목을 그대로 쓰지 않고, 내용을 궁금하게 만드는 표현으로
 - HR(`---`) 위아래 모두 사용
 - CONTENT-PLAN.md의 다음 순서 포스트를 참고하되, 정확히 일치할 필요는 없음 (내용이 바뀔 수 있으므로)
+
+---
+
+## 교차 게시 sanitization (자동 처리)
+
+`publish-post.ts`가 dev.to / Hashnode 전송 전 아래를 자동 처리한다. 원본 `.md` 파일은 변경 없음.
+
+| 처리 항목 | 적용 플랫폼 | 이유 |
+|-----------|------------|------|
+| 코드 펜스 `title="..."` 제거 | dev.to + Hashnode | Astro/Shiki 전용 문법 |
+| `@word` → `@​word` (zero-width space) | dev.to만 | `@theme`, `@source` 등 CSS at-rule을 멘션 링크로 처리하는 버그 방지 |
+
+**포스트 작성 시 별도 조치 불필요.** 스크립트가 처리함.
 
 ---
 
