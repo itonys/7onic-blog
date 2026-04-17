@@ -121,27 +121,6 @@ const jsonLd = {
           </div>
         </article>
 
-        <script>
-          // Inject copy button into every code block
-          document.querySelectorAll('.prose pre').forEach((pre) => {
-            const btn = document.createElement('button');
-            btn.className = 'copy-btn';
-            btn.textContent = 'Copy';
-            btn.addEventListener('click', () => {
-              const code = pre.querySelector('code');
-              if (!code) return;
-              navigator.clipboard.writeText(code.innerText).then(() => {
-                btn.textContent = 'Copied!';
-                btn.classList.add('copied');
-                setTimeout(() => {
-                  btn.textContent = 'Copy';
-                  btn.classList.remove('copied');
-                }, 2000);
-              });
-            });
-            pre.appendChild(btn);
-          });
-        </script>
       </main>
       <Sidebar />
     </div>
