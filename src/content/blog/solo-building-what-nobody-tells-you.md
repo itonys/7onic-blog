@@ -2,7 +2,7 @@
 title: 'Solo Builder #1: What Nobody Tells You'
 description: >-
   Building a design system alone sounds like a shortcut. No meetings, no
-  politics, full ownership. Here's what that actually looks like after a year.
+  politics, full ownership. Here's what that actually looks like.
 pubDate: 2026-04-19T00:00:00.000Z
 category: design-system
 tags:
@@ -31,7 +31,7 @@ It was just me.
 
 So I learned what building a design system alone actually looks like the hard way.
 
-A year in, here's what I wish I'd known.
+Here's what I wish I'd known.
 
 ## You will make every decision, every day
 
