@@ -1,5 +1,5 @@
 ---
-title: 'Solo Building a Design System: What Nobody Tells You'
+title: 'Solo Builder #1: What Nobody Tells You'
 description: >-
   Building a design system alone sounds like a shortcut. No meetings, no
   politics, full ownership. Here's what that actually looks like after a year.

@@ -29,6 +29,11 @@ export const SERIES = [
     label: 'Design to Code',
     description: "A designer's journey building a design system",
   },
+  {
+    id: 'solo-builder',
+    label: 'Solo Builder',
+    description: 'What it actually looks like to build a design system alone',
+  },
 ] as const;
 
 export type SeriesId = (typeof SERIES)[number]['id'];
