@@ -13,12 +13,13 @@
 | 1 | **링크처럼 보이는 스타일 금지** — `text-decoration: underline`은 `<a>` 태그에만. 비링크 텍스트에 underline + color 조합 사용 금지 |
 | 2 | **추측 금지** — "확인했다"·"문제 없다" 보고 전에 반드시 Read/Grep으로 직접 확인 |
 | 3 | **코드 수정은 명시적 허락 후에만** — 유저 질문 ≠ 실행 지시 |
+| 4 | **`<!doctype html>` 누락 금지** — `<html>` 태그를 포함하는 `.astro` 파일은 page/layout 구분 없이 반드시 첫 줄에 `<!doctype html>`. 없으면 quirks mode → 모바일 viewport meta 무시 → 무한 가로 스크롤 발생. **`BlogPost.astro`에서 이미 한 번 발생한 버그** |
 
 ---
 
 ## 페이지 레이아웃 규칙
 
-모든 페이지는 아래 구조를 따른다:
+모든 페이지는 아래 구조를 따른다. **새 page/layout 파일 작성 시 `<!doctype html>` 포함 여부를 가장 먼저 확인한다.**
 
 ```astro
 <div class="page-wrapper">   <!-- width: 100% 필수, flex row -->
