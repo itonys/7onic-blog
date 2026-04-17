@@ -64,6 +64,22 @@ body {
   flex: 1;
 }
 
+/* Shiki dual theme: light uses our code-bg, dark switches to --shiki-dark-* vars */
+.prose .astro-code {
+  background-color: var(--color-code-bg) !important;
+}
+
+[data-theme="dark"] .prose .astro-code {
+  background-color: var(--color-code-bg) !important;
+}
+
+[data-theme="dark"] .prose .astro-code span {
+  color: var(--shiki-dark) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
 /* Prose (blog post content) */
 .prose {
   font-size: 1.125rem;
