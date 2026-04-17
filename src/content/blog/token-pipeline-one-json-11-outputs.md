@@ -3,7 +3,7 @@ title: 'Design to Code #2: One JSON, Eleven Outputs'
 description: >-
   How a single JSON file generates 11 distribution formats — and the three
   problems I ran into building the sync-tokens pipeline for 7onic.
-pubDate: 2026-04-17
+pubDate: 2026-04-17T00:00:00.000Z
 category: tokens
 tags:
   - design-tokens
@@ -13,6 +13,8 @@ tags:
 series: design-to-code
 seriesOrder: 2
 draft: false
+devtoId: '3513177'
+hashnodeId: 69e192f95886ea50a3ffb533
 ---
 
 The entire [7onic](https://7onic.design) design system runs on a single JSON file.

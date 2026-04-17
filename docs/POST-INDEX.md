@@ -5,6 +5,7 @@
 | # | Slug | Title | blog | dev.to | Hashnode | Date |
 |---|------|-------|------|--------|----------|------|
 | 1 | `why-i-built-7onic` | Design to Code #1: Why I Built 7onic | ✅ | ✅ [#3509912](https://dev.to/7onic/design-to-code-1-why-i-built-7onic-48fo) | ✅ [69e0be11](https://7onic.hashnode.dev/design-to-code-1-why-i-built-7onic) | 2026-04-16 |
+| 2 | `token-pipeline-one-json-11-outputs` | Design to Code #2: One JSON, Eleven Outputs | ✅ | ✅ [#3513177](https://dev.to/7onic/design-to-code-2-one-json-eleven-outputs-5443) | ✅ [69e192f9](https://7onic.hashnode.dev/design-to-code-2-one-json-eleven-outputs) | 2026-04-17 |
 
 ## Series
 
@@ -13,3 +14,4 @@
 | Order | Slug | Status |
 |-------|------|--------|
 | #1 | `why-i-built-7onic` | ✅ Published |
+| #2 | `token-pipeline-one-json-11-outputs` | ✅ Published |
