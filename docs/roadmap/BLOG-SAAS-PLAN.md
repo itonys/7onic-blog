@@ -507,9 +507,10 @@ R2 버킷 구조:
 | 플랫폼 | API | 플랜 | 지역 |
 |--------|-----|------|------|
 | dev.to | REST API v1 | Free+ | 영어권 |
+| Qiita | REST API v2 | **Free+** | 일본 (거점) |
 | Hashnode | GraphQL API | Basic+ | 영어권 |
-| Qiita | REST API v2 | Pro | 일본 |
 | Zenn | GitHub 연동 (자동) | Pro | 일본 |
+| はてなブログ | AtomPub API | Pro | 일본 |
 
 #### 수동 복사 지원 (API 미지원 플랫폼)
 
@@ -687,6 +688,8 @@ seriesOrder: 1      # 시리즈 순서
   - [ ] WYSIWYG 에디터 (비개발자용, 내부 저장은 MD)
   - [ ] 포스트 목록 + 수정/삭제
   - [ ] dev.to API 키 연결 + 교차게시
+  - [ ] **Qiita API 키 연결 + 교차게시** (일본 개발자 타겟 — 거점 시장 우선)
+  - [ ] 수동 복사 버튼 (Velog / Tistory / Medium — 클립보드 자동 변환)
 - [ ] **블로그 렌더링**
   - [ ] 테마 1종 (minimal-dark, 7onic 블로그 기반)
   - [ ] MD → HTML 파이프라인 (remark + rehype + Shiki)
@@ -708,7 +711,8 @@ seriesOrder: 1      # 시리즈 순서
 
 ### Phase 3 — 확장
 
-- [ ] Zenn + Qiita 교차게시 (Pro)
+- [ ] Zenn GitHub 연동 교차게시 (Pro)
+- [ ] はてなブログ AtomPub 교차게시 (Pro)
 - [ ] OG 이미지 커스텀 템플릿 (Pro)
 - [ ] Google Analytics 연동 (Basic+)
 - [ ] 플랫폼별 조회수 합산 통계
