@@ -246,7 +246,7 @@ The actual product is a system where design and code no longer argue about reali
 
 ---
 
-*Next: the CLI copies source files into your project instead of installing a package. That was a deliberate choice, and it has real trade-offs. Here's why copy-paste won.*
+*Next: I launched 7onic as a standard npm package. Then I added a CLI that copies source files directly into your project. Here's why I made that shift — and what it actually costs.*
 
 ---
 

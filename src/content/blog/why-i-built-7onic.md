@@ -74,7 +74,7 @@ On top of that token layer, I built [7onic](https://7onic.design) — 42 compone
 npx 7onic add button input select
 ```
 
-This copies the actual source files into your project. Not a compiled package you import — the real `.tsx` files, in your `components/` folder, fully yours to read and modify. I went back and forth on this decision a lot. I'll write a separate post about why I landed on copy-paste over npm import, because it's a real trade-off.
+This copies the actual source files into your project. Not a compiled package you import — the real `.tsx` files, in your `components/` folder, fully yours to read and modify. I started with npm install — the standard approach. The CLI came later, once I understood what copy-paste actually enables. I'll write a separate post about why I made that shift, because it's a real trade-off.
 
 ## Why Radix specifically
 
@@ -103,7 +103,7 @@ This is the first post in a series called "Design to Code." The plan is to write
 Some posts I'm planning:
 
 - How the token pipeline works end to end — the `sync-tokens` script, why I generate RGB channel variables, how Tailwind v3 and v4 support both work from the same token file
-- The copy-paste vs npm-import debate — why I chose to have the CLI copy source files and what that costs
+- The copy-paste vs npm-import story — why I started with npm install and later built a CLI that copies source files instead
 - Using AI to build a design system — what `llms.txt` actually does, how I use Claude to write components, and where it falls apart
 - Lessons from 42 components — patterns that scaled, patterns that didn't, things I'd do differently if I started over
 
