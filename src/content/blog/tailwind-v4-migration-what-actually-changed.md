@@ -2,7 +2,8 @@
 title: 'Tailwind Guides #1: What Actually Broke Migrating to v4'
 description: >-
   Migrating from Tailwind CSS v3 to v4 while supporting both — the silent dark
-  mode bug, reversed variant stacking, and the outline flash nobody warned about.
+  mode bug, reversed variant stacking, and the outline flash nobody warned
+  about.
 pubDate: 2026-04-18T00:00:00.000Z
 category: tailwind
 tags:
@@ -14,6 +15,8 @@ tags:
 series: tailwind-guides
 seriesOrder: 1
 draft: false
+devtoId: '3515176'
+hashnodeId: 69e2132c15774c372747d5ca
 ---
 
 I was halfway through shipping a component update when v4 dropped. My design system, [7onic](https://7onic.design), has to work with both Tailwind v3 and v4 — same components, same token source, two different output formats. So my reaction to the v4 announcement was less "exciting new features" and more "great, another output target to maintain."
