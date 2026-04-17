@@ -68,6 +68,19 @@ function sanitizeContent(raw: string): string {
   return raw.replace(/^(```\w+)\s+title="[^"]*"/gm, '$1');
 }
 
+/**
+ * dev.to treats @word as a user mention and links it.
+ * Escape @ outside code blocks so CSS at-rules don't become links.
+ */
+function sanitizeForDevto(raw: string): string {
+  const result = sanitizeContent(raw);
+  // Split on fenced code blocks, escape @ only in non-code segments
+  const parts = result.split(/(```[\s\S]*?```)/g);
+  return parts
+    .map((part, i) => (i % 2 === 1 ? part : part.replace(/@(\w)/g, '\\@$1')))
+    .join('');
+}
+
 // ── dev.to ────────────────────────────────────────────────────────────────────
 
 async function publishDevto(): Promise<string | null> {
@@ -76,7 +89,7 @@ async function publishDevto(): Promise<string | null> {
   const body = {
     article: {
       title: fm.title,
-      body_markdown: sanitizeContent(content),
+      body_markdown: sanitizeForDevto(content),
       published: true,
       canonical_url: canonicalUrl,
       tags: devtoTags,
