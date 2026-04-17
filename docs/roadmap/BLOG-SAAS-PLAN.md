@@ -949,6 +949,84 @@ seriesOrder: 1      # 시리즈 순서
 - Stripe API 응답을 그대로 로그에 남기기 (카드 마지막 4자리라도)
 - 테스트 환경에서 실제 카드 번호 입력 (Stripe 테스트 카드만)
 
+### Phase별 보안 구현 우선순위
+
+모든 보안 항목을 MVP에 넣지 않는다. **단계별로 필수/권장/선택을 명확히 구분.**
+
+#### Phase 1 MVP — 절대 스킵 불가 (🔴 필수)
+
+카드 정보 + 유저 격리 + 기본 인증만 타이트하게. 나머지는 기본값 수준.
+
+- 🔴 Stripe 위임 — 카드 정보 우리 서버 절대 미경유
+- 🔴 Stripe Webhook 서명 검증
+- 🔴 HTTPS 전용 + HSTS 헤더
+- 🔴 OAuth (GitHub/Google) 기반 인증
+- 🔴 Multi-tenant 격리: Supabase RLS + 미들웨어 테넌트 검증
+- 🔴 R2 경로 분리 (`users/{username}/...`)
+- 🔴 비밀번호 해시 (자체 비밀번호 옵션 시)
+- 🔴 세션 쿠키: `httpOnly` + `secure` + `SameSite`
+- 🔴 MD → HTML sanitize (`rehype-sanitize`)
+- 🔴 API 키 암호화 저장 (KV에 평문 금지)
+- 🔴 MD export 기능 (GDPR 준비, 해지 시 데이터 이전)
+
+#### Phase 1.5 — MVP 직후 보강 (🟡 권장)
+
+유저 10명 넘어가기 전에 마무리. 큰 비용 아님.
+
+- 🟡 감사 로그 — 결제, 계정 삭제, 권한 변경만 append-only 로그
+- 🟡 Rate limiting — 로그인, 가입, 결제 API
+- 🟡 hCaptcha / Turnstile — 봇 가입 방지
+- 🟡 CSP 헤더 기본 설정 (`default-src 'self'`)
+- 🟡 이용약관 + 개인정보처리방침 (일본 특정상거래법 포함)
+- 🟡 R2 오브젝트 버저닝 + 소프트 삭제 (휴지통)
+
+#### Phase 2 — 유저 늘어나면 (🟢 확장)
+
+수백 명 규모에서 필요. 운영 안정화 단계.
+
+- 🟢 다중 클라우드 백업 (R2 → AWS S3 or B2)
+- 🟢 Supabase DB 자동 백업 + 정기 dump
+- 🟢 실패 로그인 추적 + 계정 임시 잠금
+- 🟢 이상 활동 탐지 (새 IP, 대량 API 호출)
+- 🟢 MFA (유료 플랜 권장)
+- 🟢 Dependabot / Renovate 자동 패치
+- 🟢 `npm audit` CI 통합
+- 🟢 Status 페이지 (status.blog.7onic.app)
+- 🟢 GDPR 전체 삭제 프로세스 (백업 포함)
+
+#### Phase 3+ — 엔터프라이즈 (🔵 필요 시)
+
+B2B 고객 / 법인 계약 들어올 때. 비용 큼.
+
+- 🔵 분기별 복구 훈련
+- 🔵 외부 침투 테스트 (연 1회)
+- 🔵 SOC 2 Type II 감사 (수천만원)
+- 🔵 전담 보안 담당자
+- 🔵 SIEM (보안 이벤트 통합 모니터링)
+- 🔵 SBOM (공급망 투명성)
+
+### 우선순위 요약 테이블
+
+| 항목 | Phase 1 | Phase 1.5 | Phase 2 | Phase 3+ |
+|------|:-:|:-:|:-:|:-:|
+| Stripe PCI 위임 | 🔴 | | | |
+| Multi-tenant RLS | 🔴 | | | |
+| OAuth + 세션 | 🔴 | | | |
+| MD sanitize | 🔴 | | | |
+| MD export (GDPR) | 🔴 | | | |
+| 감사 로그 | | 🟡 | | |
+| Rate limiting | | 🟡 | | |
+| CSP / Captcha | | 🟡 | | |
+| 다중 클라우드 백업 | | | 🟢 | |
+| MFA | | | 🟢 | |
+| 이상 활동 탐지 | | | 🟢 | |
+| GDPR 전체 삭제 | | | 🟢 | |
+| SOC 2 | | | | 🔵 |
+| 분기 복구 훈련 | | | | 🔵 |
+| 침투 테스트 | | | | 🔵 |
+
+---
+
 ### 확장 시 체크리스트 (새 기능 추가마다 반드시 확인)
 
 ```
