@@ -167,4 +167,8 @@ The rest is mostly find-and-replace. Dark mode is where your v3 instincts will l
 
 ---
 
+*Next: I mentioned the `rgb()` channel hack for v3 opacity modifiers. That hack is part of a bigger story — how CSS variables and Tailwind actually interact, and why most guides get the setup wrong.*
+
+---
+
 **About 7onic** — An open-source React design system where design and code never drift. Free, MIT licensed. Docs and interactive playground at [7onic.design](https://7onic.design). Source code on [GitHub](https://github.com/itonys/7onic) — stars appreciated. More posts in this series at [blog.7onic.design](https://blog.7onic.design). Follow updates on X at [@7onicHQ](https://x.com/7onicHQ).
