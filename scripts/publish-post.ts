@@ -58,6 +58,16 @@ const devtoTags = tags.map((t) => t.replace(/-/g, ''));
 console.log(`\n📝 Publishing: ${fm.title}`);
 console.log(`   canonical: ${canonicalUrl}\n`);
 
+// ── Content sanitizer ─────────────────────────────────────────────────────────
+
+/**
+ * Strip Astro/Shiki-specific code fence attributes before cross-posting.
+ * e.g. ```js title="foo.js" → ```js
+ */
+function sanitizeContent(raw: string): string {
+  return raw.replace(/^(```\w+)\s+title="[^"]*"/gm, '$1');
+}
+
 // ── dev.to ────────────────────────────────────────────────────────────────────
 
 async function publishDevto(): Promise<string | null> {
@@ -66,7 +76,7 @@ async function publishDevto(): Promise<string | null> {
   const body = {
     article: {
       title: fm.title,
-      body_markdown: content,
+      body_markdown: sanitizeContent(content),
       published: true,
       canonical_url: canonicalUrl,
       tags: devtoTags,
@@ -119,14 +129,14 @@ async function publishHashnode(): Promise<string | null> {
         input: {
           id: fm.hashnodeId,
           title: fm.title,
-          contentMarkdown: content,
+          contentMarkdown: sanitizeContent(content),
           tags: hashnodeTags,
         },
       }
     : {
         input: {
           title: fm.title,
-          contentMarkdown: content,
+          contentMarkdown: sanitizeContent(content),
           publicationId: HASHNODE_PUB_ID,
           tags: hashnodeTags,
           originalArticleURL: canonicalUrl,
