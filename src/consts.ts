@@ -34,6 +34,11 @@ export const SERIES = [
     label: 'Solo Builder',
     description: 'What it actually looks like to build a design system alone',
   },
+  {
+    id: 'tailwind-guides',
+    label: 'Tailwind Guides',
+    description: 'Practical Tailwind CSS tips from building a design system',
+  },
 ] as const;
 
 export type SeriesId = (typeof SERIES)[number]['id'];
