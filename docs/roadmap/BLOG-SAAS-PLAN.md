@@ -2,6 +2,7 @@
 
 > 상태: 기획 단계 (미착수)
 > 목적: 블로그 자동 배포 + 교차게시 인프라를 SaaS 수익 모델로 확장
+> 최종 갱신: 2026-04-17
 
 ---
 
@@ -18,7 +19,7 @@
 유저가 AI로 글 작성
 → MD 템플릿에 붙여넣기
 → 대시보드에 업로드
-→ 개인 블로그 자동 배포
+→ 개인 블로그 즉시 반영 (빌드 없음)
 → dev.to / Hashnode / Zenn / Qiita 동시 전파
 ```
 
@@ -31,27 +32,555 @@
 
 ---
 
+## 아키텍처 — Astro SSR 멀티테넌트
+
+### 핵심 결정
+
+유저마다 별도 사이트를 빌드하지 않는다.
+**Astro 1개 앱이 SSR 모드로 모든 유저 블로그를 서빙한다.**
+
+```
+user1.blog.7onic.app  ─┐
+user2.blog.7onic.app  ──→  Astro SSR 앱 1개 (Cloudflare Workers)
+user3.blog.7onic.app  ─┘       ↓
+                          서브도메인으로 유저 식별
+                          KV/DB에서 설정 읽기
+                          R2에서 포스트 읽기
+                          Astro 컴포넌트로 렌더링
+                          캐시 저장 → HTML 응답
+```
+
+### 왜 이 방식인가
+
+| 비교 항목 | 유저별 정적 빌드 | SSR 멀티테넌트 |
+|----------|---------------|--------------|
+| 유저 1000명 시 빌드 | 월 3000+ 빌드 필요 | **빌드 없음** |
+| 테마 업데이트 | 1000개 재빌드 | **1번 배포** |
+| 빌드 실패 관리 | 매일 어딘가서 터짐 | **빌드 없음** |
+| 설정 변경 반영 | 2~3분 대기 | **즉시** |
+| 관리할 프로젝트 | 1000개 | **1개** |
+| Astro 생태계 | ✅ | ✅ 동일 |
+
+### Astro 프로젝트 구조
+
+```
+blog-saas/
+├── astro.config.mjs          # output: 'server', adapter: cloudflare()
+├── src/
+│   ├── middleware.ts          # 서브도메인 → 유저 식별
+│   ├── lib/
+│   │   ├── config.ts         # KV에서 유저 설정 읽기
+│   │   ├── posts.ts          # R2에서 포스트 읽기
+│   │   ├── cache.ts          # 캐시 관리 (생성/무효화)
+│   │   └── og.ts             # OG 이미지 생성 (satori)
+│   ├── layouts/
+│   │   └── BlogLayout.astro  # 유저 설정 주입된 공통 레이아웃
+│   ├── components/
+│   │   ├── Header.astro      # config.headerMenu 기반 동적 렌더링
+│   │   ├── Sidebar.astro     # config.categories + config.series
+│   │   ├── Footer.astro      # config.footer + config.socialLinks
+│   │   ├── PostCard.astro
+│   │   └── ThemeProvider.astro  # config.brandColor → CSS 변수 주입
+│   ├── pages/
+│   │   ├── index.astro          # 블로그 홈 (포스트 목록)
+│   │   ├── [slug].astro         # 포스트 상세
+│   │   ├── category/[id].astro  # 카테고리별 목록
+│   │   ├── series/[id].astro    # 시리즈별 목록
+│   │   ├── about.astro          # 작성자 소개
+│   │   ├── og/[slug].png.ts     # OG 이미지 (on-demand + R2 캐시)
+│   │   ├── rss.xml.ts           # RSS 피드
+│   │   └── sitemap.xml.ts       # 사이트맵
+│   ├── styles/
+│   │   └── theme.css            # CSS 변수 기반 테마
+│   └── themes/                  # 테마별 레이아웃 변형
+│       ├── minimal-dark/
+│       ├── minimal-light/
+│       └── docs-style/
+└── dashboard/                   # 대시보드 (Next.js 별도 앱)
+    └── ...
+```
+
+### astro.config.mjs
+
+```js
+import { defineConfig } from 'astro/config'
+import cloudflare from '@astrojs/cloudflare'
+
+export default defineConfig({
+  output: 'server',
+  adapter: cloudflare({
+    mode: 'advanced',
+    runtime: { mode: 'off' }, // KV, R2 바인딩은 wrangler.toml에서
+  }),
+})
+```
+
+### 요청 흐름 상세
+
+```
+1. 유저 요청: user1.blog.7onic.app/my-post
+
+2. Cloudflare Workers가 Astro SSR 앱 실행
+
+3. middleware.ts:
+   - Host 헤더에서 서브도메인 추출 → "user1"
+   - Astro.locals.username = "user1"
+
+4. [slug].astro 페이지:
+   a. 캐시 확인 (user1:my-post)
+      → 있으면 캐시 응답 반환 (렌더링 안 함)
+   b. KV에서 user1 설정 읽기 → config JSON
+   c. R2에서 my-post HTML 읽기
+   d. Astro 컴포넌트 렌더링:
+      - Header: config.headerMenu 기반
+      - Sidebar: config.categories + config.series
+      - 본문: post HTML (Shiki 하이라이팅 적용됨)
+      - Footer: config.footer + config.socialLinks
+      - CSS: config.brandColor → --color-brand 변수
+   e. 완성된 HTML 캐시 저장
+   f. 응답 반환
+
+5. 다음 동일 요청 → 캐시에서 즉시 반환
+```
+
+### 캐시 전략
+
+```
+캐시 키: {username}:{path}
+저장소: Cloudflare Cache API (무료, 엣지)
+
+무효화 시점:
+- 포스트 게시/수정/삭제 → 해당 포스트 + 홈 + 카테고리 + 시리즈 캐시 무효화
+- 설정 변경 → 해당 유저 전체 캐시 무효화
+
+캐시 TTL: 24시간 (변경 없으면 자동 갱신)
+```
+
+---
+
+## 기술 스택
+
+### 인프라 (전부 무료 티어)
+
+| 서비스 | 용도 | 무료 한도 | 비용 |
+|--------|------|----------|------|
+| Cloudflare Workers | Astro SSR 서빙 | 일 10만 요청 | 0원 |
+| Cloudflare KV | 유저 설정 JSON | 일 10만 읽기 / 1000 쓰기 | 0원 |
+| Cloudflare R2 | 포스트 HTML + 미디어 | 10GB / 월 1000만 읽기 | 0원 |
+| Supabase | 유저 계정 + 대시보드 데이터 | 50k MAU / 500MB | 0원 |
+| Vercel | 대시보드 호스팅 (Next.js) | 무료 | 0원 |
+| Stripe | 결제 | 결제 시 3.6% 수수료만 | 0원 |
+
+### 스케일링
+
+| 유저 수 | 인프라 상태 | 월 비용 |
+|---------|-----------|--------|
+| ~5,000명 | 무료 티어 내 | 0원 |
+| ~100,000명 | Workers $5/월 | ~750엔 |
+
+### 대시보드 UI
+
+- **7onic 디자인 시스템** — 토큰 + 컴포넌트 그대로 사용
+- Next.js + Supabase Auth + Stripe
+
+---
+
+## 유저 설정 스키마
+
+### config JSON (KV 저장)
+
+```json
+{
+  "username": "user1",
+  "plan": "free",
+  "theme": "minimal-dark",
+
+  "blog": {
+    "title": "My Developer Blog",
+    "description": "Thoughts on frontend development",
+    "language": "en"
+  },
+
+  "branding": {
+    "logo": "r2://user1/uploads/logo.png",
+    "favicon": "r2://user1/uploads/favicon.ico",
+    "brandColor": "#7c3aed",
+    "ogTemplate": "default"
+  },
+
+  "author": {
+    "name": "Tony",
+    "bio": "Frontend developer. Building things.",
+    "avatar": "r2://user1/uploads/avatar.jpg"
+  },
+
+  "headerMenu": [
+    { "label": "Home", "url": "/" },
+    { "label": "About", "url": "/about" },
+    { "label": "GitHub", "url": "https://github.com/user", "external": true }
+  ],
+
+  "categories": [
+    { "id": "react", "label": "React" },
+    { "id": "css", "label": "CSS" },
+    { "id": "devops", "label": "DevOps" }
+  ],
+
+  "series": [
+    { "id": "react-deep-dive", "label": "React Deep Dive", "description": "..." }
+  ],
+
+  "socialLinks": {
+    "x": "@user",
+    "github": "user",
+    "linkedin": ""
+  },
+
+  "footer": {
+    "text": "© 2026 Tony",
+    "links": []
+  },
+
+  "integrations": {
+    "devto": { "apiKey": "encrypted:...", "enabled": true },
+    "hashnode": { "apiKey": "encrypted:...", "pubId": "...", "enabled": true },
+    "zenn": { "enabled": false },
+    "qiita": { "enabled": false },
+    "analytics": { "gaId": "" },
+    "comments": { "provider": "giscus", "repo": "", "enabled": false }
+  },
+
+  "domain": {
+    "custom": "",
+    "subdomain": "user1"
+  }
+}
+```
+
+### 포스트 데이터 (R2 저장)
+
+```
+R2 버킷 구조:
+  users/
+    user1/
+      posts/
+        my-first-post.json        ← 메타데이터
+        my-first-post.html        ← 렌더링된 HTML (Shiki 적용)
+        my-first-post.md          ← 원본 MD (교차게시 + 수정용)
+      uploads/
+        logo.png
+        favicon.ico
+        avatar.jpg
+        posts/
+          my-first-post/
+            screenshot.webp       ← 포스트 이미지
+      cache/
+        og/
+          my-first-post.png       ← OG 이미지 캐시
+```
+
+### 포스트 메타데이터 JSON
+
+```json
+{
+  "slug": "my-first-post",
+  "title": "My First Post",
+  "description": "This is my first blog post",
+  "pubDate": "2026-04-17T00:00:00.000Z",
+  "updatedDate": null,
+  "category": "react",
+  "tags": ["react", "hooks", "typescript"],
+  "series": "react-deep-dive",
+  "seriesOrder": 1,
+  "draft": false,
+  "crossPost": {
+    "devtoId": "3513177",
+    "devtoUrl": "https://dev.to/user/...",
+    "hashnodeId": "69e192f9",
+    "hashnodeUrl": "https://user.hashnode.dev/..."
+  }
+}
+```
+
+---
+
+## 유저 설정 기능 상세 (대시보드)
+
+### 1. 블로그 기본 설정
+
+| 항목 | 입력 방식 | 플랜 |
+|------|----------|------|
+| 블로그 제목 | 텍스트 (60자 이내) | 전체 |
+| 블로그 설명 | 텍스트 (160자 이내) | 전체 |
+| 언어 | 셀렉트 (en / ja / ko) | 전체 |
+| 테마 선택 | 카드 프리뷰 → 클릭 | Free=1종 고정, Basic+=전체 |
+
+### 2. 브랜딩
+
+| 항목 | 입력 방식 | 플랜 |
+|------|----------|------|
+| 로고 | 이미지 업로드 (R2) | 전체 |
+| 파비콘 | 이미지 업로드 (R2) | 전체 |
+| 브랜드 컬러 | 컬러 피커 (기본 #7c3aed) | 전체 |
+| 아바타 | 이미지 업로드 (R2) | 전체 |
+
+#### 브랜드 컬러 구현
+
+```css
+/* ThemeProvider.astro가 config에서 읽어서 주입 */
+:root {
+  --color-brand: var(--user-brand-color, #7c3aed);
+  --color-brand-hover: color-mix(in srgb, var(--color-brand) 85%, black);
+  --color-brand-light: color-mix(in srgb, var(--color-brand) 10%, transparent);
+}
+```
+
+### 3. 작성자 정보
+
+| 항목 | 입력 방식 | 용도 |
+|------|----------|------|
+| 이름 | 텍스트 | 포스트 하단 author 영역, copyright |
+| 한줄 소개 | 텍스트 (80자) | About 페이지, author 카드 |
+| 아바타 | 이미지 업로드 | author 카드, OG 이미지 |
+
+### 4. 네비게이션
+
+#### 헤더 메뉴
+- 대시보드에서 드래그 앤 드롭으로 순서 변경
+- 항목 추가/삭제/이름 변경
+- 외부 링크 지원 (external: true → 새 탭)
+- 최대 6개
+
+#### 사이드바 카테고리
+- 카테고리 추가/삭제/이름 변경
+- 포스트에서 카테고리 선택 시 이 목록에서 선택
+- 카테고리 URL: `/category/{id}`
+
+### 5. 시리즈 (그룹 기능)
+
+- 시리즈 생성: ID + 라벨 + 설명
+- 포스트 작성 시 시리즈 선택 + 순서 지정
+- 시리즈 페이지: `/series/{id}` — 순서대로 목록 표시
+- 시리즈 삭제 시 포스트는 유지 (시리즈 태그만 해제)
+
+### 6. 소셜 링크
+
+| 항목 | 입력 방식 |
+|------|----------|
+| X (Twitter) | @handle |
+| GitHub | username |
+| LinkedIn | URL |
+
+→ 푸터 + 사이드바에 아이콘으로 표시
+
+### 7. 푸터
+
+| 항목 | 입력 방식 |
+|------|----------|
+| Copyright 텍스트 | 텍스트 (기본: `© {year} {author.name}`) |
+
+### 8. 도메인
+
+| 항목 | 입력 방식 | 플랜 |
+|------|----------|------|
+| 서브도메인 | `{username}.blog.7onic.app` (자동) | 전체 |
+| 커스텀 도메인 | CNAME 설정 안내 + 검증 | Basic+ |
+
+#### 커스텀 도메인 구현
+```
+유저가 대시보드에서 도메인 입력
+→ CNAME 설정 안내 (user-blog.example.com → blog.7onic.app)
+→ DNS 검증 (API로 CNAME 확인)
+→ Cloudflare for SaaS로 SSL 자동 발급
+→ Worker가 Host 헤더로 유저 매칭
+```
+
+---
+
+## 포스트 게시 흐름 상세
+
+### 포스트 업로드
+
+```
+1. 대시보드에서 MD 파일 업로드 (또는 에디터에서 작성)
+
+2. 서버 처리:
+   a. frontmatter 파싱 + 유효성 검증
+      - title 60자 이내
+      - description 120~160자
+      - tags 3~5개
+      - category가 유저 설정에 존재하는지
+   b. MD → HTML 변환
+      - remark/rehype 파이프라인
+      - Shiki 코드 하이라이팅 (github-light/github-dark 듀얼)
+      - 이미지 URL 처리 (상대경로 → R2 URL)
+   c. R2에 저장:
+      - {username}/posts/{slug}.md (원본)
+      - {username}/posts/{slug}.html (렌더링)
+      - {username}/posts/{slug}.json (메타데이터)
+   d. Supabase에 포스트 인덱스 저장 (검색/정렬용)
+
+3. 캐시 무효화:
+   - 해당 포스트 페이지
+   - 홈 (포스트 목록)
+   - 해당 카테고리 페이지
+   - 해당 시리즈 페이지
+   - RSS
+   - sitemap
+
+4. 교차게시 (유저 설정에 따라):
+   a. MD 원본 읽기
+   b. canonical URL 생성: {user-domain}/{slug}
+   c. dev.to API → POST /api/articles
+   d. Hashnode GraphQL API → createStory
+   e. (Pro) Zenn / Qiita API
+   f. 반환된 ID/URL을 포스트 메타데이터에 기록
+
+5. 대시보드에 결과 표시:
+   - 블로그 ✅ / dev.to ✅ / Hashnode ✅
+   - 각 URL 링크
+```
+
+### 포스트 수정
+
+```
+1. 대시보드에서 MD 수정 (원본 MD 로드)
+2. 동일 파이프라인 실행 (HTML 재생성)
+3. 캐시 무효화
+4. 교차게시 업데이트 (기존 ID로 PUT/UPDATE)
+```
+
+### 포스트 삭제
+
+```
+1. R2에서 MD/HTML/JSON 삭제
+2. Supabase 인덱스 삭제
+3. 캐시 무효화
+4. 교차게시 삭제는 수동 안내 (대부분 플랫폼이 API 삭제 미지원)
+```
+
+---
+
+## OG 이미지 생성
+
+### 구현 방식
+
+```
+요청: user1.blog.7onic.app/og/my-post.png
+
+1. R2 캐시 확인 (users/user1/cache/og/my-post.png)
+   → 있으면 즉시 반환
+
+2. 없으면 on-demand 생성:
+   a. KV에서 유저 설정 읽기 (brandColor, logo)
+   b. R2에서 포스트 메타데이터 읽기 (title, tags)
+   c. satori로 SVG 생성
+      - 배경: brandColor 기반 그라데이션
+      - 제목 + 태그 + 로고
+   d. @resvg/resvg-wasm으로 PNG 변환 (Worker 환경)
+   e. R2에 캐시 저장
+   f. 응답 반환
+
+3. 포스트 수정 시 OG 캐시도 무효화
+```
+
+### 테마별 OG 템플릿
+
+- Free: 기본 템플릿 1종 (brandColor 그라데이션 + 제목)
+- Pro: 커스텀 템플릿 선택 가능 (향후)
+
+---
+
+## 교차게시 상세
+
+### 지원 플랫폼
+
+| 플랫폼 | API | 플랜 |
+|--------|-----|------|
+| dev.to | REST API v1 | Free+ |
+| Hashnode | GraphQL API | Basic+ |
+| Zenn | 비공식 (GitHub 연동) | Pro |
+| Qiita | REST API v2 | Pro |
+
+### 교차게시 로직
+
+```ts
+async function crossPost(username: string, slug: string) {
+  const config = await getConfig(username)
+  const post = await getPostMD(username, slug)
+  const meta = await getPostMeta(username, slug)
+  const canonicalUrl = getCanonicalUrl(config, slug)
+
+  const results = {}
+
+  // dev.to
+  if (config.integrations.devto.enabled) {
+    const devto = await publishToDevto({
+      title: meta.title,
+      body: post,
+      canonical: canonicalUrl,
+      tags: meta.tags.map(t => t.replace(/-/g, '')), // 하이픈 제거
+      existingId: meta.crossPost?.devtoId, // update 시
+    })
+    results.devto = devto
+  }
+
+  // Hashnode
+  if (config.integrations.hashnode.enabled) {
+    const hashnode = await publishToHashnode({
+      title: meta.title,
+      content: post,
+      canonical: canonicalUrl,
+      tags: meta.tags,
+      pubId: config.integrations.hashnode.pubId,
+      existingId: meta.crossPost?.hashnodeId,
+    })
+    results.hashnode = hashnode
+  }
+
+  // 결과를 포스트 메타데이터에 기록
+  await updatePostMeta(username, slug, { crossPost: results })
+  return results
+}
+```
+
+### canonical URL 규칙
+
+- 커스텀 도메인 있으면: `https://user-blog.example.com/{slug}/`
+- 없으면: `https://user1.blog.7onic.app/{slug}/`
+- 항상 유저 블로그가 canonical (플랫폼이 아님)
+
+---
+
 ## 도메인 구조
 
 | 용도 | 도메인 |
 |---|---|
 | 서비스 대시보드 | `blog.7onic.app` |
-| 유저 블로그 (Free) | `username.blog.7onic.app` |
+| 유저 블로그 (Free) | `{username}.blog.7onic.app` |
 | 유저 블로그 (유료) | 커스텀 도메인 연결 |
+| 우리 블로그 (데모) | `blog.7onic.design` (기존 Astro 정적) |
 
 ---
 
 ## 요금제
 
-| 기능 | Free | Basic | Pro |
+| 기능 | Free | Basic (500엔/월) | Pro (1000엔/월) |
 |---|---|---|---|
-| 가격 | 0엔 | 500엔/월 | 1000엔/월 |
 | 블로그 수 | 1개 | 1개 | 3개 |
 | 도메인 | `username.blog.7onic.app` | 커스텀 도메인 | 커스텀 도메인 |
 | 월 포스트 | 3개 | 20개 | 무제한 |
-| 교차게시 | dev.to만 | dev.to + Hashnode | + Zenn + Qiita |
-| 테마 선택 | 1개 고정 | 전체 | 전체 |
+| 교차게시 | dev.to만 | + Hashnode | + Zenn + Qiita |
+| 테마 선택 | 1종 고정 | 전체 | 전체 |
+| 브랜드 컬러 | ✅ | ✅ | ✅ |
+| 로고/파비콘 | ✅ | ✅ | ✅ |
+| 메뉴/카테고리/시리즈 | ✅ | ✅ | ✅ |
+| 작성자 정보 | ✅ | ✅ | ✅ |
+| 소셜 링크 | ✅ | ✅ | ✅ |
 | OG 이미지 | 기본 템플릿 | 기본 템플릿 | 커스텀 가능 |
+| Google Analytics | ❌ | ✅ | ✅ |
+| 댓글 (Giscus) | ❌ | ✅ | ✅ |
+| 미디어 스토리지 | 50MB | 500MB | 2GB |
 
 ---
 
@@ -67,19 +596,25 @@
 | 순수익 +5만엔 | 80명 | 2700명 |
 | 순수익 +10만엔 | 175명 | 5800명 |
 
+### 서버 비용
+
+| 유저 수 | 인프라 상태 | 월 비용 |
+|---------|-----------|--------|
+| ~5,000명 | 전부 무료 티어 | 0원 |
+| ~100,000명 | Workers 유료 ($5) | ~750엔 |
+
+→ 비용이 발생하는 시점에 수익이 이미 초과하므로 리스크 없음
+
 ---
 
-## 핵심 기능
+## AI 정책
 
-### 1. 블로그 테마 제공
-- Astro 기반 정적 블로그 테마 3종 (MVP)
-  - `minimal-dark` — 현재 7onic 블로그 스타일
-  - `minimal-light`
-  - `docs-style` — 기술 문서형
-- 대시보드에서 프리뷰 → 선택 → 즉시 배포
+- **앱 내 AI 기능 없음** — 토큰 비용 발생 없음
+- 유저가 자신의 AI로 글 작성 후 MD만 가져오는 구조
+- MD 템플릿 제공으로 AI 활용 유도
 
-### 2. MD 템플릿
-유저가 AI에 그대로 줄 수 있는 템플릿:
+### MD 템플릿 (유저에게 제공)
+
 ```markdown
 ---
 title: ""           # 60자 이내
@@ -87,81 +622,74 @@ description: ""     # 120-160자
 pubDate: YYYY-MM-DD
 category: ""
 tags: []            # 3-5개
-lang: en            # en | ja
+series: ""          # 시리즈 사용 시
+seriesOrder: 1      # 시리즈 순서
 ---
 
 본문
 ```
-
-### 3. 교차게시 자동화
-- 영어권: dev.to + Hashnode
-- 일본어권: Zenn + Qiita
-- 업로드 1번으로 연결된 모든 플랫폼에 동시 게시
-
-### 4. OG 이미지 자동 생성
-- 7onic 블로그와 동일한 satori + sharp 파이프라인
-- Pro 티어: 커스텀 템플릿 선택 가능
-
-### 5. 다국어 대응
-- 대시보드 UI: 영어 / 일본어
-- 플랫폼 연결도 언어별로 분리
-
----
-
-## UI / 기술 스택
-
-### UI
-- **7onic 디자인 시스템** — 토큰 + 컴포넌트 그대로 사용
-- 빠르게 만들 수 있고 퀄리티 보장
-
-### 인프라
-- **블로그 호스팅**: Cloudflare Pages (정적 사이트, 실질적 무료)
-- **대시보드**: Next.js → Vercel
-- **DB + 인증**: Supabase
-- **결제**: Stripe (엔화 지원)
-- **빌드 트리거**: Cloudflare Pages webhook
-
-### 월 서버 비용 (예상)
-| 유저 수 | 비용 |
-|---|---|
-| ~500명 | $10 = 약 1500엔 |
-| ~1000명 | $35 = 약 5000엔 |
-| ~2000명 | $80 = 약 12000엔 |
-
----
-
-## AI 정책
-- **앱 내 AI 기능 없음** — 토큰 비용 발생 없음
-- 유저가 자신의 AI로 글 작성 후 MD만 가져오는 구조
 
 ---
 
 ## 빌드 단계
 
 ### Phase 1 — MVP
-- [ ] 인증 (GitHub OAuth / 이메일)
-- [ ] dev.to + Hashnode API 키 연결
-- [ ] MD 파일 업로드 → 수동 교차게시
-- [ ] 기본 대시보드 (게시 이력)
-- [ ] 블로그 테마 1종 + 자동 배포
 
-### Phase 2 — 자동화
-- [ ] 새 포스트 감지 → 자동 교차게시
-- [ ] 커스텀 도메인 연결
-- [ ] Zenn + Qiita 지원
-- [ ] Stripe 결제 연동
+> 목표: 최소 기능으로 유저가 블로그를 만들고 글을 올릴 수 있는 상태
+
+- [ ] **인프라**
+  - [ ] Astro SSR + Cloudflare Workers 세팅
+  - [ ] Cloudflare KV 바인딩 (유저 설정)
+  - [ ] Cloudflare R2 바인딩 (포스트 + 미디어)
+  - [ ] Supabase 프로젝트 (유저 계정 + 포스트 인덱스)
+  - [ ] 서브도메인 라우팅 (`*.blog.7onic.app` → Worker)
+  - [ ] 캐시 레이어 (Cloudflare Cache API)
+- [ ] **대시보드**
+  - [ ] 인증 (GitHub OAuth + 이메일)
+  - [ ] 블로그 기본 설정 (제목, 설명, 언어)
+  - [ ] 브랜딩 (로고, 파비콘, 브랜드 컬러, 아바타)
+  - [ ] 작성자 정보 (이름, 소개)
+  - [ ] 헤더 메뉴 관리 (추가/삭제/순서변경)
+  - [ ] 카테고리 관리
+  - [ ] 시리즈 관리
+  - [ ] 소셜 링크
+  - [ ] 푸터 텍스트
+  - [ ] MD 업로드 → 포스트 게시
+  - [ ] 포스트 목록 + 수정/삭제
+  - [ ] dev.to API 키 연결 + 교차게시
+- [ ] **블로그 렌더링**
+  - [ ] 테마 1종 (minimal-dark, 7onic 블로그 기반)
+  - [ ] MD → HTML 파이프라인 (remark + rehype + Shiki)
+  - [ ] 유저 설정 기반 동적 렌더링
+  - [ ] RSS 피드 생성
+  - [ ] sitemap 생성
+  - [ ] OG 이미지 on-demand 생성
+
+### Phase 2 — 과금 + 자동화
+
+> 목표: 유료 전환 + 추가 플랫폼
+
+- [ ] Stripe 결제 연동 (엔화)
+- [ ] 플랜별 기능 잠금 UI
+- [ ] Hashnode 교차게시 (Basic+)
+- [ ] 커스텀 도메인 연결 (Cloudflare for SaaS)
+- [ ] 테마 추가 (minimal-light, docs-style)
+- [ ] 포스트 수정 시 교차게시 자동 업데이트
 
 ### Phase 3 — 확장
-- [ ] 블로그 테마 추가
-- [ ] OG 이미지 커스텀 (Pro)
-- [ ] 플랫폼별 통계 (조회수 합산)
-- [ ] 실패 알림 (이메일/Slack)
+
+- [ ] Zenn + Qiita 교차게시 (Pro)
+- [ ] OG 이미지 커스텀 템플릿 (Pro)
+- [ ] Google Analytics 연동 (Basic+)
+- [ ] 플랫폼별 조회수 합산 통계
+- [ ] 실패 알림 (이메일)
 
 ### Phase 4 — 소셜 기능
-- [ ] 댓글 — Giscus (GitHub Discussions 기반, 무료, 개발자 친화)
-- [ ] 공유 버튼 — X / LinkedIn (프론트엔드만, 백엔드 불필요)
-- [ ] 좋아요 카운터 — Supabase 간단 카운터 (Nice to have)
-- [ ] 북마크 — 로그인 유저 전용 (Nice to have)
+
+- [ ] 댓글 — Giscus (Basic+)
+- [ ] 공유 버튼 — X / LinkedIn
+- [ ] 좋아요 카운터 (Supabase)
+- [ ] 북마크 (로그인 유저 전용)
 
 ---
 
@@ -170,7 +698,9 @@ lang: en            # en | ja
 - **7onic 블로그 자체가 데모** — "이 블로그가 이 서비스로 만들어졌습니다"
 - dev.to / Hashnode / Zenn 포스트로 타겟 유저 직접 유입
 - 솔로 빌더 커뮤니티 (IndieHackers) 공략
+- Product Hunt 런칭 (Phase 2 이후)
 
 ---
 
 *최초 작성: 2026-04-16*
+*전면 갱신: 2026-04-17 — Astro SSR 멀티테넌트 아키텍처 확정, 유저 설정 기능 상세 추가*
