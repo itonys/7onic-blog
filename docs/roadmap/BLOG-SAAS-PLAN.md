@@ -24,11 +24,15 @@
 ```
 
 ### 경쟁 서비스와 차이
-| 서비스 | 포지션 |
-|---|---|
-| Ghost / Substack | 블로그 소유 O, 전파 X |
-| Buffer / Hootsuite | 전파 O, 블로그 소유 X |
-| **우리** | **블로그 소유 + 전파 허브 동시** |
+| 서비스 | 블로그 소유 | 커스텀 도메인 | 교차배포 | 브랜딩 | 데이터 이전 |
+|---|---|---|---|---|---|
+| Velog / Zenn | X (플랫폼 종속) | X | X | X (플랫폼 디자인) | 제한적 |
+| dev.to / Hashnode | X (플랫폼 종속) | △ (Hashnode만) | X | △ | MD export |
+| Ghost / Substack | O | O | X | O | O |
+| Buffer / Hootsuite | X (블로그 아님) | — | O (SNS만) | — | — |
+| **우리** | **O** | **O** | **O (dev.to, Hashnode, Zenn, Qiita)** | **O** | **O (MD 다운로드)** |
+
+> **핵심 포지션**: Velog의 편리함 (MD 업로드 → 즉시 게시) + 자기 블로그의 독립성 (커스텀 도메인, SEO 축적, 데이터 소유권) + 교차배포 자동화
 
 ---
 
