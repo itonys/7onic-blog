@@ -502,12 +502,32 @@ R2 버킷 구조:
 
 ### 지원 플랫폼
 
-| 플랫폼 | API | 플랜 |
-|--------|-----|------|
-| dev.to | REST API v1 | Free+ |
-| Hashnode | GraphQL API | Basic+ |
-| Zenn | 비공식 (GitHub 연동) | Pro |
-| Qiita | REST API v2 | Pro |
+#### 자동 게시 (API 기반)
+
+| 플랫폼 | API | 플랜 | 지역 |
+|--------|-----|------|------|
+| dev.to | REST API v1 | Free+ | 영어권 |
+| Hashnode | GraphQL API | Basic+ | 영어권 |
+| Qiita | REST API v2 | Pro | 일본 |
+| Zenn | GitHub 연동 (자동) | Pro | 일본 |
+
+#### 수동 복사 지원 (API 미지원 플랫폼)
+
+| 플랫폼 | API 상태 | 지원 방식 | 지역 |
+|--------|---------|---------|------|
+| Velog | ❌ 공식 없음 | "Copy for Velog" 버튼 → MD 클립보드 | 한국 |
+| Tistory | ⚠️ 2024 deprecated | "Copy for Tistory" 버튼 → HTML 변환 후 복사 | 한국 |
+| Brunch | ❌ 폐쇄 | "Copy Markdown" | 한국 |
+| Medium | ⚠️ API 제한적 | "Copy Markdown" | 영어권 |
+
+**수동 복사 UX:**
+- 대시보드 포스트 상세 화면에 플랫폼별 "Copy" 버튼
+- 플랫폼 규칙에 맞게 자동 변환 후 클립보드 복사:
+  - Velog: MD 그대로 (Velog가 MD 지원)
+  - Tistory: HTML 변환 (Tistory 에디터는 HTML 기반)
+  - Medium: MD + 이미지 URL 절대경로
+- 유저는 해당 플랫폼 에디터에 붙여넣기만 하면 끝 (3초 작업)
+- canonical URL 자동 포함 (SEO 중복 회피)
 
 ### 교차게시 로직
 
