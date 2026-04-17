@@ -141,9 +141,9 @@ body {
   padding: 0.25rem 0.625rem;
   font-size: 0.75rem;
   font-family: var(--font-sans);
-  color: rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.45);
   background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 5px;
   cursor: pointer;
   transition: color 0.15s, background 0.15s, border-color 0.15s;
