@@ -13,7 +13,7 @@ tags:
   - design-tokens
 series: tailwind-guides
 seriesOrder: 1
-draft: true
+draft: false
 ---
 
 I was halfway through shipping a component update when v4 dropped. My design system, [7onic](https://7onic.design), has to work with both Tailwind v3 and v4 — same components, same token source, two different output formats. So my reaction to the v4 announcement was less "exciting new features" and more "great, another output target to maintain."
