@@ -141,19 +141,33 @@ body {
   padding: 0.25rem 0.625rem;
   font-size: 0.75rem;
   font-family: var(--font-sans);
-  color: rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   cursor: pointer;
   transition: color 0.15s, background 0.15s;
   user-select: none;
 }
 .prose pre .copy-btn:hover {
+  color: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.1);
+}
+.prose pre .copy-btn.copied {
+  color: #16a34a;
+  border-color: rgba(22, 163, 74, 0.3);
+}
+
+[data-theme="dark"] .prose pre .copy-btn {
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+[data-theme="dark"] .prose pre .copy-btn:hover {
   color: rgba(255, 255, 255, 0.85);
   background: rgba(255, 255, 255, 0.15);
 }
-.prose pre .copy-btn.copied {
+[data-theme="dark"] .prose pre .copy-btn.copied {
   color: #4ade80;
   border-color: rgba(74, 222, 128, 0.3);
 }
