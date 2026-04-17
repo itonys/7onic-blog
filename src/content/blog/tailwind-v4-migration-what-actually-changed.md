@@ -1,8 +1,8 @@
 ---
-title: 'Tailwind CSS v4 Migration: What Actually Broke'
+title: 'Tailwind Guides #1: What Actually Broke Migrating to v4'
 description: >-
-  Migrating a design system from Tailwind CSS v3 to v4 while supporting both.
-  The silent dark mode bug, reversed variant stacking, and other real-world pain.
+  Migrating from Tailwind CSS v3 to v4 while supporting both — the silent dark
+  mode bug, reversed variant stacking, and the outline flash nobody warned about.
 pubDate: 2026-04-18T00:00:00.000Z
 category: tailwind
 tags:
