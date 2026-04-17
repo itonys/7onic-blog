@@ -1,7 +1,7 @@
 ---
 title: "Series Name #N: Post Title"
 description: "One-line description for SEO and OG image (under 160 chars)"
-pubDate: 2026-04-16
+pubDate: YYYY-MM-DDTHH:MM:SS.000Z
 category: "design-system"
 tags: ["design-system", "tokens"]
 series: "design-to-code"
@@ -38,4 +38,5 @@ draft: true
 - [ ] About footer 포함 (맨 끝)
 - [ ] CONTENT-RULES.md 금지 패턴 위반 없는지 확인
 - [ ] draft: false로 변경 (배포 시)
+- [ ] pubDate: /blog-publish Step 0에서 date -u 실행 후 자동 주입 (날짜만 넣지 말 것)
 -->

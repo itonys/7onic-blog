@@ -4,10 +4,12 @@
 
 ## 실행 순서
 
-1. `docs/CONTENT-RULES.md`를 Read 도구로 읽는다.
-2. `src/content/blog/` 안의 기존 포스트 파일들을 확인해 시리즈 순서, 태그 패턴, 파일 네이밍을 파악한다.
-3. 유저가 제공한 주제/키포인트를 바탕으로 포스트 초안을 작성한다.
-4. `src/content/blog/[slug].md` 파일을 생성한다.
+1. `src/content/blog/_template.md`를 Read 도구로 읽는다 — 체크리스트·구조 확인.
+2. `docs/CONTENT-RULES.md`를 Read 도구로 읽는다.
+3. `src/content/blog/` 안의 기존 포스트 1개를 Read해서 실제 패턴 확인 (제목 형식, 끝부분 구조).
+4. 유저가 제공한 주제/키포인트를 바탕으로 포스트 초안을 작성한다.
+5. 새 시리즈면 `src/consts.ts` SERIES 배열에 추가.
+6. `src/content/blog/[slug].md` 파일을 생성한다.
 
 ## 초안 작성 기준
 
@@ -25,7 +27,7 @@
 - `tags`: 3~5개 관련 태그
 - `category`: 내용에 맞는 카테고리
 - `draft: true` (기본값 — 유저 검토 후 false로 변경)
-- `pubDate`: 오늘 날짜
+- `pubDate`: 빈 값으로 둠 — `/blog-publish` Step 0에서 실제 배포 시각으로 주입
 
 ## 완료 후 보고
 

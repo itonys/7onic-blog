@@ -11,10 +11,20 @@
    - [ ] `description` 120~160자
    - [ ] `tags` 3~5개
    - [ ] `category` 유효한 값
-   - [ ] `pubDate` 날짜 형식 정확
+   - [ ] `pubDate` — **배포 직전 현재 시각으로 자동 주입** (아래 Step 0 참고)
    - [ ] 시리즈 포스트면 `series` + `seriesOrder` 있는지
 
 ## 실행 순서
+
+### Step 0 — pubDate 현재 시각 주입 (배포 직전 1회만)
+
+```bash
+date -u +"%Y-%m-%dT%H:%M:%S.000Z"
+```
+
+출력된 시각을 `pubDate` 필드에 그대로 기록한다.
+
+> **규칙: pubDate는 최초 배포 순간 단 1회만 설정한다. 이후 포스트를 수정하거나 재배포해도 절대 변경하지 않는다.**
 
 ### Step 1 — git push (Vercel 자동 배포)
 ```bash
@@ -27,7 +37,6 @@ git push origin main
 ```bash
 npm run publish-post -- "[slug]"
 ```
-> 스크립트 미구현 시: 유저에게 dev.to / Hashnode 수동 게시 안내
 
 ### Step 3 — 완료 보고
 - `blog.7onic.design/[slug]` URL 안내
@@ -45,6 +54,7 @@ npm run publish-post -- "[slug]"
   - 첫 댓글에 배경 설명 추가 (솔로 빌더 + 오픈소스 + 토큰 파이프라인 스토리)
 - [ ] **Reddit** — r/webdev, r/reactjs, r/Frontend 중 내용에 맞는 곳
 - [ ] **IndieHackers** — indiehackers.com (**포스트 20개 이상일 때**, 솔로 빌더 커뮤니티)
+  - 제목은 HN보다 캐주얼하게
 
 ## 주의
 

@@ -10,7 +10,7 @@
 ---
 title: "제목 (60자 이내, 영어)"
 description: "SEO 설명 (120~160자, 영어)"
-pubDate: YYYY-MM-DD
+pubDate: YYYY-MM-DDTHH:MM:SS.000Z  # /blog-publish Step 0에서 date -u로 자동 주입
 category: "design-system | tokens | components | tailwind | ai | cli | devops"
 tags: ["tag1", "tag2", "tag3"]  # 3~5개, 소문자 kebab-case
 series: "design-to-code"        # 시리즈 포스트만
@@ -23,6 +23,7 @@ draft: false
 - `description`: 120~160자. 첫 문장이 핵심 내용 요약.
 - `tags`: 3~5개. 카테고리와 중복 가능. 소문자 kebab-case (`design-tokens`, `radix-ui` 등).
 - `draft: true`로 작성 시작 → 검토 완료 후 `draft: false`로 변경.
+- `pubDate`: **배포 직전 `/blog-publish` Step 0에서 `date -u` 실행 후 출력값 그대로 기록.** 날짜만(`YYYY-MM-DD` 또는 `T00:00:00.000Z`) 넣는 것은 잘못된 값. 최초 설정 후 절대 수정 금지 — 수정·재배포 시에도 변경하지 않는다.
 
 ---
 
