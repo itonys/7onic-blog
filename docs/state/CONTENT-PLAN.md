@@ -115,6 +115,7 @@
 | AI-8 | llms.txt for Multiple Packages: No Cross-Contamination | tokens용 ≠ components용 |
 | AI-9 | AI Code Review: What It Catches, What It Misses | 실무 검증 결과 |
 | AI-10 | Designing Docs for AI Consumption | AI가 잘 읽는 문서 구조 |
+| 신규 | Approval-Based Doc Propagation: An AI-Human Workflow That Actually Works | "즉시 자동 전파" → "커밋 시점 승인 기반 일괄 전파" 모델로 뒤집은 과정. 실험·반복 단계는 방해 없이 · 커밋 직전 AI가 git diff → A/B/C 카테고리 판별 → 전파 계획 보고 → 승인. 키워드 파싱 없이 AI가 명시 질문하는 방식이 왜 더 robust한지 |
 
 ---
 
@@ -155,6 +156,8 @@
 | 신규 | `npm ci` vs `npm install + --legacy-peer-deps`: The Hidden Supply Chain Risk | lock 파일 삭제가 왜 공급망 공격 방어력을 무너뜨리는지 — 실제 CVE 시나리오 + CI 전환 가이드 |
 | 신규 | Why My 1-Person Open Source Treats Security Like a Funded SaaS | 디자인 시스템이 유저 앱 핵심에 침투하는 특성 + SaaS 확장 염두 + AI 협업 일관성 — 보안 우선순위 철학 |
 | 신규 | Bundle Leak Detection: Verifying devDeps Don't Ship to Users | `dist/` grep으로 next/next-intl 참조 0건 검증 — 유저 영향 객관 증명하는 검증 스크립트 패턴 |
+| 신규 | Restructuring 71 Docs for AI-First Navigation | 평면 docs/를 rules/state/decisions/roadmap/guides 5 카테고리로 재구성 — AI 탐색 효율 측정 · 71 파일 이동 + 9 README 허브 · git mv 이력 보존 · sed 일괄 링크 치환 자동화 스크립트 3종 · 전수 검증 10/10 PASS |
+| 신규 | The Shared Rules Folder: One Source for Every New Project | `docs/rules/shared/`에 BACKEND-RULES·SAAS-SECURITY·PRODUCT-PHILOSOPHY·DOC-PROPAGATION-RULES를 모아 신규 프로젝트 시작 시 복사만으로 공통 품질 기준 주입 — 장기 `create-7onic-saas` CLI와 통합 계획 |
 
 ---
 
