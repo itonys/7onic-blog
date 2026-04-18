@@ -780,7 +780,7 @@ seriesOrder: 1      # 시리즈 순서
 ## 보안 / 법령 — 공통 프레임워크 참조
 
 > **본 섹션의 상세 내용은 ai-project 공통 참조 문서를 참고한다.**
-> `~/Documents/ai-project/docs/SAAS-SECURITY-COMPLIANCE.md`
+> `~/Documents/ai-project/docs/rules/shared/SAAS-SECURITY-COMPLIANCE.md`
 
 ### Blog SaaS에 적용되는 섹션
 

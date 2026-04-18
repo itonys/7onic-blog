@@ -179,5 +179,5 @@ frontmatter에서 `devto_tags` 없으면 자동 매핑. 있으면 우선.
 ## 관련 자산
 
 - `scripts/publish-post.ts` — 구현 대상 스크립트
-- `docs/roadmap/PUBLISH-SCRIPT-HARDENING-PLAN.md` — 스크립트 강화 로드맵 (Phase 1 완료 후 SEO 기능 통합)
-- `docs/roadmap/BLOG-SAAS-PLAN.md` — SaaS 버전 참조
+- `docs/roadmap/planned/PUBLISH-SCRIPT-HARDENING-PLAN.md` — 스크립트 강화 로드맵 (Phase 1 완료 후 SEO 기능 통합)
+- `docs/roadmap/planned/BLOG-SAAS-PLAN.md` — SaaS 버전 참조

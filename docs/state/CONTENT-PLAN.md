@@ -238,7 +238,7 @@
 
 | 페이지 | URL | 소스 | 상태 |
 |--------|-----|------|------|
-| Why 7onic | `/why` | `~/Documents/ai-project/docs/why-7onic.md` | ⬜ |
+| Why 7onic | `/why` | `~/Documents/ai-project/docs/guides/why-7onic.md` | ⬜ |
 
 > 헤더 nav에 About 다음으로 추가 예정.
 

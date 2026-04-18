@@ -9,7 +9,7 @@
 | # | 원칙 | 위반 시 |
 |---|------|--------|
 | 1 | **데이터 창작·과장·추측 금지** — 숫자·날짜·버전·사건·결정은 반드시 ai-project 문서에서 근거를 찾아 인용. "아마", "대략", "많은 사람이" 같은 모호한 표현 금지 | 초안 폐기, 근거 확보 후 재작성 |
-| 2 | **AI 냄새 제거** — `docs/CONTENT-RULES.md`의 Voice & Tone 섹션 12가지 금지 패턴 준수. 깔끔한 병렬 반복, "Here's the thing:", 균일한 문장 품질, 분산된 자기비하, 완벽한 결론 등은 즉시 AI 시그널 | 해당 문단 재작성 |
+| 2 | **AI 냄새 제거** — `docs/rules/CONTENT-RULES.md`의 Voice & Tone 섹션 12가지 금지 패턴 준수. 깔끔한 병렬 반복, "Here's the thing:", 균일한 문장 품질, 분산된 자기비하, 완벽한 결론 등은 즉시 AI 시그널 | 해당 문단 재작성 |
 | 3 | **설명형·광고형 금지** — 인디 개발자가 혼자 겪은 과정을 스토리로. 결과 나열·기능 설명·CTA 조합은 마케팅 카피 | 구조 재설계 |
 
 > 이 3원칙은 체크리스트(하단)에서 자기 검증하고 보고에 결과를 명시한다.
@@ -19,13 +19,13 @@
 ## 실행 순서
 
 1. **(필수) ai-project 결정 기록 Read** — 주제 관련 사실 확보:
-   - `~/Documents/ai-project/docs/decisions/DECISIONS-INDEX.md` — 아키텍처 결정 인덱스
-   - `~/Documents/ai-project/docs/COMPLETED-FEATURES-INDEX.md` — 무엇이 언제 구현됐는지
-   - `~/Documents/ai-project/docs/roadmap/DEPLOY-PLAN.md` — 배포 타임라인
-   - `~/Documents/ai-project/docs/TOKEN-EXCEPTIONS-INDEX.md` — 현실과 타협한 예외
+   - `~/Documents/ai-project/docs/decisions/README.md` — 아키텍처 결정 인덱스
+   - `~/Documents/ai-project/docs/state/COMPLETED-FEATURES-INDEX.md` — 무엇이 언제 구현됐는지
+   - `~/Documents/ai-project/docs/roadmap/active/DEPLOY-PLAN.md` — 배포 타임라인
+   - `~/Documents/ai-project/docs/state/TOKEN-EXCEPTIONS-INDEX.md` — 현실과 타협한 예외
    - `~/Documents/ai-project/CHANGELOG.md` + `cli/CHANGELOG.md` — 릴리즈 순서·날짜·이유
    - 주제에 해당하는 개별 결정 파일이 있다면 `~/Documents/ai-project/docs/decisions/*.md` Read
-2. **(필수) Voice & Tone 규칙 Read** — `docs/CONTENT-RULES.md`의 Voice & Tone 섹션 전체
+2. **(필수) Voice & Tone 규칙 Read** — `docs/rules/CONTENT-RULES.md`의 Voice & Tone 섹션 전체
 3. **(필수) 톤 레퍼런스 Read** — `src/content/blog/why-i-built-7onic.md` 1회. 이 포스트의 리듬·문장 길이 변주·괄호 속 사족·자기 의심 표현이 기준
 4. **주제 ↔ 결정 기록 교차 확인** — 유저가 제공한 키포인트가 문서에 실제로 있는지 검증. 없으면 유저에게 근거 요청, 추측으로 채우지 않는다
 5. **(필수 게이트) Hot take 한 줄 선언** — 하단 "Hot Take 선언" 섹션 참고. **유저 승인 전 본문 작성 금지**
@@ -120,7 +120,7 @@ Hot take 제안: "..."
 - **모델**: Opus 권장
 - **언어**: 영어. **네이티브가 쓴 것처럼** 읽혀야 함 — 번역투·교과서 영어 금지
 - **길이**: 1200~2000 단어 (주제에 따라 유연)
-- `docs/CONTENT-RULES.md` 전체 규칙 준수
+- `docs/rules/CONTENT-RULES.md` 전체 규칙 준수
 
 ---
 

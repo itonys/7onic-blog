@@ -41,7 +41,7 @@ npm run publish-post -- "[slug]"
 ### Step 3 — 완료 보고
 - `blog.7onic.design/[slug]` URL 안내
 - dev.to / Hashnode 게시 URL (교차 게시 시)
-- `docs/POST-INDEX.md` 업데이트 (제목·slug·날짜·dev.to/Hashnode ID 기록)
+- `docs/state/POST-INDEX.md` 업데이트 (제목·slug·날짜·dev.to/Hashnode ID 기록)
 
 ### Step 4 — 수동 공유 체크리스트 (유저에게 안내)
 
