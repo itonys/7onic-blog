@@ -12,7 +12,7 @@
 | **포스트 게시 (교차 배포)** | `state/POST-INDEX.md` | `roadmap/planned/SEO-CROSS-POSTING-PLAN.md` |
 | **새 페이지 추가** | `templates/PAGE-TEMPLATE.astro` 또는 `PAGE-TEMPLATE-LIST.astro` | `../CLAUDE.md` (페이지 레이아웃 규칙) |
 | **콘텐츠 기획** | `state/CONTENT-PLAN.md` (112편 계획) | — |
-| **블로그 SaaS 확장 논의** | `roadmap/planned/BLOG-SAAS-PLAN.md` | `~/Documents/ai-project/docs/roadmap/planned/PROJECT-SCAFFOLD-PLAN.md` |
+| **블로그 SaaS 확장 논의** | `roadmap/planned/BLOG-SAAS-PLAN.md` (ai-project Phase M-4 포트폴리오 2번째 후보) | `~/Documents/ai-project/docs/roadmap/planned/MICRO-SAAS-ENGINE-PLAN.md` (Phase M 우산) / `PROJECT-SCAFFOLD-PLAN.md` (Phase M-3 배포 레이어) |
 
 ---
 
@@ -52,3 +52,4 @@ Q. 종류는?
 ## 📜 변경 이력
 
 - **2026-04-18**: ai-project와 동일한 구조화 플랜 적용 — 10 파일 재배치, 카테고리 분리.
+- **2026-04-20**: ai-project Phase M 로드맵 재구조화 연계 — `PUBLISH-SCRIPT-HARDENING`은 Phase M-2 공통 lib 프로토타입, `BLOG-SAAS-PLAN`은 Phase M-4 포트폴리오 후보로 지정. 상세: ai-project `docs/decisions/ROADMAP-RESTRUCTURE-2026-04-20.md`.
