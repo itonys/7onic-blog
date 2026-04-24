@@ -25,11 +25,11 @@
 | 1 | Why I Built 7onic | ✅ 2026-04-16 |
 | 2 | The Token Pipeline: One JSON File → 11 Outputs | ✅ 2026-04-17 |
 | 3 | Copy-Paste vs npm Install: Why the CLI Copies Files | ✅ 2026-04-24 |
-| 4 | Using AI to Build a Design System | ⬜ |
-| 5 | Lessons from 42 Components | ⬜ |
+| 4 | Why I Chose Radix UI Over Building Primitives | ⬜ |
+| 5 | Using AI to Build a Design System | ⬜ |
 | 6 | How I Handle Dark Mode Without a Single Line of JS | ⬜ |
-| 7 | Why I Chose Radix UI Over Building Primitives | ⬜ |
-| 8 | CVA: The Pattern That Made Variants Manageable | ⬜ |
+| 7 | CVA: The Pattern That Made Variants Manageable | ⬜ |
+| 8 | Lessons from 42 Components | ⬜ |
 | 9 | Shipping a Design System Solo: The Honest Timeline | ⬜ |
 | 10 | What I'd Do Differently If I Started Over | ⬜ |
 
@@ -151,7 +151,7 @@
 | R-9 | 0.x Semver: MINOR = Breaking, PATCH = Features | Radix/Tailwind와 동일한 비표준 semver |
 | R-10 | Dynamic OG Images with Satori + Sharp in Astro | 빌드타임 OG 이미지 자동 생성 — 10팔레트 해시 + 은하수 배경 |
 | R-11 | Google Favicon Jagged Edges: The Pre-Rounded Trap | 둥근 아이콘을 구글이 또 클리핑 → 울퉁불퉁 — 정사각형으로 해결 |
-| 신규 | Axios Attack Day: 4-Hour Supply Chain Hardening as an Indie | 2026-04-17 axios 해킹 뉴스 받은 당일 전면 감사: npm ci + provenance + audit CI 강제 + ADR까지 — 인디 1인 유지보수 관점의 실제 대응 스토리 |
+| 신규 | Axios Attack Day: 4-Hour Supply Chain Hardening as an Indie | axios 공급망 공격 2026-03-30 → 18일 후 2026-04-17 뒤늦게 대응: npm ci + provenance + audit CI 강제 + 직접 쓴 ADR 셀프 번복 — 인디 1인 유지보수 관점의 실제 대응 스토리 |
 | 신규 | npm Provenance Signing for Indie Libraries | OIDC + Sigstore로 "이 패키지는 이 GitHub 커밋에서 빌드됨" 증명. axios류 계정 탈취 공격 방어 원리 + workflow 설정 튜토리얼 |
 | 신규 | `npm ci` vs `npm install + --legacy-peer-deps`: The Hidden Supply Chain Risk | lock 파일 삭제가 왜 공급망 공격 방어력을 무너뜨리는지 — 실제 CVE 시나리오 + CI 전환 가이드 |
 | 신규 | Why My 1-Person Open Source Treats Security Like a Funded SaaS | 디자인 시스템이 유저 앱 핵심에 침투하는 특성 + SaaS 확장 염두 + AI 협업 일관성 — 보안 우선순위 철학 |
@@ -221,13 +221,13 @@
 #1  ✅ Why I Built 7onic
 #2  ✅ Token Pipeline: One JSON → 11 Outputs        (Design to Code #2)
 #3  ✅ Solo Building: What Nobody Tells You          (Solo Builder #1, 감성)
-#4     Copy-Paste vs npm Install                     (Design to Code #3)
-#5     Tailwind v4 Migration: What Actually Changed  (SEO 강함)
-#6     Using AI to Build a Design System             (Design to Code #4)
+#4  ✅ Copy-Paste vs npm Install                     (Design to Code #3)
+#5  ✅ Tailwind v4 Migration: What Actually Changed  (SEO 강함)
+#6     Why I Chose Radix UI                          (Design to Code #4)
 #7     RGB Channels for Opacity Modifiers            (Token Deep Dive #2)
 #8     Button at 5 Sizes                             (Component #1)
 #9     Public Repo Sync Incident: 321 Files Deleted  (Build & Release #5, 극적)
-#10    Why I Chose Radix UI                          (Design to Code #7)
+#10    Using AI to Build a Design System             (Design to Code #5)
 ...
 ```
 
