@@ -1,6 +1,8 @@
 ---
 title: 'Design to Code #4: Why I Chose Radix Over Custom Primitives'
-description: 'I tried to build a dialog focus trap from scratch. Got it wrong in an afternoon. Here is what Radix actually handles — and what it still gets wrong.'
+description: >-
+  I tried to build a dialog focus trap from scratch. Got it wrong in an
+  afternoon. Here is what Radix actually handles — and what it still gets wrong.
 pubDate: '2026-04-24T13:25:14.000Z'
 category: design-system
 tags:
@@ -11,6 +13,8 @@ tags:
 series: design-to-code
 seriesOrder: 4
 draft: false
+devtoId: '3546424'
+hashnodeId: 69eb717bc16ce5534f45978a
 ---
 
 I spent an entire afternoon trying to write a focus trap from scratch.

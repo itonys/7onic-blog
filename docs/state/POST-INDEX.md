@@ -9,6 +9,7 @@
 | 3 | `tailwind-v4-migration-what-actually-changed` | Tailwind Guides #1: What Actually Broke Migrating to v4 | ✅ | ✅ [#485o](https://dev.to/7onic/tailwind-guides-1-what-actually-broke-migrating-to-v4-485o) | ✅ [tailwind-guides-1](https://7onic.hashnode.dev/tailwind-guides-1-what-actually-broke-migrating-to-v4) | 2026-04-17T12:00 |
 | 4 | `solo-building-what-nobody-tells-you` | Solo Builder #1: What Nobody Tells You | ✅ | ✅ [#3513517](https://dev.to/7onic/solo-builder-1-what-nobody-tells-you-59e1) | ✅ [69e1ba74](https://7onic.hashnode.dev/solo-builder-1-what-nobody-tells-you) | 2026-04-17T09:00 |
 | 5 | `copy-paste-vs-npm-install` | Design to Code #3: Copy-Paste vs npm Install | ✅ | ✅ [#3545926](https://dev.to/7onic/design-to-code-3-copy-paste-vs-npm-install-2ai5) | ✅ [69eb54f6](https://7onic.hashnode.dev/design-to-code-3-copy-paste-vs-npm-install) | 2026-04-24T11:31 |
+| 6 | `why-i-chose-radix-ui` | Design to Code #4: Why I Chose Radix Over Custom Primitives | ✅ | ✅ [#3546424](https://dev.to/7onic/design-to-code-4-why-i-chose-radix-over-custom-primitives-50eo) | ✅ [69eb717b](https://7onic.hashnode.dev/design-to-code-4-why-i-chose-radix-over-custom-primitives) | 2026-04-24T13:25 |
 
 ---
 
@@ -21,6 +22,7 @@
 | #1 | `why-i-built-7onic` | Why I Built 7onic | ✅ Published |
 | #2 | `token-pipeline-one-json-11-outputs` | One JSON, Eleven Outputs | ✅ Published |
 | #3 | `copy-paste-vs-npm-install` | Copy-Paste vs npm Install | ✅ Published |
+| #4 | `why-i-chose-radix-ui` | Why I Chose Radix Over Custom Primitives | ✅ Published |
 
 ### Tailwind Guides — Practical Tailwind CSS tips from building a design system
 
