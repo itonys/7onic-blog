@@ -24,7 +24,7 @@
 |---|------|------|
 | 1 | Why I Built 7onic | ✅ 2026-04-16 |
 | 2 | The Token Pipeline: One JSON File → 11 Outputs | ✅ 2026-04-17 |
-| 3 | Copy-Paste vs npm Install: Why the CLI Copies Files | ⬜ |
+| 3 | Copy-Paste vs npm Install: Why the CLI Copies Files | ✅ 2026-04-24 |
 | 4 | Using AI to Build a Design System | ⬜ |
 | 5 | Lessons from 42 Components | ⬜ |
 | 6 | How I Handle Dark Mode Without a Single Line of JS | ⬜ |

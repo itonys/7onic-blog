@@ -8,6 +8,7 @@
 | 2 | `token-pipeline-one-json-11-outputs` | Design to Code #2: One JSON, Eleven Outputs | ✅ | ✅ [#3513177](https://dev.to/7onic/design-to-code-2-one-json-eleven-outputs-5443) | ✅ [69e192f9](https://7onic.hashnode.dev/design-to-code-2-one-json-eleven-outputs) | 2026-04-17T06:00 |
 | 3 | `tailwind-v4-migration-what-actually-changed` | Tailwind Guides #1: What Actually Broke Migrating to v4 | ✅ | ✅ [#485o](https://dev.to/7onic/tailwind-guides-1-what-actually-broke-migrating-to-v4-485o) | ✅ [tailwind-guides-1](https://7onic.hashnode.dev/tailwind-guides-1-what-actually-broke-migrating-to-v4) | 2026-04-17T12:00 |
 | 4 | `solo-building-what-nobody-tells-you` | Solo Builder #1: What Nobody Tells You | ✅ | ✅ [#3513517](https://dev.to/7onic/solo-builder-1-what-nobody-tells-you-59e1) | ✅ [69e1ba74](https://7onic.hashnode.dev/solo-builder-1-what-nobody-tells-you) | 2026-04-17T09:00 |
+| 5 | `copy-paste-vs-npm-install` | Design to Code #3: Copy-Paste vs npm Install | ✅ | ✅ [#3545926](https://dev.to/7onic/design-to-code-3-copy-paste-vs-npm-install-2ai5) | ✅ [69eb54f6](https://7onic.hashnode.dev/design-to-code-3-copy-paste-vs-npm-install) | 2026-04-24T11:31 |
 
 ---
 
@@ -19,7 +20,7 @@
 |-------|------|-------|------|
 | #1 | `why-i-built-7onic` | Why I Built 7onic | ✅ Published |
 | #2 | `token-pipeline-one-json-11-outputs` | One JSON, Eleven Outputs | ✅ Published |
-| #3 | `copy-paste-vs-npm-install` | (예정) Copy-Paste vs npm Install | ⬜ |
+| #3 | `copy-paste-vs-npm-install` | Copy-Paste vs npm Install | ✅ Published |
 
 ### Tailwind Guides — Practical Tailwind CSS tips from building a design system
 
