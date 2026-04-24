@@ -1,5 +1,5 @@
 ---
-title: "Design to Code #3: Copy-Paste vs npm Install"
+title: 'Design to Code #3: Copy-Paste vs npm Install'
 description: >-
   Five days after publishing @7onic-ui/react@0.1.0, I started building a CLI
   that copies files instead. The npm package still ships. Here's the trade-off.
@@ -13,6 +13,8 @@ tags:
 series: design-to-code
 seriesOrder: 3
 draft: false
+devtoId: '3545926'
+hashnodeId: 69eb54f6d2ce9abe7de7043b
 ---
 
 The first thing I did after publishing `@7onic-ui/react@0.1.0` was install it in a test project.
