@@ -16,7 +16,7 @@
 
 ---
 
-## Series 1 — Design to Code (10편)
+## Series 1 — Design to Code (12편)
 
 > 7onic 시스템을 만든 결정들 — 마케팅 버전이 아닌 실제 reasoning
 
@@ -32,10 +32,12 @@
 | 8 | Lessons from 42 Components | ⬜ |
 | 9 | Shipping a Design System Solo: The Honest Timeline | ⬜ |
 | 10 | What I'd Do Differently If I Started Over | ⬜ |
+| 11 | Single Entry Point Philosophy: Why I Don't Do Subpath Imports | `@7onic-ui/react/card` 같은 서브패스 import 대신 루트 import 단일 유지. Card 페이지의 generateCode가 미존재 서브패스를 출력해서 유저가 복사하면 에러 발생한 사고 → 단일 엔트리 결정. 대신 chart 만 예외로 분리한 이유 (recharts 무거움). 출처: NO-SUBPATH-EXPORTS |
+| 12 | Tailwind-Only Components, Tokens for Everyone Else | 컴포넌트는 Tailwind 전용 / 디자인 토큰은 CSS 변수로 누구나 / CSS-only 컴포넌트는 작성 안 함. 배포 표면 좁히기 = 유지보수 복잡도 통제 + 유저 향한 단일 진입경로. 출처: DISTRIBUTION-STRATEGY |
 
 ---
 
-## Series 2 — Token Deep Dive (11편)
+## Series 2 — Token Deep Dive (12편)
 
 > 디자인 토큰 파이프라인 — 실제 구현에서 나온 기술 심화
 
@@ -52,6 +54,7 @@
 | T-9 | @theme inline vs @theme: The Dark Mode Breaker | v4 특유의 조용한 버그 |
 | T-10 | Breaking Change Detection + Deprecated Aliases | 토큰 마이그레이션 안전망 |
 | T-11 | Foreground Alias Generation: Bridging Figma and shadcn Naming | -text → -foreground 자동 변환 |
+| T-12 | The --color-foreground Trap: Why Tailwind v4 Internal Aliases Aren't for Raw CSS | 9개 *-foreground alias 는 Tailwind v4 의 text-*-foreground 클래스 생성용 *내부* 부산물 (shadcn 동일 패턴). raw CSS / arbitrary value / 코드 예제에 직접 노출 시 v3·standalone·no-Tailwind 환경에서 IACVT → light 모드 텍스트 불가시. distributed CSS 변수 선택 시 "어떤 import 조합에서도 정의 보장되는가" 가 유일 기준. Figma SSOT 직참조 (--color-text) 가 안전한 선택 |
 
 ---
 
@@ -84,7 +87,7 @@
 
 ---
 
-## Series 4 — Tailwind Guides (10편)
+## Series 4 — Tailwind Guides (11편)
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
@@ -98,10 +101,11 @@
 | TW-8 | When to Use Tailwind vs When to Write CSS | 실제 기준 |
 | TW-9 | Tailwind Plugin Development: A Practical Guide | 커스텀 플러그인 작성법 |
 | TW-10 | Locale-Aware Font Size: 14px for EN, 13px for CJK | :lang() 셀렉터 + CSS 변수 오버라이드 |
+| TW-11 | Framework Coexistence: Living with Next.js and Vite Defaults | Next.js create-next-app 의 unlayered `body { font-family: Arial }` + Vite 의 `:root { font-family: system-ui }` + `body { display: flex; place-items: center; min-width: 320px }` 보일러플레이트가 디자인 시스템을 덮는 문제. 해결책: `html body` 셀렉터(0,0,2 > 0,0,1) 로 cascade 우위 + Vite CLI 자동 cleanup. 두 프레임워크 디폴트와 *공존* 하는 설계 철학. 출처: NEXTJS-FRAMEWORK-COMPAT-STRATEGY |
 
 ---
 
-## Series 5 — AI + Design (10편)
+## Series 5 — AI + Design (12편)
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
@@ -115,7 +119,8 @@
 | AI-8 | llms.txt for Multiple Packages: No Cross-Contamination | tokens용 ≠ components용 |
 | AI-9 | AI Code Review: What It Catches, What It Misses | 실무 검증 결과 |
 | AI-10 | Designing Docs for AI Consumption | AI가 잘 읽는 문서 구조 |
-| 신규 | Approval-Based Doc Propagation: An AI-Human Workflow That Actually Works | "즉시 자동 전파" → "커밋 시점 승인 기반 일괄 전파" 모델로 뒤집은 과정. 실험·반복 단계는 방해 없이 · 커밋 직전 AI가 git diff → A/B/C 카테고리 판별 → 전파 계획 보고 → 승인. 키워드 파싱 없이 AI가 명시 질문하는 방식이 왜 더 robust한지 |
+| AI-11 | Approval-Based Doc Propagation: An AI-Human Workflow That Actually Works | "즉시 자동 전파" → "커밋 시점 승인 기반 일괄 전파" 모델로 뒤집은 과정. 실험·반복 단계는 방해 없이 · 커밋 직전 AI가 git diff → A/B/C 카테고리 판별 → 전파 계획 보고 → 승인. 키워드 파싱 없이 AI가 명시 질문하는 방식이 왜 더 robust한지 |
+| AI-12 | v0.3.0 Postmortem: When AI False Reports Compound | 하루 동안 거짓 "100%/전수 검증 완료" 보고 3건 → 수정 사이클 10+회 → 재발 방지 배치(훅 3개 + /100-percent-verify 스킬 + CLAUDE.md §4/§5 + 메모리 3건 + Playwright live-audit CI). 인디 솔로 빌더가 AI 협업의 신뢰성 문제를 절차·기술 양면으로 차단한 실제 사례. 출처: RELEASE-V0.3.0-POSTMORTEM |
 
 ---
 
@@ -136,7 +141,7 @@
 
 ---
 
-## Series 7 — Build & Release (9편)
+## Series 7 — Build & Release (21편)
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
@@ -151,17 +156,20 @@
 | R-9 | 0.x Semver: MINOR = Breaking, PATCH = Features | Radix/Tailwind와 동일한 비표준 semver |
 | R-10 | Dynamic OG Images with Satori + Sharp in Astro | 빌드타임 OG 이미지 자동 생성 — 10팔레트 해시 + 은하수 배경 |
 | R-11 | Google Favicon Jagged Edges: The Pre-Rounded Trap | 둥근 아이콘을 구글이 또 클리핑 → 울퉁불퉁 — 정사각형으로 해결 |
-| 신규 | Axios Attack Day: 4-Hour Supply Chain Hardening as an Indie | axios 공급망 공격 2026-03-30 → 18일 후 2026-04-17 뒤늦게 대응: npm ci + provenance + audit CI 강제 + 직접 쓴 ADR 셀프 번복 — 인디 1인 유지보수 관점의 실제 대응 스토리 |
-| 신규 | npm Provenance Signing for Indie Libraries | OIDC + Sigstore로 "이 패키지는 이 GitHub 커밋에서 빌드됨" 증명. axios류 계정 탈취 공격 방어 원리 + workflow 설정 튜토리얼 |
-| 신규 | `npm ci` vs `npm install + --legacy-peer-deps`: The Hidden Supply Chain Risk | lock 파일 삭제가 왜 공급망 공격 방어력을 무너뜨리는지 — 실제 CVE 시나리오 + CI 전환 가이드 |
-| 신규 | Why My 1-Person Open Source Treats Security Like a Funded SaaS | 디자인 시스템이 유저 앱 핵심에 침투하는 특성 + SaaS 확장 염두 + AI 협업 일관성 — 보안 우선순위 철학 |
-| 신규 | Bundle Leak Detection: Verifying devDeps Don't Ship to Users | `dist/` grep으로 next/next-intl 참조 0건 검증 — 유저 영향 객관 증명하는 검증 스크립트 패턴 |
-| 신규 | Restructuring 71 Docs for AI-First Navigation | 평면 docs/를 rules/state/decisions/roadmap/guides 5 카테고리로 재구성 — AI 탐색 효율 측정 · 71 파일 이동 + 9 README 허브 · git mv 이력 보존 · sed 일괄 링크 치환 자동화 스크립트 3종 · 전수 검증 10/10 PASS |
-| 신규 | The Shared Rules Folder: One Source for Every New Project | `docs/rules/shared/`에 BACKEND-RULES·SAAS-SECURITY·PRODUCT-PHILOSOPHY·DOC-PROPAGATION-RULES를 모아 신규 프로젝트 시작 시 복사만으로 공통 품질 기준 주입 — 장기 `create-7onic-saas` CLI와 통합 계획 |
+| R-12 | Axios Attack Day: 4-Hour Supply Chain Hardening as an Indie | axios 공급망 공격 2026-03-30 → 18일 후 2026-04-17 뒤늦게 대응: npm ci + provenance + audit CI 강제 + 직접 쓴 ADR 셀프 번복 — 인디 1인 유지보수 관점의 실제 대응 스토리 |
+| R-13 | npm Provenance Signing for Indie Libraries | OIDC + Sigstore로 "이 패키지는 이 GitHub 커밋에서 빌드됨" 증명. axios류 계정 탈취 공격 방어 원리 + workflow 설정 튜토리얼 |
+| R-14 | `npm ci` vs `npm install + --legacy-peer-deps`: The Hidden Supply Chain Risk | lock 파일 삭제가 왜 공급망 공격 방어력을 무너뜨리는지 — 실제 CVE 시나리오 + CI 전환 가이드 |
+| R-15 | Why My 1-Person Open Source Treats Security Like a Funded SaaS | 디자인 시스템이 유저 앱 핵심에 침투하는 특성 + SaaS 확장 염두 + AI 협업 일관성 — 보안 우선순위 철학 |
+| R-16 | Bundle Leak Detection: Verifying devDeps Don't Ship to Users | `dist/` grep으로 next/next-intl 참조 0건 검증 — 유저 영향 객관 증명하는 검증 스크립트 패턴 |
+| R-17 | Restructuring 71 Docs for AI-First Navigation | 평면 docs/를 rules/state/decisions/roadmap/guides 5 카테고리로 재구성 — AI 탐색 효율 측정 · 71 파일 이동 + 9 README 허브 · git mv 이력 보존 · sed 일괄 링크 치환 자동화 스크립트 3종 · 전수 검증 10/10 PASS |
+| R-18 | The Shared Rules Folder: One Source for Every New Project | `docs/rules/shared/`에 BACKEND-RULES·SAAS-SECURITY·PRODUCT-PHILOSOPHY·DOC-PROPAGATION-RULES를 모아 신규 프로젝트 시작 시 복사만으로 공통 품질 기준 주입 — 장기 `create-7onic-saas` CLI와 통합 계획 |
+| R-19 | Body Baseline Color: 5 Patches Across 5 Days | v0.3.1 (circular ref @theme inline) → v0.3.2 (Approach Z single-direction chain) → v0.3.4 (alias 우회) → v0.3.5 (Figma 직참조 정석화). 각 단계가 왜 부분 해결이었는지 — IACVT / cascade specificity / standalone import 의존성을 단계별로 발견한 실제 디버깅 로그. 인디 1인 release postmortem 관점. 출처: FOREGROUND-ALIAS + V0.3.1~v0.3.5 |
+| R-20 | Reversing a Major Decision: Namespace Exports → Named-Only | v0.2.x 시기 22 개 compound 컴포넌트에 Object.assign namespace 패턴 도입 → v0.3.0 에서 Named export 단일로 뒤집음. Next.js Client Manifest 제약·forwardRef 호환성·외부 사용자 mental model 단순화의 trade-off. ADR 셀프 번복 사례. 출처: NAMESPACE-COMPOUND-EXPORT (Superseded) + NAMED-PRIMARY-MIGRATION |
+| R-21 | Permanent 4-Framework Test Showcase: One Script, Always Ready | 매 릴리즈마다 Next.js × Vite × TW v3 × TW v4 4 환경을 수동 재생성하던 루틴을 레포 내 영구 템플릿 + 스크립트 1 개로 대체. 버전 하드코딩 제거 → package.json 자동 주입. 인디 1 인이 정합성 유지하는 실용 인프라 패턴. 출처: USER-TEST-SHOWCASE-INFRA |
 
 ---
 
-## Series 8 — Solo Builder (12편)
+## Series 8 — Solo Builder (15편)
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
@@ -177,9 +185,9 @@
 | SB-10 | Revenue, Users, Expectations: First Year | 솔직한 수치 공개 |
 | SB-11 | Why I Write About What I Build | 블로그가 마케팅인 이유 |
 | SB-12 | What I Wish I'd Known Before Starting | 회고 |
-| SB-신규 | My Experience Is the Product | **"내 경험 = 제품" 철학.** 7onic → 블로그 → Blog SaaS 플라이휠 흐름 공개. 각 단계가 이전 단계의 자산을 활용하는 구조. Stripe/Notion/Linear도 같은 패턴으로 시작. 인디 해커가 실패하는 이유는 "남의 문제"부터 풀려고 해서. |
-| SB-신규 | Why I Built Blog SaaS: It Started as My Own Pain | **블로그 교차게시가 귀찮아서 만든 자동화 스크립트가 SaaS가 된 과정.** 처음에는 7onic 홍보용 블로그였고, 수동 복붙에 지쳐서 스크립트 만들고, "나만 이런가?" 싶어서 SaaS로 확장. 진짜 유저 리서치는 본인이 쓰면서 하는 것. |
-| SB-신규 | The Indie Hacker's 4-Question Filter for New Ideas | **새 서비스 아이디어 검증 체크리스트:** ① 내가 한 달에 최소 1번 불편한가 ② 지금 수동/비효율적인가 ③ 나 같은 사람이 더 있는가 ④ 기존 자산으로 만들 수 있는가. 4개 다 YES여야 착수. |
+| SB-13 | My Experience Is the Product | **"내 경험 = 제품" 철학.** 7onic → 블로그 → Blog SaaS 플라이휠 흐름 공개. 각 단계가 이전 단계의 자산을 활용하는 구조. Stripe/Notion/Linear도 같은 패턴으로 시작. 인디 해커가 실패하는 이유는 "남의 문제"부터 풀려고 해서. |
+| SB-14 | Why I Built Blog SaaS: It Started as My Own Pain | **블로그 교차게시가 귀찮아서 만든 자동화 스크립트가 SaaS가 된 과정.** 처음에는 7onic 홍보용 블로그였고, 수동 복붙에 지쳐서 스크립트 만들고, "나만 이런가?" 싶어서 SaaS로 확장. 진짜 유저 리서치는 본인이 쓰면서 하는 것. |
+| SB-15 | The Indie Hacker's 4-Question Filter for New Ideas | **새 서비스 아이디어 검증 체크리스트:** ① 내가 한 달에 최소 1번 불편한가 ② 지금 수동/비효율적인가 ③ 나 같은 사람이 더 있는가 ④ 기존 자산으로 만들 수 있는가. 4개 다 YES여야 착수. |
 
 ---
 
@@ -201,17 +209,16 @@
 
 | 시리즈 | 편수 |
 |---|---|
-| Design to Code | 10 |
-| Token Deep Dive | 11 |
+| Design to Code | 12 |
+| Token Deep Dive | 12 |
 | Component Anatomy | 20 |
-| Tailwind Guides | 10 |
-| AI + Design | 10 |
+| Tailwind Guides | 11 |
+| AI + Design | 12 |
 | CLI & Tooling | 10 |
-| Build & Release | 11 |
-| Solo Builder | 12 |
+| Build & Release | 21 |
+| Solo Builder | 15 |
 | Accessibility | 7 |
-| 트렌드 스탠드얼론 | 11 |
-| **합계** | **112편** |
+| **합계** | **120편** |
 
 ---
 
