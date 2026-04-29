@@ -124,7 +124,7 @@
 
 ---
 
-## Series 6 — CLI & Tooling (10편)
+## Series 6 — CLI & Tooling (13편)
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
@@ -138,10 +138,13 @@
 | CLI-8 | Smoke Testing 3 Environments Before Release | Next.js + Vite v3 + Vite v4 자동 검증 |
 | CLI-9 | Error Messages That Actually Help | 좋은 CLI 에러 메시지 설계 |
 | CLI-10 | Schema-Driven Config: JSON Schema for IDE Autocomplete | 7onic.json 스키마 제공 |
+| CLI-11 | Framework Detection First: Abort Before Config Changes | shadcn 패턴 — Next.js/Vite/TS/Tailwind 감지 실패 시 설정 변경 없이 EXIT. 에러 메시지 + install 페이지 링크. CLI 신뢰성의 핵심 |
+| CLI-12 | Removing a Dependency You Thought Was Needed | lucide-react baseDeps 제거 결정 — 라이브러리 자체는 인라인 SVG 사용. 유저에게 "설치하지 않음" 을 명시하는 llms.txt 전략 포함 |
+| CLI-13 | Surgical CSS Cleanup with .bak Safety Net | Vite boilerplate CSS 자동 정리 — regex 블록 탐지 + `.bak` 백업 + 알림 only (Y/n 제거로 zero-friction). 같은 패턴으로 Next.js `*` reset `@layer base` wrap |
 
 ---
 
-## Series 7 — Build & Release (21편)
+## Series 7 — Build & Release (23편)
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
@@ -166,6 +169,8 @@
 | R-19 | Body Baseline Color: 5 Patches Across 5 Days | v0.3.1 (circular ref @theme inline) → v0.3.2 (Approach Z single-direction chain) → v0.3.4 (alias 우회) → v0.3.5 (Figma 직참조 정석화). 각 단계가 왜 부분 해결이었는지 — IACVT / cascade specificity / standalone import 의존성을 단계별로 발견한 실제 디버깅 로그. 인디 1인 release postmortem 관점. 출처: FOREGROUND-ALIAS + V0.3.1~v0.3.5 |
 | R-20 | Reversing a Major Decision: Namespace Exports → Named-Only | v0.2.x 시기 22 개 compound 컴포넌트에 Object.assign namespace 패턴 도입 → v0.3.0 에서 Named export 단일로 뒤집음. Next.js Client Manifest 제약·forwardRef 호환성·외부 사용자 mental model 단순화의 trade-off. ADR 셀프 번복 사례. 출처: NAMESPACE-COMPOUND-EXPORT (Superseded) + NAMED-PRIMARY-MIGRATION |
 | R-21 | Permanent 4-Framework Test Showcase: One Script, Always Ready | 매 릴리즈마다 Next.js × Vite × TW v3 × TW v4 4 환경을 수동 재생성하던 루틴을 레포 내 영구 템플릿 + 스크립트 1 개로 대체. 버전 하드코딩 제거 → package.json 자동 주입. 인디 1 인이 정합성 유지하는 실용 인프라 패턴. 출처: USER-TEST-SHOWCASE-INFRA |
+| R-22 | The Missing postcss.config.mjs: When Your Test Templates Lie | user-test 인프라가 `create-next-app --tailwind` 직접 호출 → 미리 만든 templates/ 복사로 전환되면서 `postcss.config.mjs` 한 파일이 누락된 회귀. utility class 0건 emit 증상으로 발견. Tailwind 표준 셋업 결과물을 수동으로 복제할 때의 함정 — page ↔ templates ↔ user 환경의 1:1 정합성 원칙. 페이지 자체 완결화(외부 Get Tailwind 링크 제거 + framework × 버전 4조합 풀 가이드)로 page와 templates가 같은 명세를 보유하도록 동기 정리. 출처: INSTALLATION-PAGE-SELF-CONTAINED |
+| R-23 | One Month of Wrong Install Docs: Verifying What Verify Doesn't | Installation 페이지의 셋업 코드 안내가 i18n 화 시점부터 한 달 이상 결함(filename `src/app/` 가정 ↔ `@source` 경로 default 가정 불일치 / Vite+v3 `module.exports` 가 Vite 6+ ESM 환경 미호환) 보유한 채 v0.3.0~v0.3.5 모든 릴리즈 외부 노출. 기존 release verify(`verify-publish`/`verify-components`/`verify-llms-examples`/`verify-i18n`)가 패키지·번들 무결성만 검증하고 페이지 셋업 코드 정확성은 검증 범위 밖이었음. user-test 인프라가 templates 복사 방식이라 페이지 명세를 우회 검증. 외부 보고 0건이지만 다운로드 카운트 수백 건 — 사용자 발견 못 한 채 묻혔을 가능성. 재발 방지: Layer 1(페이지 ↔ templates 1:1 자동 비교) + Layer 2(빈 환경 4 종에 페이지 step 자동 적용 + 빌드 + utility class emit 검증)의 2단계 검증 시스템 도입. AI 가 추측 단정으로 잘못된 분석 반복한 사례까지 포함된 인디 1인 운영 postmortem. 출처: INSTALLATION-PAGE-SETUP-VERIFICATION-GAP |
 
 ---
 
@@ -214,11 +219,11 @@
 | Component Anatomy | 20 |
 | Tailwind Guides | 11 |
 | AI + Design | 12 |
-| CLI & Tooling | 10 |
-| Build & Release | 21 |
+| CLI & Tooling | 13 |
+| Build & Release | 23 |
 | Solo Builder | 15 |
 | Accessibility | 7 |
-| **합계** | **120편** |
+| **합계** | **125편** |
 
 ---
 
