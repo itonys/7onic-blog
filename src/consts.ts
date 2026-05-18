@@ -44,6 +44,11 @@ export const SERIES = [
     label: 'Token Deep Dive',
     description: 'The engineering decisions behind a design token pipeline',
   },
+  {
+    id: 'component-anatomy',
+    label: 'Component Anatomy',
+    description: 'The design decisions behind each component in 7onic',
+  },
 ] as const;
 
 export type SeriesId = (typeof SERIES)[number]['id'];
