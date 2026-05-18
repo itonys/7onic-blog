@@ -13,6 +13,7 @@
 | 7 | `rgb-channels-for-tailwind-opacity-modifiers` | Token Deep Dive #1: The /50 That Did Nothing | ✅ | ✅ [#3a3e](https://dev.to/7onic/token-deep-dive-2-the-50-that-did-nothing-3a3e) | ❌ API 유료화 | 2026-05-18 |
 | 8 | `button-five-sizes` | Component Anatomy #1: Perfect on Paper, Wrong in Production | ✅ | ✅ [#1ekp](https://dev.to/7onic/component-anatomy-1-perfect-on-paper-wrong-in-production-1ekp) | ❌ API 유료화 | 2026-05-18 |
 | 9 | `public-repo-sync-incident` | Build & Release #1: How Apple's rsync Update Nuked My Repo | ✅ | ✅ [#37e9](https://dev.to/7onic/build-release-5-how-apples-rsync-update-nuked-my-repo-37e9) | ❌ API 유료화 | 2026-05-18 |
+| 10 | `body-baseline-color-five-patches` | Build & Release #2: Five Patches for One Line of CSS | ✅ | ✅ [#1552](https://dev.to/7onic/build-release-2-five-patches-for-one-line-of-css-1552) | ❌ API 유료화 | 2026-05-18 |
 
 ---
 
@@ -59,6 +60,7 @@
 | Order | Slug | Title | 상태 |
 |-------|------|-------|------|
 | #1 | `public-repo-sync-incident` | How Apple's rsync Update Nuked My Repo | ✅ Published |
+| #2 | `body-baseline-color-five-patches` | Five Patches for One Line of CSS | ✅ Published |
 
 ---
 
