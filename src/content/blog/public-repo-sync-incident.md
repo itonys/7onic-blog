@@ -1,5 +1,5 @@
 ---
-title: "Build & Release #5: How Apple's rsync Update Nuked My Repo"
+title: "Build & Release #1: How Apple's rsync Update Nuked My Repo"
 description: >-
   A macOS update silently swapped rsync. My public repo's git history vanished.
   My first fix made it worse. Then I merged a bad commit without checking the
@@ -12,7 +12,7 @@ tags:
   - open-source
   - rsync
 series: build-and-release
-seriesOrder: 5
+seriesOrder: 1
 draft: false
 ---
 

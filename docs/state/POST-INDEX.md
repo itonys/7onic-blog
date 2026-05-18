@@ -10,6 +10,9 @@
 | 4 | `solo-building-what-nobody-tells-you` | Solo Builder #1: What Nobody Tells You | ✅ | ✅ [#3513517](https://dev.to/7onic/solo-builder-1-what-nobody-tells-you-59e1) | ✅ [69e1ba74](https://7onic.hashnode.dev/solo-builder-1-what-nobody-tells-you) | 2026-04-17T09:00 |
 | 5 | `copy-paste-vs-npm-install` | Design to Code #3: Copy-Paste vs npm Install | ✅ | ✅ [#3545926](https://dev.to/7onic/design-to-code-3-copy-paste-vs-npm-install-2ai5) | ✅ [69eb54f6](https://7onic.hashnode.dev/design-to-code-3-copy-paste-vs-npm-install) | 2026-04-24T11:31 |
 | 6 | `why-i-chose-radix-ui` | Design to Code #4: Why I Chose Radix Over Custom Primitives | ✅ | ✅ [#3546424](https://dev.to/7onic/design-to-code-4-why-i-chose-radix-over-custom-primitives-50eo) | ✅ [69eb717b](https://7onic.hashnode.dev/design-to-code-4-why-i-chose-radix-over-custom-primitives) | 2026-04-24T13:25 |
+| 7 | `rgb-channels-for-tailwind-opacity-modifiers` | Token Deep Dive #1: The /50 That Did Nothing | ✅ | ✅ [#3a3e](https://dev.to/7onic/token-deep-dive-2-the-50-that-did-nothing-3a3e) | ❌ API 유료화 | 2026-05-18 |
+| 8 | `button-five-sizes` | Component Anatomy #1: Perfect on Paper, Wrong in Production | ✅ | ✅ [#1ekp](https://dev.to/7onic/component-anatomy-1-perfect-on-paper-wrong-in-production-1ekp) | ❌ API 유료화 | 2026-05-18 |
+| 9 | `public-repo-sync-incident` | Build & Release #1: How Apple's rsync Update Nuked My Repo | ✅ | ✅ [#37e9](https://dev.to/7onic/build-release-5-how-apples-rsync-update-nuked-my-repo-37e9) | ❌ API 유료화 | 2026-05-18 |
 
 ---
 
@@ -38,6 +41,25 @@
 | #1 | `solo-building-what-nobody-tells-you` | What Nobody Tells You | ✅ Published |
 | #2 | — | — | ⬜ |
 
+### Token Deep Dive — The engineering decisions behind a design token pipeline
+
+| Order | Slug | Title | 상태 |
+|-------|------|-------|------|
+| #1 | `rgb-channels-for-tailwind-opacity-modifiers` | The /50 That Did Nothing | ✅ Published |
+| #2 | — | 11 Distribution Files from One Source | ⬜ |
+
+### Component Anatomy — The design decisions behind each component in 7onic
+
+| Order | Slug | Title | 상태 |
+|-------|------|-------|------|
+| #1 | `button-five-sizes` | Perfect on Paper, Wrong in Production | ✅ Published |
+
+### Build & Release — The infrastructure and release decisions behind shipping 7onic
+
+| Order | Slug | Title | 상태 |
+|-------|------|-------|------|
+| #1 | `public-repo-sync-incident` | How Apple's rsync Update Nuked My Repo | ✅ Published |
+
 ---
 
 ## 교차 게시 메모
@@ -46,4 +68,5 @@
 - **dev.to**: CSS at-rule(`@theme`, `@source` 등) → zero-width space로 자동 이스케이프 (멘션 링크 방지)
 - **코드 펜스 `title="..."`** → dev.to/Hashnode 전송 시 자동 제거 (Astro/Shiki 전용 문법)
 - **Hashnode**: Publication ID `69e0badd94b913c913139dd4`
+- **Hashnode API 유료화**: 2026-05-13부터 GraphQL API 유료 전환 → 스크립트 자동 교차 게시 불가. 수동 게시 또는 유료 플랜 필요
 - **canonical**: 항상 `blog.7onic.design` 기준

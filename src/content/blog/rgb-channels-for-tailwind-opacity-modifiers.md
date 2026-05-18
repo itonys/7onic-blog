@@ -1,5 +1,5 @@
 ---
-title: 'Token Deep Dive #2: The /50 That Did Nothing'
+title: 'Token Deep Dive #1: The /50 That Did Nothing'
 description: >-
   I converted design tokens to CSS var() for cleaner SSOT. Every /50
   modifier stopped working. Tailwind v3 didn't warn me once.
@@ -13,7 +13,7 @@ tags:
   - tailwind-v3
   - token-pipeline
 series: token-deep-dive
-seriesOrder: 2
+seriesOrder: 1
 draft: false
 ---
 

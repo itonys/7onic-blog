@@ -25,7 +25,7 @@
 | 1 | Why I Built 7onic | ✅ 2026-04-16 |
 | 2 | The Token Pipeline: One JSON File → 11 Outputs | ✅ 2026-04-17 |
 | 3 | Copy-Paste vs npm Install: Why the CLI Copies Files | ✅ 2026-04-24 |
-| 4 | Why I Chose Radix UI Over Building Primitives | ⬜ |
+| 4 | Why I Chose Radix UI Over Building Primitives | ✅ 2026-04-24 |
 | 5 | Using AI to Build a Design System | ⬜ |
 | 6 | How I Handle Dark Mode Without a Single Line of JS | ⬜ |
 | 7 | CVA: The Pattern That Made Variants Manageable | ⬜ |
@@ -43,8 +43,8 @@
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
-| T-1 | 11 Distribution Files from One Source | CSS, v3, v4, JS, JSON, TS 동시 출력 전략 |
-| T-2 | RGB Channels for Tailwind Opacity Modifiers | /50 modifier가 CSS 변수에서 안 되는 이유 + 해결 |
+| T-1 | RGB Channels for Tailwind Opacity Modifiers | ✅ 2026-05-18 |
+| T-2 | 11 Distribution Files from One Source | CSS, v3, v4, JS, JSON, TS 동시 출력 전략 |
 | T-3 | Tailwind v3 + v4 from One Token File | 듀얼 지원 구현 — @theme vs preset config |
 | T-4 | Why Style Dictionary Didn't Work for Me | 실패한 3번의 시도 |
 | T-5 | Token Naming: When Figma Uses -default and Code Uses Nothing | 변환 레이어 설계 |
@@ -64,7 +64,7 @@
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
-| C-1 | Button at 5 Sizes: 28/32/36/40/48px Design Rationale | 사이즈 스케일 근거, xs=28(WCAG 최소 24px 초과) |
+| C-1 | Button at 5 Sizes: 28/32/36/40/48px Design Rationale | ✅ 2026-05-18 |
 | C-2 | The Compound Component Pattern with Namespace Exports | Object.assign + 하위 호환 named export 동시 유지 |
 | C-3 | Focus Rings with color-mix(): Derived Tokens at Runtime | CSS color-mix()로 20% opacity 포커스 링 |
 | C-4 | Avatar Color from djb2 Hash: Deterministic but Varied | 초성 해싱 → 12색 팔레트 결정론적 배정 |
@@ -152,7 +152,7 @@
 | R-2 | Pre-Publish: 8 Automated Checks Before npm publish | 배포 전 자동 검증 게이트 |
 | R-3 | Subpath Exports: The recharts Exception | /chart 서브패스만 허용한 이유 |
 | R-4 | Verifying recharts Not in Main Bundle | dist에서 의존성 오염 확인 |
-| R-5 | Public Repo Sync Incident: 321 Files Deleted | rsync .git 보호 3겹 장치 — 사고 포스트모템 |
+| R-5 | Public Repo Sync Incident: 321 Files Deleted | ✅ 2026-05-18 |
 | R-6 | TypeScript Emit Verification: dist/ Existence in CI | 조용히 실패하는 타입 빌드 |
 | R-7 | From `rm lock` to `npm ci`: Flipping My Own Decision | 첫 배포 전 닭-달걀 문제로 도입한 `rm -f lock && npm install --legacy-peer-deps`를 1개월 후 공급망 공격 대응으로 스스로 뒤집은 과정 — ADR 뒤집기 사례 |
 | R-8 | Breaking Change Migration Guides in CHANGELOG | 필수 before/after 코드 블록 정책 |
