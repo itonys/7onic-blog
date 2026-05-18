@@ -39,6 +39,11 @@ export const SERIES = [
     label: 'Tailwind Guides',
     description: 'Practical Tailwind CSS tips from building a design system',
   },
+  {
+    id: 'token-deep-dive',
+    label: 'Token Deep Dive',
+    description: 'The engineering decisions behind a design token pipeline',
+  },
 ] as const;
 
 export type SeriesId = (typeof SERIES)[number]['id'];
