@@ -49,6 +49,11 @@ export const SERIES = [
     label: 'Component Anatomy',
     description: 'The design decisions behind each component in 7onic',
   },
+  {
+    id: 'build-and-release',
+    label: 'Build & Release',
+    description: 'The infrastructure and release decisions behind shipping 7onic',
+  },
 ] as const;
 
 export type SeriesId = (typeof SERIES)[number]['id'];
