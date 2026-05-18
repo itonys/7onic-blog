@@ -110,7 +110,7 @@ I've added one final line to the end of the sync script now: `git -C "$DEST" rem
 
 ---
 
-*Next: The same week I broke the sync script, I also reversed an npm install decision I'd documented in my own ADR — because the axios supply chain attack made my "just delete the lockfile" approach suddenly untenable.*
+*Next: The same week I broke the sync script, I also shipped a color bug five times in a row — each fix introducing a new way to break the same thing.*
 
 ---
 
