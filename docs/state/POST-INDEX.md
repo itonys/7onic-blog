@@ -17,6 +17,7 @@
 | 11 | `using-ai-to-build-a-design-system` | Design to Code #5: Using AI to Build a Design System | ✅ | ✅ [#3754040](https://dev.to/7onic/design-to-code-5-using-ai-to-build-a-design-system-47ih) | ❌ API 유료화 | 2026-05-26 |
 | 12 | `dark-mode-no-javascript` | Design to Code #6: When @theme inline Killed My Dark Mode | ✅ | ✅ [#3754387](https://dev.to/7onic/design-to-code-6-when-theme-inline-killed-my-dark-mode-blp) | ❌ API 유료화 | 2026-05-26 |
 | 13 | `cva-limits-of-a-good-pattern` | Design to Code #7: How CVA Scaffolding Turned Into Dead Code | ✅ | ✅ [#3754731](https://dev.to/7onic/design-to-code-7-how-cva-scaffolding-turned-into-dead-code-31k2) | ❌ API 유료화 | 2026-05-26 |
+| 14 | `single-entry-point` | Design to Code #8: The Cosmetics of Modularity | ✅ | ✅ [#3754999](https://dev.to/7onic/design-to-code-8-the-cosmetics-of-modularity-2bc7) | ❌ API 유료화 | 2026-05-26 |
 
 ---
 
@@ -33,6 +34,7 @@
 | #5 | `using-ai-to-build-a-design-system` | Using AI to Build a Design System | ✅ Published |
 | #6 | `dark-mode-no-javascript` | When @theme inline Killed My Dark Mode | ✅ Published |
 | #7 | `cva-limits-of-a-good-pattern` | How CVA Scaffolding Turned Into Dead Code | ✅ Published |
+| #8 | `single-entry-point` | The Cosmetics of Modularity | ✅ Published |
 
 ### Tailwind Guides — Practical Tailwind CSS tips from building a design system
 

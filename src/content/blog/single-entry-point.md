@@ -1,6 +1,8 @@
 ---
-title: "Design to Code #8: The Cosmetics of Modularity"
-description: "How a generateCode() function in our docs told users to import from a subpath that was never in the package — and why we still ship one entry point."
+title: 'Design to Code #8: The Cosmetics of Modularity'
+description: >-
+  How a generateCode() function in our docs told users to import from a subpath
+  that was never in the package — and why we still ship one entry point.
 pubDate: '2026-05-26T07:31:34.000Z'
 category: design-system
 tags:
@@ -12,6 +14,7 @@ tags:
 series: design-to-code
 seriesOrder: 8
 draft: false
+devtoId: '3754999'
 ---
 
 It was sometime in early April. Version 0.1.0 had been sitting on npm for maybe twenty-four hours. I was clicking through the documentation site I'd just deployed, riding that brief, fragile wave of pride you get right before you discover a critical bug.
