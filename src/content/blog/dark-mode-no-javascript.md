@@ -1,6 +1,8 @@
 ---
-title: "Design to Code #6: When @theme inline Killed My Dark Mode"
-description: "7onic handles dark mode purely in CSS. One word from the Tailwind v4 migration guide silently broke it for every v4 user. The fix was removing that word."
+title: 'Design to Code #6: When @theme inline Killed My Dark Mode'
+description: >-
+  7onic handles dark mode purely in CSS. One word from the Tailwind v4 migration
+  guide silently broke it for every v4 user. The fix was removing that word.
 pubDate: '2026-05-26T06:19:01.000Z'
 category: design-system
 tags:
@@ -12,6 +14,7 @@ tags:
 series: design-to-code
 seriesOrder: 6
 draft: false
+devtoId: '3754387'
 ---
 
 I was in test-v4 that morning, clicking the theme toggle for the fifteenth time, and the card background just kept staying white.

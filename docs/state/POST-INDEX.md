@@ -15,6 +15,7 @@
 | 9 | `public-repo-sync-incident` | Build & Release #1: How Apple's rsync Update Nuked My Repo | ✅ | ✅ [#37e9](https://dev.to/7onic/build-release-5-how-apples-rsync-update-nuked-my-repo-37e9) | ❌ API 유료화 | 2026-05-18 |
 | 10 | `body-baseline-color-five-patches` | Build & Release #2: Five Patches for One Line of CSS | ✅ | ✅ [#1552](https://dev.to/7onic/build-release-2-five-patches-for-one-line-of-css-1552) | ❌ API 유료화 | 2026-05-18 |
 | 11 | `using-ai-to-build-a-design-system` | Design to Code #5: Using AI to Build a Design System | ✅ | ✅ [#3754040](https://dev.to/7onic/design-to-code-5-using-ai-to-build-a-design-system-47ih) | ❌ API 유료화 | 2026-05-26 |
+| 12 | `dark-mode-no-javascript` | Design to Code #6: When @theme inline Killed My Dark Mode | ✅ | ✅ [#3754387](https://dev.to/7onic/design-to-code-6-when-theme-inline-killed-my-dark-mode-blp) | ❌ API 유료화 | 2026-05-26 |
 
 ---
 
@@ -29,6 +30,7 @@
 | #3 | `copy-paste-vs-npm-install` | Copy-Paste vs npm Install | ✅ Published |
 | #4 | `why-i-chose-radix-ui` | Why I Chose Radix Over Custom Primitives | ✅ Published |
 | #5 | `using-ai-to-build-a-design-system` | Using AI to Build a Design System | ✅ Published |
+| #6 | `dark-mode-no-javascript` | When @theme inline Killed My Dark Mode | ✅ Published |
 
 ### Tailwind Guides — Practical Tailwind CSS tips from building a design system
 
