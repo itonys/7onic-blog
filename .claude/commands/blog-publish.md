@@ -1,6 +1,8 @@
 # /blog-publish
 
-블로그 포스트를 배포한다. git push (Vercel 자동 배포) + dev.to + Hashnode 교차 게시.
+블로그 포스트를 배포한다. git push (Vercel 자동 배포) + dev.to 교차 게시.
+
+> **Hashnode 스킵 (2026-05-13~)**: GraphQL API 유료 전환으로 자동 교차 게시 불가. dev.to 단독 운영.
 
 ## 실행 전 체크리스트
 
@@ -33,15 +35,15 @@ git commit -m "post: [title]"
 git push origin main
 ```
 
-### Step 2 — 교차 게시
+### Step 2 — 교차 게시 (dev.to만)
 ```bash
-npm run publish-post -- "[slug]"
+npm run publish-post -- "[slug]" --devto-only
 ```
 
 ### Step 3 — 완료 보고
 - `blog.7onic.design/[slug]` URL 안내
-- dev.to / Hashnode 게시 URL (교차 게시 시)
-- `docs/state/POST-INDEX.md` 업데이트 (제목·slug·날짜·dev.to/Hashnode ID 기록)
+- dev.to 게시 URL + devtoId
+- `docs/state/POST-INDEX.md` 업데이트 (제목·slug·날짜·dev.to ID 기록, Hashnode 열은 ❌ API 유료화)
 
 ### Step 4 — 수동 공유 체크리스트 (유저에게 안내)
 
