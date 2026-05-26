@@ -13,6 +13,7 @@ tags:
 series: component-anatomy
 seriesOrder: 1
 draft: false
+devtoId: '3692003'
 ---
 
 I have an Architecture Decision Record (ADR) file sitting in my repo dated February 19, 2026. It contains three beautifully written paragraphs arguing why our xs button should be 28px instead of 24px. At the bottom of that file is a neat little table mapping out our definitive button size scale. Five rows: xs, sm, default, lg, and xl.

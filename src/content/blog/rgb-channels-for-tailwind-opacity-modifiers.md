@@ -15,6 +15,7 @@ tags:
 series: token-deep-dive
 seriesOrder: 1
 draft: false
+devtoId: '3691694'
 ---
 
 The other day, I noticed something funky with my accordion component's hover state.

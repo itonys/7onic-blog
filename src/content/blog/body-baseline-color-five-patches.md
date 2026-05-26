@@ -11,6 +11,7 @@ tags:
 series: build-and-release
 seriesOrder: 2
 draft: false
+devtoId: '3694268'
 ---
 
 I was running through a quick test on April 27 when I noticed something almost funny. Light background. White-ish text. Just barely legible enough that you could tell text was supposed to be there, like a watermark someone forgot to remove.

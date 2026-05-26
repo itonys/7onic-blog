@@ -14,6 +14,7 @@ tags:
 series: build-and-release
 seriesOrder: 1
 draft: false
+devtoId: '3692215'
 ---
 
 The sync script hadn't changed. Same flags, same paths, same output format. I'd been running it every single time I pushed a change to the public repo, and it had always been rock solid.
