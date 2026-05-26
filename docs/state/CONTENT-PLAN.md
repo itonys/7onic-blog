@@ -26,8 +26,8 @@
 | 2 | The Token Pipeline: One JSON File → 11 Outputs | ✅ 2026-04-17 |
 | 3 | Copy-Paste vs npm Install: Why the CLI Copies Files | ✅ 2026-04-24 |
 | 4 | Why I Chose Radix UI Over Building Primitives | ✅ 2026-04-24 |
-| 5 | Using AI to Build a Design System | ⬜ |
-| 6 | How I Handle Dark Mode Without a Single Line of JS | ⬜ |
+| 5 | Using AI to Build a Design System | ✅ 2026-05-26 |
+| 6 | How I Handle Dark Mode Without a Single Line of JS | ✅ 2026-05-26 |
 | 7 | CVA: The Pattern That Made Variants Manageable | ⬜ |
 | 8 | Lessons from 42 Components | ⬜ |
 | 9 | Shipping a Design System Solo: The Honest Timeline | ⬜ |
