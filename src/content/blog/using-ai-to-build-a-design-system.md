@@ -1,6 +1,8 @@
 ---
-title: "Design to Code #5: Using AI to Build a Design System"
-description: "I use Claude for almost everything in 7onic. I also wrote three shell scripts whose job is to catch it reporting things as done when they aren't."
+title: 'Design to Code #5: Using AI to Build a Design System'
+description: >-
+  I use Claude for almost everything in 7onic. I also wrote three shell scripts
+  whose job is to catch it reporting things as done when they aren't.
 pubDate: '2026-05-26T05:35:36.000Z'
 category: design-system
 tags:
@@ -11,6 +13,7 @@ tags:
 series: design-to-code
 seriesOrder: 5
 draft: false
+devtoId: '3754040'
 ---
 
 I gave Claude the Switch component spec and pointed it at `variables.css`. What came back — CVA variants, Radix Primitives, forwardRef, controlled and uncontrolled both wired — was genuinely good. Better than my first draft would have been. I shipped it that afternoon without changing much.
