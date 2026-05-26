@@ -1,6 +1,9 @@
 ---
-title: "Design to Code #7: How CVA Scaffolding Turned Into Dead Code"
-description: "Every 7onic component starts with CVA. A pre-publish lint sweep deleted it from five of them — including one where the cva call itself had no variants at all."
+title: 'Design to Code #7: How CVA Scaffolding Turned Into Dead Code'
+description: >-
+  Every 7onic component starts with CVA. A pre-publish lint sweep deleted it
+  from five of them — including one where the cva call itself had no variants at
+  all.
 pubDate: '2026-05-26T06:50:16.000Z'
 category: design-system
 tags:
@@ -12,6 +15,7 @@ tags:
 series: design-to-code
 seriesOrder: 7
 draft: false
+devtoId: '3754731'
 ---
 
 The lint config had been sitting in the repo for a week, untouched, when I finally ran it across `src/components/ui/` on the afternoon of April 4th. I was expecting maybe a stray `console.log`, a forgotten TODO — the kind of trivialities you hunt down right before any first publish. What I got back instead was a list of five files where `VariantProps` was imported but never used: breadcrumb, divider, drawer, pagination, and toast. Fine. Dead imports. Delete them and move on.
