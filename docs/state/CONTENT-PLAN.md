@@ -28,11 +28,11 @@
 | 4 | Why I Chose Radix UI Over Building Primitives | ✅ 2026-04-24 |
 | 5 | Using AI to Build a Design System | ✅ 2026-05-26 |
 | 6 | How I Handle Dark Mode Without a Single Line of JS | ✅ 2026-05-26 |
-| 7 | CVA: The Pattern That Made Variants Manageable | ⬜ |
-| 8 | Lessons from 42 Components | ⬜ |
+| 7 | CVA: The Pattern That Made Variants Manageable | ✅ 2026-05-26 |
+| 8 | Lessons from 42 Components | ✅ 2026-06-03 (published as #9: The Cost of a Dot) |
 | 9 | Shipping a Design System Solo: The Honest Timeline | ⬜ |
 | 10 | What I'd Do Differently If I Started Over | ⬜ |
-| 11 | Single Entry Point Philosophy: Why I Don't Do Subpath Imports | `@7onic-ui/react/card` 같은 서브패스 import 대신 루트 import 단일 유지. Card 페이지의 generateCode가 미존재 서브패스를 출력해서 유저가 복사하면 에러 발생한 사고 → 단일 엔트리 결정. 대신 chart 만 예외로 분리한 이유 (recharts 무거움). 출처: NO-SUBPATH-EXPORTS |
+| 11 | Single Entry Point Philosophy: Why I Don't Do Subpath Imports | ✅ 2026-05-26 (published as #8) |
 | 12 | Tailwind-Only Components, Tokens for Everyone Else | 컴포넌트는 Tailwind 전용 / 디자인 토큰은 CSS 변수로 누구나 / CSS-only 컴포넌트는 작성 안 함. 배포 표면 좁히기 = 유지보수 복잡도 통제 + 유저 향한 단일 진입경로. 출처: DISTRIBUTION-STRATEGY |
 
 ---

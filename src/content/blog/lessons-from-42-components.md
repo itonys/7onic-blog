@@ -14,6 +14,7 @@ tags:
 series: design-to-code
 seriesOrder: 9
 draft: false
+devtoId: '3808104'
 ---
 
 There is a screenshot somewhere in my notes from April 4th—the day v0.1.0 went up—showing a Card example with `<Card.Header>`, `<Card.Title>`, and `<Card.Content>` nested neatly inside `<Card>`. I had been staring at that JSX for a long time before I clicked publish, and what I remember thinking was: *this looks like a real design system.* Radix uses this shape. shadcn uses this shape. Of course it would be the shape. I was not designing the API so much as I was matching a silhouette I had already accepted.
