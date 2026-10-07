@@ -105,7 +105,7 @@
 
 ---
 
-## Series 5 — AI + Design (12편)
+## Series 5 — AI + Design (13편)
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
@@ -121,6 +121,7 @@
 | AI-10 | Designing Docs for AI Consumption | AI가 잘 읽는 문서 구조 |
 | AI-11 | Approval-Based Doc Propagation: An AI-Human Workflow That Actually Works | "즉시 자동 전파" → "커밋 시점 승인 기반 일괄 전파" 모델로 뒤집은 과정. 실험·반복 단계는 방해 없이 · 커밋 직전 AI가 git diff → A/B/C 카테고리 판별 → 전파 계획 보고 → 승인. 키워드 파싱 없이 AI가 명시 질문하는 방식이 왜 더 robust한지 |
 | AI-12 | v0.3.0 Postmortem: When AI False Reports Compound | 하루 동안 거짓 "100%/전수 검증 완료" 보고 3건 → 수정 사이클 10+회 → 재발 방지 배치(훅 3개 + /100-percent-verify 스킬 + CLAUDE.md §4/§5 + 메모리 3건 + Playwright live-audit CI). 인디 솔로 빌더가 AI 협업의 신뢰성 문제를 절차·기술 양면으로 차단한 실제 사례. 출처: RELEASE-V0.3.0-POSTMORTEM |
+| AI-13 | Building an MCP Server for a Design System | llms.txt(정적 문서)에서 MCP(라이브 도구)로 — 토큰 검색·컴포넌트 카탈로그·validate_code 14룰 검증(en/ja/ko)·Claude Code 플러그인 1커맨드 배포. 4자 drift 대조(llms↔src↔CVA↔CLI registry)·E2E 위반 검출률 15/15·플러그인 캐시 3.3MB 설계. "42 vs 41" 카운트 이중 정의 등 실측-정본 교훈. 출처: ai-project MCP-SERVER-PLAN |
 
 ---
 
@@ -218,12 +219,12 @@
 | Token Deep Dive | 12 |
 | Component Anatomy | 20 |
 | Tailwind Guides | 11 |
-| AI + Design | 12 |
+| AI + Design | 13 |
 | CLI & Tooling | 13 |
 | Build & Release | 23 |
 | Solo Builder | 15 |
 | Accessibility | 7 |
-| **합계** | **125편** |
+| **합계** | **126편** |
 
 ---
 
