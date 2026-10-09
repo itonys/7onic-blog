@@ -1,9 +1,8 @@
 ---
 title: 'AI + Design #1: The Validator Caught My Own Docs Lying'
 description: >-
-  I built an MCP server so AI would stop ignoring my design-system rules.
-  The first real violations it found were in my documentation, not the AI's
-  code.
+  I built an MCP server so AI would stop ignoring my design-system rules. The
+  first real violations it found were in my documentation, not the AI's code.
 pubDate: '2026-10-09T06:18:54.000Z'
 category: ai
 tags:
@@ -14,6 +13,7 @@ tags:
 series: ai-design
 seriesOrder: 1
 draft: false
+devtoId: '4821442'
 ---
 
 The first full run of my new drift checker printed 122 errors against my own design system.

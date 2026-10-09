@@ -65,6 +65,12 @@
 |-------|------|-------|------|
 | #1 | `button-five-sizes` | Perfect on Paper, Wrong in Production | ✅ Published |
 
+### AI + Design — Making AI tools build with a design system instead of around it
+
+| Order | Slug | Title | 상태 |
+|-------|------|-------|------|
+| #1 | `validator-caught-my-own-docs` | The Validator Caught My Own Docs Lying | ✅ Published |
+
 ### Build & Release — The infrastructure and release decisions behind shipping 7onic
 
 | Order | Slug | Title | 상태 |
@@ -82,4 +88,5 @@
 - **코드 펜스 `title="..."`** → dev.to/Hashnode 전송 시 자동 제거 (Astro/Shiki 전용 문법)
 - **Hashnode**: Publication ID `69e0badd94b913c913139dd4`
 - **Hashnode API 유료화**: 2026-05-13부터 GraphQL API 유료 전환 → 스크립트 자동 교차 게시 불가. 수동 게시 또는 유료 플랜 필요
+- **🔒 dev.to 단독 운영 확정 (2026-10-09, 유저 결정)**: 신규 포스트는 dev.to 에만 교차 게시 — Hashnode 수동 복붙 중단. 근거: canonical 은 blog.7onic.design 이라 교차는 유통 전용인데, 검색 유입 실적은 dev.to 에 집중 (구글 "7onic design system" 상위 실측 2026-10-08). **계정·기존 글은 유지** (`7onic.hashnode.dev` = 사이트 JSON-LD sameAs 백링크). API 무료화 시 재개 검토
 - **canonical**: 항상 `blog.7onic.design` 기준
