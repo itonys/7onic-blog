@@ -71,6 +71,7 @@
 |-------|------|-------|------|
 | #1 | `public-repo-sync-incident` | How Apple's rsync Update Nuked My Repo | ✅ Published |
 | #2 | `body-baseline-color-five-patches` | Five Patches for One Line of CSS | ✅ Published |
+| #3 | `four-failed-publishes-zero-tokens` | I Deleted Every npm Token I Own | ✅ Published |
 
 ---
 
@@ -82,4 +83,3 @@
 - **Hashnode**: Publication ID `69e0badd94b913c913139dd4`
 - **Hashnode API 유료화**: 2026-05-13부터 GraphQL API 유료 전환 → 스크립트 자동 교차 게시 불가. 수동 게시 또는 유료 플랜 필요
 - **canonical**: 항상 `blog.7onic.design` 기준
-| Build & Release #2: I Deleted Every npm Token I Own | four-failed-publishes-zero-tokens | 2026-10-09 | 4820820 | ❌ |
