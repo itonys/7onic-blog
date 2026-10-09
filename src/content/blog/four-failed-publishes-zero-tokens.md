@@ -1,5 +1,5 @@
 ---
-title: 'Build & Release #2: I Deleted Every npm Token I Own'
+title: 'Build & Release #3: I Deleted Every npm Token I Own'
 description: >-
   My npm publish failed four times in one day, each with a different error. The
   fix wasn't a new token — it was deleting every token I own.
@@ -11,7 +11,7 @@ tags:
   - github-actions
   - ci-cd
 series: build-and-release
-seriesOrder: 2
+seriesOrder: 3
 draft: false
 devtoId: '4820820'
 ---
