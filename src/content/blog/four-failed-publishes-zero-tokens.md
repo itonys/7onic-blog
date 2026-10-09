@@ -1,8 +1,8 @@
 ---
 title: 'Build & Release #2: I Deleted Every npm Token I Own'
 description: >-
-  My npm publish failed four times in one day, each with a different error.
-  The fix wasn't a new token — it was deleting every token I own.
+  My npm publish failed four times in one day, each with a different error. The
+  fix wasn't a new token — it was deleting every token I own.
 pubDate: '2026-10-09T03:14:49.000Z'
 category: devops
 tags:
@@ -13,6 +13,7 @@ tags:
 series: build-and-release
 seriesOrder: 2
 draft: false
+devtoId: '4820820'
 ---
 
 On October 7th I tried to publish `@7onic-ui/tokens@0.3.7` and npm told me my own package didn't exist.
