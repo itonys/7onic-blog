@@ -50,6 +50,11 @@ export const SERIES = [
     description: 'The design decisions behind each component in 7onic',
   },
   {
+    id: 'ai-design',
+    label: 'AI + Design',
+    description: 'Making AI tools build with a design system instead of around it',
+  },
+  {
     id: 'build-and-release',
     label: 'Build & Release',
     description: 'The infrastructure and release decisions behind shipping 7onic',
