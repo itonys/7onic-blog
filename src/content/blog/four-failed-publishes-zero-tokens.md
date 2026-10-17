@@ -4,6 +4,7 @@ description: >-
   My npm publish failed four times in one day, each with a different error. The
   fix wasn't a new token — it was deleting every token I own.
 pubDate: '2026-10-09T03:14:49.000Z'
+updatedDate: '2026-10-17T00:00:00.000Z'
 category: devops
 tags:
   - npm
@@ -91,6 +92,20 @@ The publishing chain for three npm packages now contains no credential of any ki
 If you publish from CI with a token, the January 2027 shutoff applies to you too — I just got shoved through the door three months early by an expired credential and my own clipboard. The migration is genuinely about an hour if your packages already publish from GitHub Actions, and most of that hour is reading.
 
 I won't pretend it's all settled for me, though. A login-less pipeline felt weird for a full day — some reflex kept looking for the secret that proves it's really us. It isn't there anymore. GitHub's word is the proof now, which mostly means I've traded "trust myself to manage tokens" for "trust the OIDC chain." Given how I managed tokens this week, that trade is not close.
+
+## Follow-up (October 17): what GhostAction adds to this
+
+A reader pointed at the GhostAction wave that resurfaced around October 7 (Socket's name for it; GitGuardian and StepSecurity have write-ups) and made a sharper version of my point than I did. The attack doesn't need your token. Compromised maintainer accounts committed a fake `security-audit.yml` straight to default branches, and that workflow ran on every push with access to every repository secret, then swept the working tree and the full git history for anything that looked like a credential. So the blast radius was never "the token you rotated." It's every secret any workflow run could read between implant and detection, including things that were deleted from HEAD years ago.
+
+Three things from that comment I'd now put in the post itself:
+
+1. **Scan history, not HEAD.** A key that was committed and removed is still in the object store, and this variant reads it there.
+2. **Registry publish tokens go on the rotation list even if no log ever printed them.** Being readable by the workflow is the exposure. Logs are irrelevant.
+3. **Deleting the yml is step zero, not remediation.** The file is the delivery mechanism. Rotation across every branch and fork is the fix.
+
+I re-checked my own setup against that model. The repo still has zero Actions secrets, so an implanted workflow would find nothing to read. The Trusted Publisher on npm is pinned to `publish.yml`, so a planted `security-audit.yml` cannot publish even with `id-token: write`. Default workflow permissions are read-only. And a full-history scan of every branch in the public repo, the private source repo, and one unrelated project for the GhostAction filenames came back empty.
+
+What I had not done, and still hadn't when the comment arrived: anything that stops a workflow file from landing on `main` without review. That's the next item. Branch rules on `.github/workflows/` and a tighter allowed-actions policy are on the roadmap, and I'll measure them the same way I measured everything else here, by trying to get past them.
 
 ---
 
