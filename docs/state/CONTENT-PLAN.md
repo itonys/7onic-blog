@@ -105,7 +105,7 @@
 
 ---
 
-## Series 5 — AI + Design (13편)
+## Series 5 — AI + Design (15편)
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
@@ -122,7 +122,8 @@
 | AI-11 | Approval-Based Doc Propagation: An AI-Human Workflow That Actually Works | "즉시 자동 전파" → "커밋 시점 승인 기반 일괄 전파" 모델로 뒤집은 과정. 실험·반복 단계는 방해 없이 · 커밋 직전 AI가 git diff → A/B/C 카테고리 판별 → 전파 계획 보고 → 승인. 키워드 파싱 없이 AI가 명시 질문하는 방식이 왜 더 robust한지 |
 | AI-12 | v0.3.0 Postmortem: When AI False Reports Compound | 하루 동안 거짓 "100%/전수 검증 완료" 보고 3건 → 수정 사이클 10+회 → 재발 방지 배치(훅 3개 + /100-percent-verify 스킬 + CLAUDE.md §4/§5 + 메모리 3건 + Playwright live-audit CI). 인디 솔로 빌더가 AI 협업의 신뢰성 문제를 절차·기술 양면으로 차단한 실제 사례. 출처: RELEASE-V0.3.0-POSTMORTEM |
 | AI-13 ✅ | ~~Building an MCP Server for a Design System~~ → 발행 2026-10-09 (`validator-caught-my-own-docs`, 신규 시리즈 ai-design #1, 제목 변경: "The Validator Caught My Own Docs Lying") | llms.txt(정적 문서)에서 MCP(라이브 도구)로 — 토큰 검색·컴포넌트 카탈로그·validate_code 14룰 검증(en/ja/ko)·Claude Code 플러그인 1커맨드 배포. 4자 drift 대조(llms↔src↔CVA↔CLI registry)·E2E 위반 검출률 15/15·플러그인 캐시 3.3MB 설계. "42 vs 41" 카운트 이중 정의 등 실측-정본 교훈. 출처: ai-project MCP-SERVER-PLAN |
-
+| AI-14 | 42 Runs Later: My Validator Was Right, My Scorer Was Lying | 디자인 시스템 플러그인 (MCP+스킬) 의 AI 산출 기준선을 14 화면 × 3회 헤드리스로 실측 (`claude -p`, 3회 중앙값, 비용 $107). 결과 42/42 validate 클린·MCP 자발 호출 42/42·유사 컴포넌트 혼동 0. 그런데 "Toast 누락 6/6" 은 채점기가 JSX 태그만 세고 `toast.success()` 명령형 API 를 못 본 **채점기 오판** — 재채점 후 진짜 누락은 Slider (金額レンジ를 Input 2개로) 뿐. 측정 도구를 먼저 의심하라는 교훈 + 실행 디렉토리가 레포 안이라 CLAUDE.md 를 상속한 오염 실측 ($59 버림). 사내 DS 는 "a sibling design system" 으로 익명화. 출처: Design Lab Phase 0 |
+| AI-15 | More Rules Made the AI Worse: When CLAUDE.md Fights Your MCP | 같은 14 화면을 DS 개발 규칙이 든 CLAUDE.md 상속 조건으로 돌리자 MCP 자발 호출 33% (clean 100%)·클린율 79% (clean 100%). 규칙을 컨텍스트에 직접 주자 에이전트가 "이미 안다" 고 판단해 조회를 건너뛰고 오히려 틀림. 반면 DS 무관한 일반 개발 규칙 (Tailwind·의존 추가 상담 등) 은 MCP·토큰 준수를 안 꺾고 **컴포넌트 선택만** 꺾음 (recharts peer 가 필요한 Chart 를 피해 SVG 자작). "지시를 더 넣으면 좋아진다" 는 직관의 반례 + 플러그인이 모든 엔지니어에게 닿는 유일한 지렛대라는 결론. 출처: Design Lab Phase 2 검증 |
 ---
 
 ## Series 6 — CLI & Tooling (13편)
@@ -145,7 +146,7 @@
 
 ---
 
-## Series 7 — Build & Release (24편)
+## Series 7 — Build & Release (25편)
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
@@ -173,7 +174,7 @@
 | R-22 | The Missing postcss.config.mjs: When Your Test Templates Lie | user-test 인프라가 `create-next-app --tailwind` 직접 호출 → 미리 만든 templates/ 복사로 전환되면서 `postcss.config.mjs` 한 파일이 누락된 회귀. utility class 0건 emit 증상으로 발견. Tailwind 표준 셋업 결과물을 수동으로 복제할 때의 함정 — page ↔ templates ↔ user 환경의 1:1 정합성 원칙. 페이지 자체 완결화(외부 Get Tailwind 링크 제거 + framework × 버전 4조합 풀 가이드)로 page와 templates가 같은 명세를 보유하도록 동기 정리. 출처: INSTALLATION-PAGE-SELF-CONTAINED |
 | R-23 | One Month of Wrong Install Docs: Verifying What Verify Doesn't | Installation 페이지의 셋업 코드 안내가 i18n 화 시점부터 한 달 이상 결함(filename `src/app/` 가정 ↔ `@source` 경로 default 가정 불일치 / Vite+v3 `module.exports` 가 Vite 6+ ESM 환경 미호환) 보유한 채 v0.3.0~v0.3.5 모든 릴리즈 외부 노출. 기존 release verify(`verify-publish`/`verify-components`/`verify-llms-examples`/`verify-i18n`)가 패키지·번들 무결성만 검증하고 페이지 셋업 코드 정확성은 검증 범위 밖이었음. user-test 인프라가 templates 복사 방식이라 페이지 명세를 우회 검증. 외부 보고 0건이지만 다운로드 카운트 수백 건 — 사용자 발견 못 한 채 묻혔을 가능성. 재발 방지: Layer 1(페이지 ↔ templates 1:1 자동 비교) + Layer 2(빈 환경 4 종에 페이지 step 자동 적용 + 빌드 + utility class emit 검증)의 2단계 검증 시스템 도입. AI 가 추측 단정으로 잘못된 분석 반복한 사례까지 포함된 인디 1인 운영 postmortem. 출처: INSTALLATION-PAGE-SETUP-VERIFICATION-GAP |
 | R-24 ✅ | ~~From Expired Tokens to Trusted Publishing~~ → 발행 2026-10-09 (`four-failed-publishes-zero-tokens`, 제목 변경: "I Deleted Every npm Token I Own") | npm 토큰 배포 4연속 실패 실화 (만료 E404 → 빈 secret → 클립보드 오염 → bypass-2FA 403) → OIDC 전환 1일 완주. npm 12 engines 함정 (node≥22)·strict 2FA 와 OIDC 공존·Sigstore provenance. 토큰 0개 공급망의 설계. 출처: ai-project done/NPM-TRUSTED-PUBLISHING-PLAN |
-
+| R-25 | GhostAction Made Me Check: Zero Secrets Is Necessary, Not Sufficient | R-24 독자 코멘트 (GhostAction 2026-10 wave: 탈취 계정이 `security-audit.yml` 을 기본 브랜치에 커밋 → 워크플로가 읽을 수 있는 모든 secret + git 이력 탈취) 를 받아 7onic 을 재점검. secrets 0·OIDC Trusted Publisher 가 `publish.yml` 고정·워크플로 권한 read·3 레포 전 브랜치 이력 스캔 0건 → 구조적으로 강함. 그러나 워크플로 파일이 리뷰 없이 main 에 가는 걸 막는 장치는 없었음 (branch protection 404·rulesets 0·allowed_actions all). CODEOWNERS + 룰셋 + Actions 허용 목록을 적용하고 **직접 뚫어 본 결과** (가짜 워크플로 push 거부·sync 스크립트와의 충돌·1인 레포에서 admin bypass 를 끄는 비용). 출처: DEPLOY-PLAN B-27 |
 ---
 
 ## Series 8 — Solo Builder (15편)
@@ -220,12 +221,12 @@
 | Token Deep Dive | 12 |
 | Component Anatomy | 20 |
 | Tailwind Guides | 11 |
-| AI + Design | 13 |
+| AI + Design | 15 |
 | CLI & Tooling | 13 |
-| Build & Release | 24 |
+| Build & Release | 25 |
 | Solo Builder | 15 |
 | Accessibility | 7 |
-| **합계** | **127편** |
+| **합계** | **130편** |
 
 ---
 
