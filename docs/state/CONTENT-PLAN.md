@@ -126,7 +126,7 @@
 | AI-15 | More Rules Made the AI Worse: When CLAUDE.md Fights Your MCP | 같은 14 화면을 DS 개발 규칙이 든 CLAUDE.md 상속 조건으로 돌리자 MCP 자발 호출 33% (clean 100%)·클린율 79% (clean 100%). 규칙을 컨텍스트에 직접 주자 에이전트가 "이미 안다" 고 판단해 조회를 건너뛰고 오히려 틀림. 반면 DS 무관한 일반 개발 규칙 (Tailwind·의존 추가 상담 등) 은 MCP·토큰 준수를 안 꺾고 **컴포넌트 선택만** 꺾음 (recharts peer 가 필요한 Chart 를 피해 SVG 자작). "지시를 더 넣으면 좋아진다" 는 직관의 반례 + 플러그인이 모든 엔지니어에게 닿는 유일한 지렛대라는 결론. 출처: Design Lab Phase 2 검증 |
 ---
 
-## Series 6 — CLI & Tooling (13편)
+## Series 6 — CLI & Tooling (14편)
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
@@ -143,6 +143,7 @@
 | CLI-11 | Framework Detection First: Abort Before Config Changes | shadcn 패턴 — Next.js/Vite/TS/Tailwind 감지 실패 시 설정 변경 없이 EXIT. 에러 메시지 + install 페이지 링크. CLI 신뢰성의 핵심 |
 | CLI-12 | Removing a Dependency You Thought Was Needed | lucide-react baseDeps 제거 결정 — 라이브러리 자체는 인라인 SVG 사용. 유저에게 "설치하지 않음" 을 명시하는 llms.txt 전략 포함 |
 | CLI-13 | Surgical CSS Cleanup with .bak Safety Net | Vite boilerplate CSS 자동 정리 — regex 블록 탐지 + `.bak` 백업 + 알림 only (Y/n 제거로 zero-friction). 같은 패턴으로 Next.js `*` reset `@layer base` wrap |
+| CLI-14 | Your Zero-Dependency CLI Still Ships Dependencies | 런타임 의존성 0 인 CLI 가 빌드 시 postcss 등을 번들에 내장 → 배포된 0.1.16 이 취약 범위 postcss 8.5.6 을 품고 있었음 (루트 lockfile 업데이트만으로는 안 고쳐지고 재빌드 필요). 이전·새 번들 A/B (템플릿 4종 결과 해시 차이 0) + `*` 리셋 경로 별도 검증 — 유일한 차이는 `</style>` → `\3c /style>` 이스케이프 (권고 수정 그 자체) |
 
 ---
 
@@ -222,11 +223,11 @@
 | Component Anatomy | 20 |
 | Tailwind Guides | 11 |
 | AI + Design | 15 |
-| CLI & Tooling | 13 |
+| CLI & Tooling | 14 |
 | Build & Release | 25 |
 | Solo Builder | 15 |
 | Accessibility | 7 |
-| **합계** | **130편** |
+| **합계** | **131편** |
 
 ---
 
