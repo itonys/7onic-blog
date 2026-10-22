@@ -147,7 +147,7 @@
 
 ---
 
-## Series 7 — Build & Release (25편)
+## Series 7 — Build & Release (27편)
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
@@ -176,6 +176,8 @@
 | R-23 | One Month of Wrong Install Docs: Verifying What Verify Doesn't | Installation 페이지의 셋업 코드 안내가 i18n 화 시점부터 한 달 이상 결함(filename `src/app/` 가정 ↔ `@source` 경로 default 가정 불일치 / Vite+v3 `module.exports` 가 Vite 6+ ESM 환경 미호환) 보유한 채 v0.3.0~v0.3.5 모든 릴리즈 외부 노출. 기존 release verify(`verify-publish`/`verify-components`/`verify-llms-examples`/`verify-i18n`)가 패키지·번들 무결성만 검증하고 페이지 셋업 코드 정확성은 검증 범위 밖이었음. user-test 인프라가 templates 복사 방식이라 페이지 명세를 우회 검증. 외부 보고 0건이지만 다운로드 카운트 수백 건 — 사용자 발견 못 한 채 묻혔을 가능성. 재발 방지: Layer 1(페이지 ↔ templates 1:1 자동 비교) + Layer 2(빈 환경 4 종에 페이지 step 자동 적용 + 빌드 + utility class emit 검증)의 2단계 검증 시스템 도입. AI 가 추측 단정으로 잘못된 분석 반복한 사례까지 포함된 인디 1인 운영 postmortem. 출처: INSTALLATION-PAGE-SETUP-VERIFICATION-GAP |
 | R-24 ✅ | ~~From Expired Tokens to Trusted Publishing~~ → 발행 2026-10-09 (`four-failed-publishes-zero-tokens`, 제목 변경: "I Deleted Every npm Token I Own") | npm 토큰 배포 4연속 실패 실화 (만료 E404 → 빈 secret → 클립보드 오염 → bypass-2FA 403) → OIDC 전환 1일 완주. npm 12 engines 함정 (node≥22)·strict 2FA 와 OIDC 공존·Sigstore provenance. 토큰 0개 공급망의 설계. 출처: ai-project done/NPM-TRUSTED-PUBLISHING-PLAN |
 | R-25 | GhostAction Made Me Check: Zero Secrets Is Necessary, Not Sufficient | R-24 독자 코멘트 (GhostAction 2026-10 wave: 탈취 계정이 `security-audit.yml` 을 기본 브랜치에 커밋 → 워크플로가 읽을 수 있는 모든 secret + git 이력 탈취) 를 받아 7onic 을 재점검. secrets 0·OIDC Trusted Publisher 가 `publish.yml` 고정·워크플로 권한 read·3 레포 전 브랜치 이력 스캔 0건 → 구조적으로 강함. 그러나 워크플로 파일이 리뷰 없이 main 에 가는 걸 막는 장치는 없었음 (branch protection 404·rulesets 0·allowed_actions all). CODEOWNERS + 룰셋 + Actions 허용 목록을 적용하고 **직접 뚫어 본 결과** (가짜 워크플로 push 거부·sync 스크립트와의 충돌·1인 레포에서 admin bypass 를 끄는 비용). 출처: DEPLOY-PLAN B-27 |
+| R-26 | My CI Audit Gate Was Silently Skipping Every Other Check | `npm audit --audit-level=high` 가 수정판 없는 개발 도구 취약점 (braces, 모든 버전 해당) 으로 상시 실패 → CI 첫 단계라 lint·typecheck·빌드·Playwright 가 전부 skip 된 채 PR 4건이 머지됨. 해법: 배포 의존성은 `--omit=dev` 로 허용 없이 엄격 + 전체는 GHSA·사유·만료일 허용 목록 게이트 (의존성 0 스크립트, 실패 시나리오 9종 실측). "빨간 CI 에 익숙해지는 것" 의 비용. 출처: ai-project SECURITY-UPDATE-2026-10-PLAN Phase 4 |
+| R-27 | The 1-Hour-Old Transitive Dependency: Why Cooldowns Must Cover the Whole Tree | 20일 된 next-intl 을 설치했는데 전이 의존 `@swc/core` 가 공개 1시간 된 버전으로 해석되어 postinstall 이 실행됨. 사후 검증 (provenance·이전 버전과 스크립트 diff·민감 위치 변경 스캔·`npm audit signatures`) 과 재설치 (`--ignore-scripts --before=<72시간 전>`). 지정 패키지만 보는 쿨다운의 맹점과 lockfile diff 로 전이 의존 공개일까지 보는 습관. 출처: 같은 플랜 Phase 4 · BACKEND-RULES §16.5b |
 ---
 
 ## Series 8 — Solo Builder (15편)
@@ -224,10 +226,10 @@
 | Tailwind Guides | 11 |
 | AI + Design | 15 |
 | CLI & Tooling | 14 |
-| Build & Release | 25 |
+| Build & Release | 27 |
 | Solo Builder | 15 |
 | Accessibility | 7 |
-| **합계** | **131편** |
+| **합계** | **133편** |
 
 ---
 
