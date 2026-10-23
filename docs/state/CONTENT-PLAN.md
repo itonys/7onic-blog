@@ -147,7 +147,7 @@
 
 ---
 
-## Series 7 — Build & Release (27편)
+## Series 7 — Build & Release (28편)
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
@@ -178,6 +178,7 @@
 | R-25 | GhostAction Made Me Check: Zero Secrets Is Necessary, Not Sufficient | R-24 독자 코멘트 (GhostAction 2026-10 wave: 탈취 계정이 `security-audit.yml` 을 기본 브랜치에 커밋 → 워크플로가 읽을 수 있는 모든 secret + git 이력 탈취) 를 받아 7onic 을 재점검. secrets 0·OIDC Trusted Publisher 가 `publish.yml` 고정·워크플로 권한 read·3 레포 전 브랜치 이력 스캔 0건 → 구조적으로 강함. 그러나 워크플로 파일이 리뷰 없이 main 에 가는 걸 막는 장치는 없었음 (branch protection 404·rulesets 0·allowed_actions all). CODEOWNERS + 룰셋 + Actions 허용 목록을 적용하고 **직접 뚫어 본 결과** (가짜 워크플로 push 거부·sync 스크립트와의 충돌·1인 레포에서 admin bypass 를 끄는 비용). 출처: DEPLOY-PLAN B-27 |
 | R-26 | My CI Audit Gate Was Silently Skipping Every Other Check | `npm audit --audit-level=high` 가 수정판 없는 개발 도구 취약점 (braces, 모든 버전 해당) 으로 상시 실패 → CI 첫 단계라 lint·typecheck·빌드·Playwright 가 전부 skip 된 채 PR 4건이 머지됨. 해법: 배포 의존성은 `--omit=dev` 로 허용 없이 엄격 + 전체는 GHSA·사유·만료일 허용 목록 게이트 (의존성 0 스크립트, 실패 시나리오 9종 실측). "빨간 CI 에 익숙해지는 것" 의 비용. 출처: ai-project SECURITY-UPDATE-2026-10-PLAN Phase 4 |
 | R-27 | The 1-Hour-Old Transitive Dependency: Why Cooldowns Must Cover the Whole Tree | 20일 된 next-intl 을 설치했는데 전이 의존 `@swc/core` 가 공개 1시간 된 버전으로 해석되어 postinstall 이 실행됨. 사후 검증 (provenance·이전 버전과 스크립트 diff·민감 위치 변경 스캔·`npm audit signatures`) 과 재설치 (`--ignore-scripts --before=<72시간 전>`). 지정 패키지만 보는 쿨다운의 맹점과 lockfile diff 로 전이 의존 공개일까지 보는 습관. 출처: 같은 플랜 Phase 4 · BACKEND-RULES §16.5b |
+| R-28 | Every Page Shipped the Whole Dictionary | Vercel 무료 플랜 배포 저장 공간 81% 경고를 추적하다 발견 — `NextIntlClientProvider` 에 messages 를 안 넘기면 next-intl 이 해당 언어 번역 전체를 클라이언트로 보냄 → 211 페이지 × HTML·RSC 양쪽에 300~360KB 중복 (Button 페이지에 CLI 페이지 설명문까지). 번역 0 실험으로 서버 출력 161MB → 44MB 상한 실측, 실제 필요량은 페이지당 약 5KB. 레이아웃 vs 페이지 단위 Provider 설계 함정 (클라이언트 내비게이션) + 문서 전용 push 빌드 건너뛰기 (`ignoreCommand`) 로 배포 수 자체도 절감. 출처: ai-project planned/I18N-CLIENT-MESSAGES-PLAN · COMPLETED-FEATURES §8 |
 ---
 
 ## Series 8 — Solo Builder (15편)
@@ -226,10 +227,10 @@
 | Tailwind Guides | 11 |
 | AI + Design | 15 |
 | CLI & Tooling | 14 |
-| Build & Release | 27 |
+| Build & Release | 28 |
 | Solo Builder | 15 |
 | Accessibility | 7 |
-| **합계** | **133편** |
+| **합계** | **134편** |
 
 ---
 
