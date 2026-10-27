@@ -58,7 +58,7 @@
 
 ---
 
-## Series 3 — Component Anatomy (20편)
+## Series 3 — Component Anatomy (21편)
 
 > 컴포넌트별 설계 결정 심화 — 어떤 선택을 했고 왜
 
@@ -84,6 +84,7 @@
 | C-18 | Tabs vs Segmented Control: When to Use Which | 같아 보이지만 다른 두 컴포넌트 |
 | C-19 | Skeleton Loading: Matching Content Shapes | 실제 레이아웃 모방 전략 |
 | C-20 | Chart Styling: CHART_BAR_RADIUS_MAP and SVG Constants | CSS와 SVG의 경계 |
+| C-21 | The Select That Vanished Inside a Popover | Select·Dropdown 이 z-dropdown(1000) 이라 Modal(2000)·Popover(2100) 안에서 뒤로 숨던 버그. 떠 있는 요소를 한 층(z-popover)에 두고 DOM 순서(나중에 연 것이 위)로 해결. Popover 높이 넘침은 화살표가 잘리지 않게 안쪽 스크롤 영역으로 해결 |
 
 ---
 
@@ -203,7 +204,7 @@
 
 ---
 
-## Series 9 — Accessibility (7편)
+## Series 9 — Accessibility (8편)
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
@@ -214,6 +215,7 @@
 | A11Y-5 | Screen Reader Testing Without Expertise | 전문가 없이 테스트하는 법 |
 | A11Y-6 | Color Contrast: Beyond the 4.5:1 Rule | 규칙 너머의 실제 기준 |
 | A11Y-7 | Why Radix UI Handles Accessibility Better Than I Can | 직접 구현을 포기한 이유 |
+| A11Y-8 | The Focus Ring That Appeared on Click | Radix Tabs 1.2 가 mousedown 에서 focus() 를 호출 → 키보드 입력 직후 클릭한 탭에 :focus-visible 링. 같은 roving focus 의 Segmented·RadioGroup 은 무관함을 버전 비교로 확인, 포인터 포커스 표시로 키보드 전용 링 유지 |
 
 ---
 
@@ -223,14 +225,14 @@
 |---|---|
 | Design to Code | 12 |
 | Token Deep Dive | 12 |
-| Component Anatomy | 20 |
+| Component Anatomy | 21 |
 | Tailwind Guides | 11 |
 | AI + Design | 15 |
 | CLI & Tooling | 14 |
 | Build & Release | 28 |
 | Solo Builder | 15 |
-| Accessibility | 7 |
-| **합계** | **134편** |
+| Accessibility | 8 |
+| **합계** | **136편** |
 
 ---
 
