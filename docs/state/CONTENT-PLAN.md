@@ -216,7 +216,7 @@
 | A11Y-5 | Screen Reader Testing Without Expertise | 전문가 없이 테스트하는 법 |
 | A11Y-6 | Color Contrast: Beyond the 4.5:1 Rule | 규칙 너머의 실제 기준 |
 | A11Y-7 | Why Radix UI Handles Accessibility Better Than I Can | 직접 구현을 포기한 이유 |
-| A11Y-9 | Eight Passing Test Runs Missed a Label Click Bug | Field 안 Checkbox 여러 개가 Field id 를 공유 → 라벨 "SMS" 를 누르면 첫 체크박스가 바뀜. user-test 8환경·코드 예제 검증·버전 간 픽셀 비교가 모두 통과한 이유 (설치·렌더링만 검사, 클릭 동작·DOM 의미 검사 없음, 비교 테스트는 양쪽에 같은 버그가 있으면 "같음"). 중복 id·라벨 클릭·axe 검사로 70 페이지를 훑어 Slider 손잡이 이름 없음·Pagination 목록 구조·Select 의 Field 미연결 (문서에는 연결된다고 적혀 있었음) 까지 발견, 디자인 픽셀 0 변경으로 수정. 출처: ai-project COMPLETED-FEATURES §Field 접근성 (2026-10-29) |
+| A11Y-9 | Eight Passing Test Runs Missed a Label Click Bug | Field 안 Checkbox 여러 개가 Field id 를 공유 → 라벨 "SMS" 를 누르면 첫 체크박스가 바뀜. user-test 8환경·코드 예제 검증·버전 간 픽셀 비교가 모두 통과한 이유 (설치·렌더링만 검사, 클릭 동작·DOM 의미 검사 없음, 비교 테스트는 양쪽에 같은 버그가 있으면 "같음"). 중복 id·라벨 클릭·axe 검사로 70 페이지를 훑어 Slider 손잡이 이름 없음·Pagination 목록 구조·Select 의 Field 미연결 (문서에는 연결된다고 적혀 있었음) 까지 발견, 디자인 픽셀 0 변경으로 수정. 후속: 같은 검사를 `scripts/verify-a11y-live.ts` 로 CI 에 고정, 수정 전 빌드에서 191건을 잡는지 먼저 확인해 검사 자체를 검증 (2026-10-29). 출처: ai-project COMPLETED-FEATURES §Field 접근성 (2026-10-29) |
 | A11Y-8 | The Focus Ring That Appeared on Click | Radix Tabs 1.2 가 mousedown 에서 focus() 를 호출 → 키보드 입력 직후 클릭한 탭에 :focus-visible 링. 같은 roving focus 의 Segmented·RadioGroup 은 무관함을 버전 비교로 확인, 포인터 포커스 표시로 키보드 전용 링 유지 |
 
 ---
