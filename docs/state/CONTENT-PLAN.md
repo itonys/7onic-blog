@@ -37,7 +37,7 @@
 
 ---
 
-## Series 2 — Token Deep Dive (12편)
+## Series 2 — Token Deep Dive (13편)
 
 > 디자인 토큰 파이프라인 — 실제 구현에서 나온 기술 심화
 
@@ -55,6 +55,7 @@
 | T-10 | Breaking Change Detection + Deprecated Aliases | 토큰 마이그레이션 안전망 |
 | T-11 | Foreground Alias Generation: Bridging Figma and shadcn Naming | -text → -foreground 자동 변환 |
 | T-12 | The --color-foreground Trap: Why Tailwind v4 Internal Aliases Aren't for Raw CSS | 9개 *-foreground alias 는 Tailwind v4 의 text-*-foreground 클래스 생성용 *내부* 부산물 (shadcn 동일 패턴). raw CSS / arbitrary value / 코드 예제에 직접 노출 시 v3·standalone·no-Tailwind 환경에서 IACVT → light 모드 텍스트 불가시. distributed CSS 변수 선택 시 "어떤 import 조합에서도 정의 보장되는가" 가 유일 기준. Figma SSOT 직참조 (--color-text) 가 안전한 선택 |
+| T-13 | One Gray Scale, Two Modes: The Hidden Link We Removed | 회색 한 벌을 라이트·다크가 뒤집어 쓰던 구조의 문제 — 라이트 회색 상자(gray-100)를 바꾸면 다크 본문 글자가 같이 바뀌는 숨은 연결, 다크 회색 상자 위 보조 글자 대비 미달(다크 미달의 61%). 다크 전용 `gray-dark` 10단계 도입, 배경을 한 단계 어둡게, 다크 axe 3,737 → 552. 라이트 힌트는 "디자인은 시스템이 아니다" 판단으로 원래 값 유지 — 접근성 기준과 디자인 표현의 경계. 출처: ai-project ADR DARK-GRAY-SCALE (2026-10-29) |
 
 ---
 
@@ -226,7 +227,7 @@
 | 시리즈 | 편수 |
 |---|---|
 | Design to Code | 12 |
-| Token Deep Dive | 12 |
+| Token Deep Dive | 13 |
 | Component Anatomy | 21 |
 | Tailwind Guides | 11 |
 | AI + Design | 15 |
@@ -234,7 +235,7 @@
 | Build & Release | 29 |
 | Solo Builder | 15 |
 | Accessibility | 9 |
-| **합계** | **138편** |
+| **합계** | **139편** |
 
 ---
 
