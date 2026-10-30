@@ -1,3 +1,5 @@
+@~/Documents/ai-workspace/shared/CLAUDE.md
+
 # 7onic Blog — AI 개발 가이드라인
 
 ## 응답 언어
