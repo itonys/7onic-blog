@@ -107,7 +107,7 @@
 
 ---
 
-## Series 5 — AI + Design (15편)
+## Series 5 — AI + Design (16편)
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
@@ -126,6 +126,7 @@
 | AI-13 ✅ | ~~Building an MCP Server for a Design System~~ → 발행 2026-10-09 (`validator-caught-my-own-docs`, 신규 시리즈 ai-design #1, 제목 변경: "The Validator Caught My Own Docs Lying") | llms.txt(정적 문서)에서 MCP(라이브 도구)로 — 토큰 검색·컴포넌트 카탈로그·validate_code 14룰 검증(en/ja/ko)·Claude Code 플러그인 1커맨드 배포. 4자 drift 대조(llms↔src↔CVA↔CLI registry)·E2E 위반 검출률 15/15·플러그인 캐시 3.3MB 설계. "42 vs 41" 카운트 이중 정의 등 실측-정본 교훈. 출처: ai-project MCP-SERVER-PLAN |
 | AI-14 | 42 Runs Later: My Validator Was Right, My Scorer Was Lying | 디자인 시스템 플러그인 (MCP+스킬) 의 AI 산출 기준선을 14 화면 × 3회 헤드리스로 실측 (`claude -p`, 3회 중앙값, 비용 $107). 결과 42/42 validate 클린·MCP 자발 호출 42/42·유사 컴포넌트 혼동 0. 그런데 "Toast 누락 6/6" 은 채점기가 JSX 태그만 세고 `toast.success()` 명령형 API 를 못 본 **채점기 오판** — 재채점 후 진짜 누락은 Slider (金額レンジ를 Input 2개로) 뿐. 측정 도구를 먼저 의심하라는 교훈 + 실행 디렉토리가 레포 안이라 CLAUDE.md 를 상속한 오염 실측 ($59 버림). 사내 DS 는 "a sibling design system" 으로 익명화. 출처: Design Lab Phase 0 |
 | AI-15 | More Rules Made the AI Worse: When CLAUDE.md Fights Your MCP | 같은 14 화면을 DS 개발 규칙이 든 CLAUDE.md 상속 조건으로 돌리자 MCP 자발 호출 33% (clean 100%)·클린율 79% (clean 100%). 규칙을 컨텍스트에 직접 주자 에이전트가 "이미 안다" 고 판단해 조회를 건너뛰고 오히려 틀림. 반면 DS 무관한 일반 개발 규칙 (Tailwind·의존 추가 상담 등) 은 MCP·토큰 준수를 안 꺾고 **컴포넌트 선택만** 꺾음 (recharts peer 가 필요한 Chart 를 피해 SVG 자작). "지시를 더 넣으면 좋아진다" 는 직관의 반례 + 플러그인이 모든 엔지니어에게 닿는 유일한 지렛대라는 결론. 출처: Design Lab Phase 2 검증 |
+| AI-16 | Delete, Don't Fix: Turning 107 Product Teardowns into AI Design Checks | AI 에이전트 SaaS 107개 UI 리서치 (패턴 36·체크 92) 를 AI 디자인 비평 데이터로 바꾸며, 자료 속 DS 사실 (토큰 스케일·컴포넌트 유무) 이 틀린 곳을 **고치지 않고 지운** 이유 — 사본은 원본과 다시 어긋나 오탐이 된다 (예: 「필수 표시를 항상」 체크가 로그인 화면을 불합격시킴). 92 → 77, 판정 방식 태그 (코드 23·화면 42·흐름 12) 로 「화면을 봐야만 판정되는 체크가 절반」 이라는 근거 확보. 채점 5축 (토큰은 통과 조건) 과 「범용 14 화면 중 8개가 테이블」 이라 실무 시나리오 벤치마크로 바꾼 결정까지. 사내 DS 는 익명화. 출처: ai-project `roadmap/planned/DESIGN-LAB-UPGRADE-PLAN.md` (2026-10-30)
 ---
 
 ## Series 6 — CLI & Tooling (14편)
@@ -231,12 +232,12 @@
 | Token Deep Dive | 13 |
 | Component Anatomy | 21 |
 | Tailwind Guides | 11 |
-| AI + Design | 15 |
+| AI + Design | 16 |
 | CLI & Tooling | 14 |
 | Build & Release | 30 |
 | Solo Builder | 15 |
 | Accessibility | 9 |
-| **합계** | **140편** |
+| **합계** | **141편** |
 
 ---
 
