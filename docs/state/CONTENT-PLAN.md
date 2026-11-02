@@ -59,7 +59,7 @@
 
 ---
 
-## Series 3 — Component Anatomy (21편)
+## Series 3 — Component Anatomy (22편)
 
 > 컴포넌트별 설계 결정 심화 — 어떤 선택을 했고 왜
 
@@ -86,6 +86,7 @@
 | C-19 | Skeleton Loading: Matching Content Shapes | 실제 레이아웃 모방 전략 |
 | C-20 | Chart Styling: CHART_BAR_RADIUS_MAP and SVG Constants | CSS와 SVG의 경계 |
 | C-21 | The Select That Vanished Inside a Popover | Select·Dropdown 이 z-dropdown(1000) 이라 Modal(2000)·Popover(2100) 안에서 뒤로 숨던 버그. 떠 있는 요소를 한 층(z-popover)에 두고 DOM 순서(나중에 연 것이 위)로 해결. Popover 높이 넘침은 화살표가 잘리지 않게 안쪽 스크롤 영역으로 해결 |
+| C-22 | asChild Lost the Styles: When the Slot Meets a Fragment | `<Button asChild><a>` 가 스타일 없는 링크로 나오고 Badge·세로 NavigationMenuLink 는 `React.Children.only` 오류. 아이콘·점·감싸는 span 을 자식 옆에 두면 Radix Slot 이 클래스를 합칠 곳을 잃는 구조. 사용자 요소 **안**에 넣는 방식으로 고치고, 서버 컴포넌트의 lazy 자식 처리·asChild 미사용 HTML 동일성 (21 경우 비교)·링크 안 삭제 버튼을 빼는 결정. 브랜드 페이지를 7onic 으로 만들다 발견한 dogfooding 사례. 출처: 7onic COMPLETED-FEATURES §Badge (2026-11-02) |
 
 ---
 
@@ -231,14 +232,14 @@
 |---|---|
 | Design to Code | 12 |
 | Token Deep Dive | 13 |
-| Component Anatomy | 21 |
+| Component Anatomy | 22 |
 | Tailwind Guides | 11 |
 | AI + Design | 17 |
 | CLI & Tooling | 14 |
 | Build & Release | 30 |
 | Solo Builder | 15 |
 | Accessibility | 9 |
-| **합계** | **142편** |
+| **합계** | **143편** |
 
 ---
 
