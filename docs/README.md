@@ -12,7 +12,7 @@
 | **포스트 게시 (교차 배포)** | `state/POST-INDEX.md` | `roadmap/planned/SEO-CROSS-POSTING-PLAN.md` |
 | **새 페이지 추가** | `templates/PAGE-TEMPLATE.astro` 또는 `PAGE-TEMPLATE-LIST.astro` | `../CLAUDE.md` (페이지 레이아웃 규칙) |
 | **콘텐츠 기획** | `state/CONTENT-PLAN.md` (112편 계획) | — |
-| **블로그 SaaS 확장 논의** | `roadmap/planned/BLOG-SAAS-PLAN.md` (ai-project Phase M-4 포트폴리오 2번째 후보) | `~/Documents/ai-project/docs/roadmap/planned/MICRO-SAAS-ENGINE-PLAN.md` (Phase M 우산) / `PROJECT-SCAFFOLD-PLAN.md` (Phase M-3 배포 레이어) |
+| **블로그 SaaS 확장 논의** | `roadmap/planned/BLOG-SAAS-PLAN.md` (7onic Phase M-4 포트폴리오 2번째 후보) | `~/Documents/7onic/docs/roadmap/planned/MICRO-SAAS-ENGINE-PLAN.md` (Phase M 우산) / `PROJECT-SCAFFOLD-PLAN.md` (Phase M-3 배포 레이어) |
 
 ---
 
@@ -45,11 +45,12 @@ Q. 종류는?
 
 - **루트 `CLAUDE.md`** — 블로그 프로젝트 작업 규칙 (doctype, 페이지 레이아웃 등)
 - **`.claude/commands/`** — 스킬 (`/blog-new-post`, `/blog-publish`, `/blog-update`, `/blog-list`)
-- **ai-project 연동**: `~/Documents/ai-project/docs/` — 결정 기록 · 완료 기능 · 토큰 예외 참조 소스
+- **7onic 개발 레포 연동**: `~/Documents/7onic/docs/` — 결정 기록 · 완료 기능 · 토큰 예외 참조 소스
 
 ---
 
 ## 📜 변경 이력
 
+- **2026-11-02**: 7onic 개발 레포 로컬 폴더 이름 변경 (`~/Documents/ai-project` → `~/Documents/7onic`) 반영 — CLAUDE.md · `blog-new-post` 스킬 · docs 의 경로·이름 갱신. CLAUDE.md 전파 매트릭스 항목 이름 "7onic 새 기능·결정·버그" 로 (7onic CLAUDE.md 10-B 참조와 일치)
 - **2026-04-18**: ai-project와 동일한 구조화 플랜 적용 — 10 파일 재배치, 카테고리 분리.
 - **2026-04-20**: ai-project Phase M 로드맵 재구조화 연계 — `PUBLISH-SCRIPT-HARDENING`은 Phase M-2 공통 lib 프로토타입, `BLOG-SAAS-PLAN`은 Phase M-4 포트폴리오 후보로 지정. 상세: ai-project `docs/decisions/ROADMAP-RESTRUCTURE-2026-04-20.md`.

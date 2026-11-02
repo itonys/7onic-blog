@@ -8,7 +8,7 @@
 
 | # | 원칙 | 위반 시 |
 |---|------|--------|
-| 1 | **데이터 창작·과장·추측 금지** — 숫자·날짜·버전·사건·결정은 반드시 ai-project 문서에서 근거를 찾아 인용. "아마", "대략", "많은 사람이" 같은 모호한 표현 금지 | 초안 폐기, 근거 확보 후 재작성 |
+| 1 | **데이터 창작·과장·추측 금지** — 숫자·날짜·버전·사건·결정은 반드시 7onic 개발 레포 문서에서 근거를 찾아 인용. "아마", "대략", "많은 사람이" 같은 모호한 표현 금지 | 초안 폐기, 근거 확보 후 재작성 |
 | 2 | **AI 냄새 제거** — `docs/rules/CONTENT-RULES.md`의 Voice & Tone 섹션 12가지 금지 패턴 준수. 깔끔한 병렬 반복, "Here's the thing:", 균일한 문장 품질, 분산된 자기비하, 완벽한 결론 등은 즉시 AI 시그널 | 해당 문단 재작성 |
 | 3 | **설명형·광고형 금지** — 인디 개발자가 혼자 겪은 과정을 스토리로. 결과 나열·기능 설명·CTA 조합은 마케팅 카피 | 구조 재설계 |
 
@@ -18,13 +18,13 @@
 
 ## 실행 순서
 
-1. **(필수) ai-project 결정 기록 Read** — 주제 관련 사실 확보:
-   - `~/Documents/ai-project/docs/decisions/README.md` — 아키텍처 결정 인덱스
-   - `~/Documents/ai-project/docs/state/COMPLETED-FEATURES-INDEX.md` — 무엇이 언제 구현됐는지
-   - `~/Documents/ai-project/docs/roadmap/active/DEPLOY-PLAN.md` — 배포 타임라인
-   - `~/Documents/ai-project/docs/state/TOKEN-EXCEPTIONS-INDEX.md` — 현실과 타협한 예외
-   - `~/Documents/ai-project/CHANGELOG.md` + `cli/CHANGELOG.md` — 릴리즈 순서·날짜·이유
-   - 주제에 해당하는 개별 결정 파일이 있다면 `~/Documents/ai-project/docs/decisions/*.md` Read
+1. **(필수) 7onic 개발 레포 결정 기록 Read** — 주제 관련 사실 확보:
+   - `~/Documents/7onic/docs/decisions/README.md` — 아키텍처 결정 인덱스
+   - `~/Documents/7onic/docs/state/COMPLETED-FEATURES-INDEX.md` — 무엇이 언제 구현됐는지
+   - `~/Documents/7onic/docs/roadmap/active/DEPLOY-PLAN.md` — 배포 타임라인
+   - `~/Documents/7onic/docs/state/TOKEN-EXCEPTIONS-INDEX.md` — 현실과 타협한 예외
+   - `~/Documents/7onic/CHANGELOG.md` + `cli/CHANGELOG.md` — 릴리즈 순서·날짜·이유
+   - 주제에 해당하는 개별 결정 파일이 있다면 `~/Documents/7onic/docs/decisions/*.md` Read
 2. **(필수) Voice & Tone 규칙 Read** — `docs/rules/CONTENT-RULES.md`의 Voice & Tone 섹션 전체
 3. **(필수) 톤 레퍼런스 Read** — `src/content/blog/why-i-built-7onic.md` 1회. 이 포스트의 리듬·문장 길이 변주·괄호 속 사족·자기 의심 표현이 기준
 4. **주제 ↔ 결정 기록 교차 확인** — 유저가 제공한 키포인트가 문서에 실제로 있는지 검증. 없으면 유저에게 근거 요청, 추측으로 채우지 않는다
@@ -162,7 +162,7 @@ Hot take 제안: "..."
 초안 저장 직전 AI가 스스로 7가지를 체크하고 보고에 결과 포함:
 
 - [ ] **Hot take** — 유저가 승인한 hot take가 글에서 명확히 드러나는가?
-- [ ] **Fact** — 모든 숫자·날짜·버전·사건이 ai-project 문서에서 나왔는가? (만든 것 없음)
+- [ ] **Fact** — 모든 숫자·날짜·버전·사건이 7onic 개발 레포 문서에서 나왔는가? (만든 것 없음)
 - [ ] **AI smell** — 금지 패턴 12개 중 하나도 걸리지 않는가? (특히 병렬 3박자, "Here's the thing", 균일 문장)
 - [ ] **Story** — 구체적 순간으로 시작했는가? 실패·의심·뒤집음이 들어갔는가?
 - [ ] **Voice** — "I"로 말하고 있는가? 기업 블로그 톤이 섞이지 않았는가?

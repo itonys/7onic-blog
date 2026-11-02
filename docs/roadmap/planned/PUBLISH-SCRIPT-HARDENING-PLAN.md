@@ -3,8 +3,8 @@
 > 상태: 기획 단계 (미착수)
 > 목적: 현재 Happy Path만 있는 교차게시 스크립트를 BACKEND-RULES §1 준수하도록 개선
 > 최초 작성: 2026-04-18
-> 근거 문서: `~/Documents/ai-project/docs/rules/shared/BACKEND-RULES.md`
-> **Phase M 통합 (2026-04-20)**: 본 플랜은 `~/Documents/ai-project/docs/roadmap/planned/MICRO-SAAS-ENGINE-PLAN.md` **Phase M-2 공통 lib 프로토타입**. 여기서 만드는 `scripts/lib/http-client.ts` · 구조화 logger · 에러 타입 계층이 Phase M-3 PROJECT-SCAFFOLD-PLAN §5 공통 lib 4종의 **첫 실증 구현체**. 블로그 프로젝트에서 먼저 검증한 뒤 스캐폴드 CLI에 승격.
+> 근거 문서: `~/Documents/7onic/docs/rules/shared/BACKEND-RULES.md`
+> **Phase M 통합 (2026-04-20)**: 본 플랜은 `~/Documents/7onic/docs/roadmap/planned/MICRO-SAAS-ENGINE-PLAN.md` **Phase M-2 공통 lib 프로토타입**. 여기서 만드는 `scripts/lib/http-client.ts` · 구조화 logger · 에러 타입 계층이 Phase M-3 PROJECT-SCAFFOLD-PLAN §5 공통 lib 4종의 **첫 실증 구현체**. 블로그 프로젝트에서 먼저 검증한 뒤 스캐폴드 CLI에 승격.
 
 ---
 
@@ -173,8 +173,8 @@ Done.
 
 ## 관련 자산
 
-- `~/Documents/ai-project/docs/rules/shared/BACKEND-RULES.md` §1, §3, §10 준수 대상
-- `~/Documents/ai-project/docs/roadmap/planned/PROJECT-SCAFFOLD-PLAN.md` 공통 lib/http-client.ts 프로토타입 참조
+- `~/Documents/7onic/docs/rules/shared/BACKEND-RULES.md` §1, §3, §10 준수 대상
+- `~/Documents/7onic/docs/roadmap/planned/PROJECT-SCAFFOLD-PLAN.md` 공통 lib/http-client.ts 프로토타입 참조
 - `~/Documents/7onic-blog/docs/roadmap/planned/BLOG-SAAS-PLAN.md` 교차배포 아키텍처 목표
 
 ---

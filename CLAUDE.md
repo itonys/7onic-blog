@@ -12,7 +12,7 @@
 
 > **블로그 작업 세션 시작 시 `docs/README.md` Read**. 작업 유형별 필수 읽기 테이블·디렉토리 지도·파일 추가 기준이 그곳에 있다.
 >
-> **ai-project 연동 작업 시 추가**: `~/Documents/ai-project/docs/` — 결정 기록(decisions/) · 완료 기능(state/) · 토큰 예외 등 포스트 소재 소스.
+> **7onic 개발 레포 연동 작업 시 추가**: `~/Documents/7onic/docs/` — 결정 기록(decisions/) · 완료 기능(state/) · 토큰 예외 등 포스트 소재 소스.
 
 ---
 
@@ -115,7 +115,7 @@ Uppercase + letter-spacing + 회색 조합의 서브타이틀은 본문과 연�
 
 ## 문서 전파 규칙
 
-**공통 원칙·A/B/C 카테고리·판별 원칙·Red Flags·누락 빈번 영역**: `~/Documents/ai-project/docs/rules/shared/DOC-PROPAGATION-RULES.md` (모든 프로젝트 공통 SSOT).
+**공통 원칙·A/B/C 카테고리·판별 원칙·Red Flags·누락 빈번 영역**: `~/Documents/7onic/docs/rules/shared/DOC-PROPAGATION-RULES.md` (모든 프로젝트 공통 SSOT).
 
 **요약**:
 - **작업 중**: AI는 요청한 것만 수정. 전파 대상 건드리지 않음.
@@ -132,10 +132,10 @@ Uppercase + letter-spacing + 회색 조합의 서브타이틀은 본문과 연�
 | 변경 종류 | 카테고리 | 갱신 대상 |
 |---|---|---|
 | 새 포스트 게시 | A | `docs/state/POST-INDEX.md` (제목·slug·dev.to/Hashnode ID·날짜 등) + `docs/state/CONTENT-PLAN.md` (해당 항목 ✅ 완료) |
-| 콘텐츠 규칙 변경 | C | `docs/rules/CONTENT-RULES.md` (SSOT — ai-project에서 절대경로 참조) |
+| 콘텐츠 규칙 변경 | C | `docs/rules/CONTENT-RULES.md` (SSOT — 7onic 개발 레포에서 절대경로 참조) |
 | 새 시리즈 추가 | A | `docs/state/CONTENT-PLAN.md` 시리즈 섹션 + `src/consts.ts` SERIES 배열 등 시리즈 언급 전반 |
-| ai-project 새 기능·결정·버그 | C | `docs/state/CONTENT-PLAN.md` 해당 시리즈 마지막 번호 다음에 시퀀셜 추가. 포맷: `\| <시리즈prefix>-<다음번호> \| 제목 \| 핵심 내용 \|` (예: T-13, R-22, AI-13, SB-16). **`신규` 라벨 사용 금지** — 시퀀셜 번호로 이어 붙이고 시리즈 헤더 편수 + 총계 함께 갱신 |
-| 스킬(`.claude/commands/`) 변경 | C | `~/Documents/ai-project/.claude/commands/` 양쪽 동기화 (경로만 다름) 등 |
+| 7onic 새 기능·결정·버그 | C | `docs/state/CONTENT-PLAN.md` 해당 시리즈 마지막 번호 다음에 시퀀셜 추가. 포맷: `\| <시리즈prefix>-<다음번호> \| 제목 \| 핵심 내용 \|` (예: T-13, R-22, AI-13, SB-16). **`신규` 라벨 사용 금지** — 시퀀셜 번호로 이어 붙이고 시리즈 헤더 편수 + 총계 함께 갱신 |
+| 스킬(`.claude/commands/`) 변경 | C | `~/Documents/7onic/.claude/commands/` 양쪽 동기화 (경로만 다름) 등 |
 | OG 이미지 디자인 변경 | A | `src/pages/og/[...id].png.ts` + Vercel 빌드 확인 등 |
 | 페이지 레이아웃 규칙 변경 | C | `CLAUDE.md` 본 파일 + `docs/templates/PAGE-TEMPLATE.astro` + `docs/templates/PAGE-TEMPLATE-LIST.astro` 등 |
 | docs/ 새 md 파일 추가 | C | 해당 폴더 `README.md` "문서 목록" 등 |
@@ -179,7 +179,7 @@ Uppercase + letter-spacing + 회색 조합의 서브타이틀은 본문과 연�
 
 ### 포스트 작성 워크플로우
 
-1. ai-project에서 `/blog-new-post` 스킬 실행
+1. 7onic 개발 레포 (`~/Documents/7onic`) 에서 `/blog-new-post` 스킬 실행
 2. AI 초안 검토·수정
 3. `draft: false`로 변경
 4. `/blog-publish` 스킬로 배포 — **Step 0에서 `date -u` 실행 후 현재 시각을 `pubDate`에 기록**
