@@ -39,7 +39,7 @@ Every version removed a reason not to use it. None of them got used.
 
 I should be honest about how long it took me to see this, because it's a little embarrassing.
 
-Every time a version failed, I found a packaging reason. The file was too far from the code, so I moved closer to the editor, and then the site was too far from the editor too. The package needed setup. (The AI doc, in hindsight, needed someone to point the AI at it, which is the same problem wearing a new hat.) And each explanation was *true*, which is what made it so easy to keep going. I'd fix the packaging, ship the next door, and wait.
+Every time a version failed, I found a packaging reason. The file was too far from the code. Fine, so the next one lived on a website, which turned out to be too far from the editor. The package needed setup. (The AI doc, in hindsight, needed someone to point the AI at it, which is the same problem wearing a new hat.) And each explanation was *true*, which is what made it so easy to keep going. I'd fix the packaging, ship the next door, and wait.
 
 Five doors in, I finally noticed that I had become very good at building doors, and that nobody's route went through any of them. People were moving along the paths they already had: open the editor, ask the AI, ship the feature. A design system that waits next to that path, however well made, is a detour. And people don't take detours for an option.
 
