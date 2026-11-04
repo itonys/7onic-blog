@@ -3,7 +3,7 @@ title: 'AI + Design #2: My AI Review Team Gave It 93. I Gave It 70.'
 description: >-
   Four AI reviewers, seven rounds, and a brand page they agreed beat its
   reference. Then I actually looked at it. What went wrong with the scoring.
-pubDate:
+pubDate: 2026-11-04T07:21:02.000Z
 category: ai
 tags:
   - ai
@@ -12,7 +12,7 @@ tags:
   - design
 series: ai-design
 seriesOrder: 2
-draft: true
+draft: false
 ---
 
 The final report said 9.3.
