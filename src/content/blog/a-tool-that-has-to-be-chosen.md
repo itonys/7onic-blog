@@ -39,7 +39,7 @@ Every version removed a reason not to use it. None of them got used.
 
 I should be honest about how long it took me to see this, because it's a little embarrassing.
 
-Every time a version failed, I found a packaging reason. The file was too far from the code. The site was too far from the editor. The package needed setup. The AI doc needed someone to point the AI at it. And each explanation was *true*, which is what made it so easy to keep going. I'd fix the packaging, ship the next door, and wait.
+Every time a version failed, I found a packaging reason. The file was too far from the code, so I moved closer to the editor, and then the site was too far from the editor too. The package needed setup. (The AI doc, in hindsight, needed someone to point the AI at it, which is the same problem wearing a new hat.) And each explanation was *true*, which is what made it so easy to keep going. I'd fix the packaging, ship the next door, and wait.
 
 Five doors in, I finally noticed that I had become very good at building doors, and that nobody's route went through any of them. People were moving along the paths they already had: open the editor, ask the AI, ship the feature. A design system that waits next to that path, however well made, is a detour. And people don't take detours for an option.
 
@@ -82,7 +82,7 @@ fix every error and re-validate.
 
 `validate_code` parses the generated TSX and checks it against 14 rules, 9 of which are errors (hardcoded colors, arbitrary values, native elements where a component exists, that kind of thing). Nobody has to remember to run it. The AI runs it on its own output, sees the error, and fixes it before a person ever looks at the screen.
 
-That's the real difference from the five doors. A guide asks to be read. A check inside the loop doesn't ask anything.
+That's the real difference from the five doors. Every one of them depended on somebody deciding to go and look. This one runs whether anyone remembers it or not.
 
 (It's not perfect. The AI can still decide a rule doesn't apply, and a validator only catches what it was written to catch. A screen can pass every rule and still be a mediocre screen. That's a different problem and probably a different post.)
 
