@@ -13,6 +13,7 @@ tags:
 series: design-to-code
 seriesOrder: 10
 draft: false
+devtoId: '4973580'
 ---
 
 The fifth version handled its own setup. My pitch to the team was basically one sentence: just add the MCP server, I'll take care of the rest. Tokens, components, the rules for using them, all wired up for you.

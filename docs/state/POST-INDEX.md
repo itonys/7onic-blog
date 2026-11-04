@@ -19,6 +19,9 @@
 | 13 | `cva-limits-of-a-good-pattern` | Design to Code #7: How CVA Scaffolding Turned Into Dead Code | ✅ | ✅ [#3754731](https://dev.to/7onic/design-to-code-7-how-cva-scaffolding-turned-into-dead-code-31k2) | ❌ API 유료화 | 2026-05-26 |
 | 14 | `single-entry-point` | Design to Code #8: The Cosmetics of Modularity | ✅ | ✅ [#3754999](https://dev.to/7onic/design-to-code-8-the-cosmetics-of-modularity-2bc7) | ❌ API 유료화 | 2026-05-26 |
 | 15 | `lessons-from-42-components` | Design to Code #9: The Cost of a Dot | ✅ | ✅ [#3808104](https://dev.to/7onic/design-to-code-9-the-cost-of-a-dot-3g6o) | ❌ API 유료화 | 2026-06-03 |
+| 16 | `four-failed-publishes-zero-tokens` | Build & Release #3: I Deleted Every npm Token I Own | ✅ | ✅ [#4820820](https://dev.to/7onic/build-release-2-i-deleted-every-npm-token-i-own-1o87) | ❌ API 유료화 | 2026-10-09T03:14 |
+| 17 | `validator-caught-my-own-docs` | AI + Design #1: The Validator Caught My Own Docs Lying | ✅ | ✅ [#4821442](https://dev.to/7onic/ai-design-1-the-validator-caught-my-own-docs-lying-199j) | ❌ API 유료화 | 2026-10-09T06:18 |
+| 18 | `a-tool-that-has-to-be-chosen` | Design to Code #10: If a Tool Has to Be Chosen, It Won't Be | ✅ | ✅ [#4973580](https://dev.to/7onic/design-to-code-10-if-a-tool-has-to-be-chosen-it-wont-be-fn8) | ❌ API 유료화 | 2026-11-04T06:37 |
 
 ---
 
@@ -37,6 +40,7 @@
 | #7 | `cva-limits-of-a-good-pattern` | How CVA Scaffolding Turned Into Dead Code | ✅ Published |
 | #8 | `single-entry-point` | The Cosmetics of Modularity | ✅ Published |
 | #9 | `lessons-from-42-components` | The Cost of a Dot | ✅ Published |
+| #10 | `a-tool-that-has-to-be-chosen` | If a Tool Has to Be Chosen, It Won't Be | ✅ Published |
 
 ### Tailwind Guides — Practical Tailwind CSS tips from building a design system
 
