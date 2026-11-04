@@ -45,6 +45,12 @@ npm run publish-post -- "[slug]" --devto-only
 - dev.to 게시 URL + devtoId
 - `docs/state/POST-INDEX.md` 업데이트 (제목·slug·날짜·dev.to ID 기록, Hashnode 열은 ❌ API 유료화)
 
+### Step 3-B — Velog 한국어판 원고 (영문 공개 직후)
+
+- `docs/rules/VELOG-RULES.md` Read → `velog/NN-[slug].md` 작성 (번호 = `npm run velog` 의 next number). 번역이 아니라 Velog 톤으로 다시 쓰기, 사실은 영문판 그대로
+- 유저 안내: `npm run velog -- NN` (제목 → Enter → 본문 순서로 클립보드 복사, 태그 · 소개 출력)
+- 유저가 올렸다고 하면 Velog 공개 목록 확인 (`https://v2.velog.io/graphql` posts 조회) → frontmatter `velogUrl` · `postedAt` 채우고 POST-INDEX Velog 표 갱신
+
 ### Step 4 — 수동 공유 체크리스트 (유저에게 안내)
 
 아래는 자동화 불가 — 유저가 직접 실행:

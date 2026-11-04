@@ -24,6 +24,19 @@
 | 18 | `a-tool-that-has-to-be-chosen` | Design to Code #10: If a Tool Has to Be Chosen, It Won't Be | ✅ | ✅ [#4973580](https://dev.to/7onic/design-to-code-10-if-a-tool-has-to-be-chosen-it-wont-be-fn8) | ❌ API 유료화 | 2026-11-04T06:37 |
 | 19 | `ai-review-team-gave-it-93` | AI + Design #2: My AI Review Team Gave It 93. I Gave It 70. | ✅ | ✅ [#4973837](https://dev.to/7onic/ai-design-2-my-ai-review-team-gave-it-93-i-gave-it-70-2lg9) | ❌ API 유료화 | 2026-11-04T07:21 |
 
+
+## Velog 한국어판 (`velog.io/@henotony` — 시리즈 「디자인 시스템 만들기」)
+
+> #1 ~ #14 는 2026-04-17 ~ 05-26 에 직접 올림 (원고 파일 없음). #15 부터 원고는 `velog/` · 복사는 `npm run velog -- <번호>` · 규칙 `docs/rules/VELOG-RULES.md`
+
+| Velog # | 영문 원문 slug | 원고 | 올린 날 |
+|---|---|---|---|
+| 15 | `lessons-from-42-components` | `velog/15-lessons-from-42-components.md` | 2026-11-04 |
+| 16 | `four-failed-publishes-zero-tokens` | `velog/16-four-failed-publishes-zero-tokens.md` | 2026-11-04 |
+| 17 | `validator-caught-my-own-docs` | `velog/17-validator-caught-my-own-docs.md` | 2026-11-04 |
+| 18 | `a-tool-that-has-to-be-chosen` | `velog/18-a-tool-that-has-to-be-chosen.md` | 2026-11-04 |
+| 19 | `ai-review-team-gave-it-93` | `velog/19-ai-review-team-gave-it-93.md` | 2026-11-04 |
+
 ---
 
 ## Series

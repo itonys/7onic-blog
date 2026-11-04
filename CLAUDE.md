@@ -166,6 +166,7 @@ Uppercase + letter-spacing + 회색 조합의 서브타이틀은 본문과 연�
 - H4 이하 사용 금지
 - `draft: true`로 시작 → 검토 후 `false`
 - 이미지 저장: `public/images/posts/[slug]/`, WebP 권장, 200KB 이하
+- Velog 한국어판: 영문 공개 뒤 `velog/NN-[slug].md` 에 다시 쓰기 (규칙 `docs/rules/VELOG-RULES.md`, 복사 `npm run velog -- NN`). 이 폴더는 사이트 빌드 대상 아님 — 블로그 본문의 `#` H1 금지 규칙은 Velog 원고에는 해당 없음
 
 ### 코드 블록 기능
 

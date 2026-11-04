@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "publish-post": "npx dotenv-cli -e .env -- npx tsx scripts/publish-post.ts"
+    "publish-post": "npx dotenv-cli -e .env -- npx tsx scripts/publish-post.ts",
+    "velog": "npx tsx scripts/velog-copy.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.3",
