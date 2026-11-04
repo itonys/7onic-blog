@@ -22,6 +22,7 @@
 | 16 | `four-failed-publishes-zero-tokens` | Build & Release #3: I Deleted Every npm Token I Own | ✅ | ✅ [#4820820](https://dev.to/7onic/build-release-2-i-deleted-every-npm-token-i-own-1o87) | ❌ API 유료화 | 2026-10-09T03:14 |
 | 17 | `validator-caught-my-own-docs` | AI + Design #1: The Validator Caught My Own Docs Lying | ✅ | ✅ [#4821442](https://dev.to/7onic/ai-design-1-the-validator-caught-my-own-docs-lying-199j) | ❌ API 유료화 | 2026-10-09T06:18 |
 | 18 | `a-tool-that-has-to-be-chosen` | Design to Code #10: If a Tool Has to Be Chosen, It Won't Be | ✅ | ✅ [#4973580](https://dev.to/7onic/design-to-code-10-if-a-tool-has-to-be-chosen-it-wont-be-fn8) | ❌ API 유료화 | 2026-11-04T06:37 |
+| 19 | `ai-review-team-gave-it-93` | AI + Design #2: My AI Review Team Gave It 93. I Gave It 70. | ✅ | ✅ [#4973837](https://dev.to/7onic/ai-design-2-my-ai-review-team-gave-it-93-i-gave-it-70-2lg9) | ❌ API 유료화 | 2026-11-04T07:21 |
 
 ---
 
@@ -74,6 +75,7 @@
 | Order | Slug | Title | 상태 |
 |-------|------|-------|------|
 | #1 | `validator-caught-my-own-docs` | The Validator Caught My Own Docs Lying | ✅ Published |
+| #2 | `ai-review-team-gave-it-93` | My AI Review Team Gave It 93. I Gave It 70. | ✅ Published |
 
 ### Build & Release — The infrastructure and release decisions behind shipping 7onic
 
