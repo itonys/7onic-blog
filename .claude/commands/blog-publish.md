@@ -48,6 +48,7 @@ npm run publish-post -- "[slug]" --devto-only
 ### Step 3-B — Velog 한국어판 원고 (영문 공개 직후)
 
 - `docs/rules/VELOG-RULES.md` Read → `velog/NN-[slug].md` 작성 (번호 = `npm run velog` 의 next number). 번역이 아니라 Velog 톤으로 다시 쓰기, 사실은 영문판 그대로
+- 다 쓴 뒤 VELOG-RULES §2-1 직역 체크리스트를 문장마다 대조하고, 그 안의 검색 명령으로 해요체 어미 · `솔직히` · `배리언트` 가 0인지 확인
 - 유저 안내: `npm run velog -- NN` (제목 → Enter → 본문 순서로 클립보드 복사, 태그 · 소개 출력)
 - 유저가 올렸다고 하면 Velog 공개 목록 확인 (`https://v2.velog.io/graphql` posts 조회) → frontmatter `velogUrl` · `postedAt` 채우고 POST-INDEX Velog 표 갱신
 
