@@ -65,7 +65,14 @@ console.log(`   canonical: ${canonicalUrl}\n`);
  * e.g. ```js title="foo.js" → ```js
  */
 function sanitizeContent(raw: string): string {
-  return raw.replace(/^(```\w+)\s+title="[^"]*"/gm, '$1');
+  const stripped = raw.replace(/^(```\w+)\s+title="[^"]*"/gm, '$1');
+  // Root-relative links (/slug/) only work on the blog itself; on cross-post
+  // platforms they resolve against that platform's domain. Make them absolute
+  // outside fenced code blocks.
+  return stripped
+    .split(/(```[\s\S]*?```)/g)
+    .map((part, i) => (i % 2 === 1 ? part : part.replace(/\]\(\/(?!\/)/g, `](${CANONICAL_BASE}/`)))
+    .join('');
 }
 
 /**
