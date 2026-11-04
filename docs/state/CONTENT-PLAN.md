@@ -16,7 +16,7 @@
 
 ---
 
-## Series 1 — Design to Code (12편)
+## Series 1 — Design to Code (13편)
 
 > 7onic 시스템을 만든 결정들 — 마케팅 버전이 아닌 실제 reasoning
 
@@ -34,6 +34,7 @@
 | 10 | What I'd Do Differently If I Started Over | ⬜ |
 | 11 | Single Entry Point Philosophy: Why I Don't Do Subpath Imports | ✅ 2026-05-26 (published as #8) |
 | 12 | Tailwind-Only Components, Tokens for Everyone Else | 컴포넌트는 Tailwind 전용 / 디자인 토큰은 CSS 변수로 누구나 / CSS-only 컴포넌트는 작성 안 함. 배포 표면 좁히기 = 유지보수 복잡도 통제 + 유저 향한 단일 진입경로. 출처: DISTRIBUTION-STRATEGY |
+| 13 | If a Tool Has to Be Chosen, It Won't Be (초안 `a-tool-that-has-to-be-chosen.md`, draft — 공개 시 #10) | 디자인 시스템을 다섯 가지 형태 (디자인 파일 → 가이드 사이트 → npm 라이브러리 → AI 용 문서 → 설정 자동화 MCP) 로 내놨지만 아무도 쓰지 않았던 경험에서 얻은 교훈 — 골라서 써야 하는 도구는 고르지 않는다. 그런데 7onic 도 결국 골라야 쓰는 도구라는 모순을 정면으로: AI 가 이미 읽는 자리 (MCP instructions · `validate_code` 루프 · `init --claude`) 에 규칙을 두는 것까지가 지금의 답이고, 아직 증명되지 않음 (열린 결말). **회사 식별 단서 · 동료 비판 · 진행 중인 회사 계획은 쓰지 않는다** (브랜드 분리). 출처: 유저 경험 + 허브 `projects/7onic/messages/2026-11-04-muse-공유-7onic-블로그-재료-영문-에세이.md` (Muse 초고, 재작성 대상) · 7onic `cli/CHANGELOG.md` 0.1.16 init Step 17 · COMPLETED-FEATURES-INDEX §13 MCP |
 
 ---
 
@@ -230,7 +231,7 @@
 
 | 시리즈 | 편수 |
 |---|---|
-| Design to Code | 12 |
+| Design to Code | 13 |
 | Token Deep Dive | 13 |
 | Component Anatomy | 22 |
 | Tailwind Guides | 11 |
@@ -239,7 +240,7 @@
 | Build & Release | 30 |
 | Solo Builder | 15 |
 | Accessibility | 9 |
-| **합계** | **143편** |
+| **합계** | **144편** |
 
 ---
 
