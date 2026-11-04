@@ -240,10 +240,10 @@ dev.to / Hashnode에 교차 게시되는 포스트는 독자가 7onic을 모를 
 ```md
 ---
 
-**About 7onic** — An open-source React design system where design and code never drift. Free, MIT licensed. Docs and interactive playground at [7onic.design](https://7onic.design). Source code on [GitHub](https://github.com/itonys/7onic) — stars appreciated. More posts in this series at [blog.7onic.design](https://blog.7onic.design). Follow updates on X at [@7onicHQ](https://x.com/7onicHQ).
+**About 7onic** — 7onic is a small studio that builds the tools its own work was missing. This blog follows one of them: an open-source React design system where design and code never drift. Free, MIT licensed. Studio at [7onic.io](https://7onic.io). Docs and interactive playground at [7onic.design](https://7onic.design). Source code on [GitHub](https://github.com/itonys/7onic) — stars appreciated. More posts at [blog.7onic.design](https://blog.7onic.design). Follow updates on X at [@7onicHQ](https://x.com/7onicHQ).
 ```
 
-- `---` (HR) 뒤에 bold 텍스트 + 링크 3개: 7onic.design / blog.7onic.design / @7onicHQ
+- `---` (HR) 뒤에 bold 텍스트 + 링크 5개: 7onic.io (스튜디오) / 7onic.design / GitHub / blog.7onic.design / @7onicHQ. 첫 문장은 7onic.io 소개 문구와 맞춘다 (2026-11-04 — 7onic = 작은 스튜디오, 디자인 시스템은 그 도구 중 하나)
 - 마케팅 카피가 아닌 사실 정보 나열 톤 유지
 
 ---

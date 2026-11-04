@@ -191,4 +191,4 @@ The longer postmortem is in the ADR if anyone wants it. The short version fits i
 
 ---
 
-**About 7onic** — An open-source React design system where design and code never drift. Free, MIT licensed. Docs and interactive playground at [7onic.design](https://7onic.design). Source code on [GitHub](https://github.com/itonys/7onic) — stars appreciated. More posts in this series at [blog.7onic.design](https://blog.7onic.design). Follow updates on X at [@7onicHQ](https://x.com/7onicHQ).
+**About 7onic** — 7onic is a small studio that builds the tools its own work was missing. This blog follows one of them: an open-source React design system where design and code never drift. Free, MIT licensed. Studio at [7onic.io](https://7onic.io). Docs and interactive playground at [7onic.design](https://7onic.design). Source code on [GitHub](https://github.com/itonys/7onic) — stars appreciated. More posts at [blog.7onic.design](https://blog.7onic.design). Follow updates on X at [@7onicHQ](https://x.com/7onicHQ).
