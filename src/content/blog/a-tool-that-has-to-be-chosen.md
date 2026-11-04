@@ -3,7 +3,7 @@ title: 'Design to Code #10: If a Tool Has to Be Chosen, It Won''t Be'
 description: >-
   I shipped a design system five ways and nobody picked any of them. Two lessons
   from that failure shaped how 7onic was built.
-pubDate:
+pubDate: 2026-11-04T06:37:06.000Z
 category: design-system
 tags:
   - design-system
@@ -12,7 +12,7 @@ tags:
   - ai
 series: design-to-code
 seriesOrder: 10
-draft: true
+draft: false
 ---
 
 The fifth version handled its own setup. My pitch to the team was basically one sentence: just add the MCP server, I'll take care of the rest. Tokens, components, the rules for using them, all wired up for you.
