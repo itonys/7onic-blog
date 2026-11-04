@@ -26,7 +26,7 @@ I built this tool to catch AI breaking my rules. Its first catch was my document
 
 ## Why a static file wasn't enough
 
-Back in [Design to Code #5](/blog/using-ai-to-build-a-design-system) I wrote about `llms.txt` — the six variants I maintain so AI tools know the component APIs and the token rules. I ended that post with an observation that's been bugging me since: in long sessions, rules that were clearly active at the start just quietly stop being applied. Not defiantly. They fade.
+Back in [Design to Code #5](/using-ai-to-build-a-design-system/) I wrote about `llms.txt` — the six variants I maintain so AI tools know the component APIs and the token rules. I ended that post with an observation that's been bugging me since: in long sessions, rules that were clearly active at the start just quietly stop being applied. Not defiantly. They fade.
 
 That's the structural problem with documentation as an interface: it's a polite request. The model reads it, agrees with it, and then four tasks later writes `bg-blue-500` anyway because the context that said not to has scrolled out of attention. You can't fix that with better prose. The document has no way to say *no*.
 

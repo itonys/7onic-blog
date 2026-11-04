@@ -109,7 +109,7 @@ What I had not done, and still hadn't when the comment arrived: anything that st
 
 ---
 
-*Next up: back in [Design to Code #5](/blog/using-ai-to-build-a-design-system) I wrote about llms.txt — a static file AI tools read and hopefully obey. Since then I've built the enforcement half: an MCP server that lets the AI query tokens and components directly, and a `validate_code` tool that rejects what the docs couldn't prevent. That story next.*
+*Next up: back in [Design to Code #5](/using-ai-to-build-a-design-system/) I wrote about llms.txt — a static file AI tools read and hopefully obey. Since then I've built the enforcement half: an MCP server that lets the AI query tokens and components directly, and a `validate_code` tool that rejects what the docs couldn't prevent. That story next.*
 
 ---
 

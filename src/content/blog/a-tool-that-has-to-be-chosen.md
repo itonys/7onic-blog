@@ -52,7 +52,7 @@ A rule that sits politely to the side isn't really a rule. It's a suggestion wit
 
 ## Then I looked at 7onic
 
-7onic came after all of that, and I'd like to say it's the version that finally broke the pattern. It's not that simple. Look at what it is: [design tokens](/blog/token-pipeline-one-json-11-outputs) in a Figma-compatible JSON file, a docs site, npm packages, an `llms.txt`, an MCP server. The same five doors, built again.
+7onic came after all of that, and I'd like to say it's the version that finally broke the pattern. It's not that simple. Look at what it is: [design tokens](/token-pipeline-one-json-11-outputs/) in a Figma-compatible JSON file, a docs site, npm packages, an `llms.txt`, an MCP server. The same five doors, built again.
 
 What changed is what I did with the two lessons that cost me the most.
 
