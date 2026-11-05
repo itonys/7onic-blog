@@ -213,7 +213,7 @@
 
 ---
 
-## Series 9 — Accessibility (9편)
+## Series 9 — Accessibility (10편)
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
@@ -226,6 +226,7 @@
 | A11Y-7 | Why Radix UI Handles Accessibility Better Than I Can | 직접 구현을 포기한 이유 |
 | A11Y-9 | Eight Passing Test Runs Missed a Label Click Bug | Field 안 Checkbox 여러 개가 Field id 를 공유 → 라벨 "SMS" 를 누르면 첫 체크박스가 바뀜. user-test 8환경·코드 예제 검증·버전 간 픽셀 비교가 모두 통과한 이유 (설치·렌더링만 검사, 클릭 동작·DOM 의미 검사 없음, 비교 테스트는 양쪽에 같은 버그가 있으면 "같음"). 중복 id·라벨 클릭·axe 검사로 70 페이지를 훑어 Slider 손잡이 이름 없음·Pagination 목록 구조·Select 의 Field 미연결 (문서에는 연결된다고 적혀 있었음) 까지 발견, 디자인 픽셀 0 변경으로 수정. 후속: 같은 검사를 `scripts/verify-a11y-live.ts` 로 CI 에 고정, 수정 전 빌드에서 191건을 잡는지 먼저 확인해 검사 자체를 검증 (2026-10-29). 출처: 7onic COMPLETED-FEATURES §Field 접근성 (2026-10-29) |
 | A11Y-8 | The Focus Ring That Appeared on Click | Radix Tabs 1.2 가 mousedown 에서 focus() 를 호출 → 키보드 입력 직후 클릭한 탭에 :focus-visible 링. 같은 roving focus 의 Segmented·RadioGroup 은 무관함을 버전 비교로 확인, 포인터 포커스 표시로 키보드 전용 링 유지 |
+| A11Y-10 | Where Did the Focus Go? Four Reports From Our Own App | 7onic.app 리뷰가 보고한 부품 문제 4건을 원본에서 판정. ① 닫기 버튼 라벨 "Close" 고정 (5곳) → `closeLabel` ② DropdownMenu·Select 를 키보드로 닫으면 포커스가 body 로 — 2월 ADR 의 "실제로는 문제 없음" 이 측정해 보니 틀림, 「무조건 복귀」 는 마우스 선택 뒤 링 재발로 기각하고 「키보드로 닫을 때만 복귀」 ③ Segmented 선택 그림자가 포커스 링을 덮음 (같은 box-shadow · 같은 우선순위) ④ RadioGroup 첫 방향키 미선택은 버그가 아니라 자동 도구가 0ms 로 키를 눌러 생긴 측정 결과 (5ms 이상이면 정상). 결론: 보고는 재현부터. 출처: 7onic COMPLETED-FEATURES-INDEX · ADR RADIX-CLOSE-AUTOFOCUS 개정 (2026-11-05) |
 
 ---
 
@@ -241,8 +242,8 @@
 | CLI & Tooling | 14 |
 | Build & Release | 30 |
 | Solo Builder | 16 |
-| Accessibility | 9 |
-| **합계** | **146편** |
+| Accessibility | 10 |
+| **합계** | **147편** |
 
 ---
 
