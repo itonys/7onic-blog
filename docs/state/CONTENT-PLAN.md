@@ -214,7 +214,7 @@
 
 ---
 
-## Series 9 — Accessibility (12편)
+## Series 9 — Accessibility (13편)
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
@@ -230,6 +230,7 @@
 | A11Y-10 | Where Did the Focus Go? Four Reports From Our Own App | 7onic.app 리뷰가 보고한 부품 문제 4건을 원본에서 판정. ① 닫기 버튼 라벨 "Close" 고정 (5곳) → `closeLabel` ② DropdownMenu·Select 를 키보드로 닫으면 포커스가 body 로 — 2월 ADR 의 "실제로는 문제 없음" 이 측정해 보니 틀림, 「무조건 복귀」 는 마우스 선택 뒤 링 재발로 기각하고 「키보드로 닫을 때만 복귀」 ③ Segmented 선택 그림자가 포커스 링을 덮음 (같은 box-shadow · 같은 우선순위) ④ RadioGroup 첫 방향키 미선택은 버그가 아니라 자동 도구가 0ms 로 키를 눌러 생긴 측정 결과 (5ms 이상이면 정상). 결론: 보고는 재현부터. 출처: 7onic COMPLETED-FEATURES-INDEX · ADR RADIX-CLOSE-AUTOFOCUS 개정 (2026-11-05) |
 | A11Y-11 | Six Reports, Three Fixes: When "No" Is the Design | 7onic.app 리뷰가 보낸 6건을 원본에서 판정. 고친 3건: ChatMessageFooter 상태 글자 · MetricCardTrend 화면 낭독기 글자가 영어 고정 → `statusLabels` · `srLabel` (`closeLabel` 에 이은 "기본값 영어 + 페이지 언어로 덮어쓰기" 패턴), Avatar soft orange·red 글자 대비 3.11·3.95 → 4.52·5.30 (색 배정은 유지). 고치지 않은 3건: Segmented 비선택 글자 대비 (힌트 글자는 의도한 토큰 예외 — 숫자 바닥선 규칙을 두지 않는 이유), Button outline·ghost 눌림 색 · DropdownMenu 기본 애니메이션 (토큰에 없는 것은 넣지 않고 className 으로 열어 둠). 반전: "className 으로 넣으면 된다" 던 DropdownMenu 닫힘 애니메이션이 실제로는 막혀 있었다 — Portal 바로 안의 Context Provider 때문에 Radix Presence 가 DOM 노드를 못 읽음. 앱 쪽 대조 실험 (Radix 원본 vs Provider 하나 끼운 것) 으로 재보고 → Provider 를 Portal 밖으로, 닫힘 프레임 0 → 26. "열어 둔 길" 도 실제로 걸어 봐야 한다. 결론: 디자인 시스템의 "안 함" 도 결정이고 기록해야 다시 안 묻는다. 출처: 7onic CHANGELOG [Unreleased] · TOKEN-EXCEPTIONS 예외 13·40 (2026-11-06) |
 | A11Y-12 | The Docs Said "Reduced Motion Supported". Nobody Had Measured It | `prefers-reduced-motion: reduce` 에서도 Drawer · Skeleton 이 그대로 재생. 원인은 `.animate-*` 가 캐스케이드 레이어 밖이라 Tailwind v4 의 `motion-reduce:animate-none` 이 항상 짐 — 첫 배포부터. 문서의 "対応済み" 는 클래스가 붙어 있다는 사실만 보고 쓴 것. 스피너 5종은 유지. 수정 중 "규칙을 `variables.css` 한 곳으로" 줄였다가 배포 전 렌더 테스트에서 Drawer · Modal 이 여전히 재생 — `data-[state=open]:animate-*` 변형 클래스는 그 선택자와 이름이 안 맞음. 유틸리티 안에도 규칙을 넣는 3곳 생성으로 복구. 검증 케이스에 변형 클래스가 없으면 "꺼졌다" 는 측정도 절반만 참 |
+| A11Y-13 | The Enter Key That Sent Half a Word | ChatInput 에 「타이틀을 조금 더 찐하게」 를 치고 Enter → 서버에 「…찐하게」 와 「게」 두 건. 조합 중 Enter 는 「확정」 인데 `onKeyDown` 이 조합 여부를 안 봄 — 첫 배포부터, 일본어는 변환 확정에 Enter 를 늘 누름. 고치는 조건은 `isComposing` 하나로 부족: Safari 는 확정 Enter 에서 `isComposing=false` 라 `keyCode 229` 도 봄. 문서의 Textarea 「Enter 로 제출」 복사용 예시도 같은 버그를 퍼뜨리고 있었음. 실제 IME 는 자동화가 어려워 이벤트를 흉내 낸 시험 + 고치기 전 코드로 되돌려 실패를 먼저 확인 |
 
 ---
 
@@ -245,8 +246,8 @@
 | CLI & Tooling | 14 |
 | Build & Release | 31 |
 | Solo Builder | 16 |
-| Accessibility | 12 |
-| **합계** | **150편** |
+| Accessibility | 13 |
+| **합계** | **151편** |
 
 ---
 
