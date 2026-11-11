@@ -154,7 +154,7 @@
 
 ---
 
-## Series 7 — Build & Release (30편)
+## Series 7 — Build & Release (31편)
 
 | # | 제목 | 핵심 내용 |
 |---|------|----------|
@@ -188,6 +188,7 @@
 | R-28 | Every Page Shipped the Whole Dictionary | Vercel 무료 플랜 배포 저장 공간 81% 경고를 추적하다 발견 — `NextIntlClientProvider` 에 messages 를 안 넘기면 next-intl 이 해당 언어 번역 전체를 클라이언트로 보냄 → 211 페이지 × HTML·RSC 양쪽에 300~360KB 중복 (Button 페이지에 CLI 페이지 설명문까지). 번역 0 실험으로 서버 출력 161MB → 44MB 상한 실측, 실제 필요량은 페이지당 약 5KB. 레이아웃 vs 페이지 단위 Provider 설계 함정 (클라이언트 내비게이션) + 문서 전용 push 빌드 건너뛰기 (`ignoreCommand`) 로 배포 수 자체도 절감. **실제 결과 (2026-10-28)**: 서버 출력 161MB → 46MB (−71%), Button 페이지 799 → 166KB. 함정: Provider 에서 locale 없이 `getMessages()` → 섹션 하위 전체가 정적 생성에서 빠졌는데 빌드는 성공·크기는 17MB 로 "더 좋아 보임" — HTML 수·캐시 헤더로만 발견. **후속 (2026-11-06)**: ISR Read Units 가 하루 1만~3.2만 → 2천~5천으로 떨어진 것이 같은 날 (10-28) 배포 시점과 일치 (Read Unit 은 읽은 데이터 양 기준 — 페이지가 가벼워지면 함께 줄어듦). 30일 합계의 "55%" 는 줄기 전 3주치가 남은 숫자. 남은 Deployment Storage 는 빌드 건너뛰기 범위를 "사이트가 읽지 않는 폴더" (mcp·ai-kit·test-v4·scripts 등) 로 넓혀 대응 — 사이트 코드의 파일 읽기 · import 를 전수 검색해 목록을 정하고, 최근 커밋 84개 기준 빌드 55 → 37. 출처: 7onic done/I18N-CLIENT-MESSAGES-PLAN · COMPLETED-FEATURES §8·§15 |
 | R-29 | Tree-Shakable on Paper Only | 단일 ESM 번들은 forwardRef·cva·displayName 이 부수효과로 잡혀 Button 만 import 해도 라이브러리 90% 포함 (user-test 실측 552KB). 컴포넌트별 엔트리 + 공통 청크 분할로 248KB, `"use client"` banner 중복과 소스맵 보정, `bundle: false` 가 별칭 경로를 못 푸는 이유 |
 | R-30 | The Prop That Did Nothing: Auditing Docs Against Source | 문서 사이트 정합성 점검 (Props 표 허용 값 ↔ 소스·문구 속 개수 표기 52건 ↔ 실제 토큰·llms ↔ 문서·3개 언어 숫자 대조) 중 Breadcrumb `maxItems` 3개 prop 이 타입·문서·llms 에는 있지만 구현이 없고 `<nav>` 로 흘러가던 결함 발견. 「선언만 되고 쓰이지 않는 prop」 전 컴포넌트 검사 → 이 3개뿐. 구현 중 `map` + `<Fragment>` 로 렌더된 목록을 못 세던 함정을 브라우저 확인에서 발견. 정적 검사·import 검사가 모두 0 findings 여도 「동작」 은 직접 봐야 하는 이유. 출처: 7onic COMPLETED-FEATURES §Breadcrumb (2026-10-29) |
+| R-31 | Why Slack Showed a Gray Box: On-Demand OG Images | 사이트 4개를 Slack 에 공유했는데 디자인 시스템 사이트만 미리보기 이미지가 회색. 이미지 주소는 200 · 정상 PNG → 차이는 생성 방식: Edge 에서 요청마다 그림 (1.2~1.8초 · 캐시 MISS · content-length 없음) vs 나머지 3개는 정적 PNG. Slack 은 실패 결과를 저장해 같은 링크 재공유로는 안 바뀜 (`?v=2` 로 확인). `runtime = 'edge'` 만 빼도 여전히 요청 때 생성 — 메타데이터 이미지 경로는 레이아웃의 `generateStaticParams` 를 물려받지 않는 함정. 68개 × 3언어 = 204개 빌드 때 생성. 출처: 7onic ADR NEXTJS-16-UPGRADE 후속 2 · COMPLETED-FEATURES §S-3 (2026-11-11) |
 ---
 
 ## Series 8 — Solo Builder (16편)
@@ -242,10 +243,10 @@
 | Tailwind Guides | 11 |
 | AI + Design | 18 |
 | CLI & Tooling | 14 |
-| Build & Release | 30 |
+| Build & Release | 31 |
 | Solo Builder | 16 |
 | Accessibility | 12 |
-| **합계** | **149편** |
+| **합계** | **150편** |
 
 ---
 
